@@ -17,23 +17,27 @@ export default function HeroSection() {
   const x = useSpring(mouseX, springConfig);
   const y = useSpring(mouseY, springConfig);
   
-  // Transform values for different grid elements with varying intensities
-  const x1 = useTransform(x, [-1, 1], [-20, 20]);
-  const y1 = useTransform(y, [-1, 1], [-15, 15]);
-  const x2 = useTransform(x, [-1, 1], [15, -15]);
-  const y2 = useTransform(y, [-1, 1], [20, -20]);
-  const x3 = useTransform(x, [-1, 1], [-10, 10]);
-  const y3 = useTransform(y, [-1, 1], [-25, 25]);
-  const x4 = useTransform(x, [-1, 1], [25, -25]);
-  const y4 = useTransform(y, [-1, 1], [10, -10]);
-  const x5 = useTransform(x, [-1, 1], [-30, 30]);
-  const y5 = useTransform(y, [-1, 1], [-10, 10]);
+  // Transform values with much more pronounced motion for dramatic effect
+  const x1 = useTransform(x, [-1, 1], [-60, 60]);
+  const y1 = useTransform(y, [-1, 1], [-45, 45]);
+  const x2 = useTransform(x, [-1, 1], [50, -50]);
+  const y2 = useTransform(y, [-1, 1], [70, -70]);
+  const x3 = useTransform(x, [-1, 1], [-40, 40]);
+  const y3 = useTransform(y, [-1, 1], [-80, 80]);
+  const x4 = useTransform(x, [-1, 1], [80, -80]);
+  const y4 = useTransform(y, [-1, 1], [35, -35]);
+  const x5 = useTransform(x, [-1, 1], [-70, 70]);
+  const y5 = useTransform(y, [-1, 1], [-25, 25]);
   
-  // Additional transforms for floating elements
-  const x6 = useTransform(x, [-1, 1], [10, -10]);
-  const y6 = useTransform(y, [-1, 1], [-20, 20]);
-  const x7 = useTransform(x, [-1, 1], [-15, 15]);
-  const y7 = useTransform(y, [-1, 1], [15, -15]);
+  // Additional geometric elements with varied motion
+  const x6 = useTransform(x, [-1, 1], [30, -30]);
+  const y6 = useTransform(y, [-1, 1], [-60, 60]);
+  const x7 = useTransform(x, [-1, 1], [-45, 45]);
+  const y7 = useTransform(y, [-1, 1], [45, -45]);
+  const x8 = useTransform(x, [-1, 1], [65, -65]);
+  const y8 = useTransform(y, [-1, 1], [-30, 30]);
+  const x9 = useTransform(x, [-1, 1], [-55, 55]);
+  const y9 = useTransform(y, [-1, 1], [55, -55]);
   
   // Cursor transforms
   const cursorX = useTransform(mouseX, [-1, 1], [-8, -8]);
@@ -86,84 +90,114 @@ export default function HeroSection() {
       {/* Subtle architectural grid overlay */}
       <div className="absolute inset-0 architectural-grid-fine opacity-30"></div>
       
-      {/* Interactive geometric elements with cursor-responsive motion */}
-      <div className="absolute inset-0 opacity-10">
-        {/* Large rectangle - top left */}
+      {/* Interactive geometric elements with dramatic cursor-responsive motion */}
+      <div className="absolute inset-0">
+        {/* Large architectural rectangle - top left */}
         <motion.div 
-          className="absolute top-32 left-32 w-64 h-64 border border-elegant-black"
+          className="absolute top-32 left-32 w-64 h-64 border-2 border-elegant-black"
           style={{ x: x1, y: y1 }}
           animate={{ 
-            scale: isHovered ? 1.02 : 1,
-            opacity: isHovered ? 0.15 : 0.1
+            scale: isHovered ? 1.15 : 1,
+            opacity: isHovered ? 0.4 : 0.15,
+            borderWidth: isHovered ? 3 : 2
           }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         />
         
-        {/* Rotated square - bottom right */}
+        {/* Rotated diamond - bottom right */}
         <motion.div 
-          className="absolute bottom-32 right-32 w-48 h-48 border border-elegant-black transform rotate-45"
+          className="absolute bottom-32 right-32 w-48 h-48 border-2 border-elegant-black transform rotate-45"
           style={{ x: x2, y: y2 }}
           animate={{ 
-            scale: isHovered ? 1.05 : 1,
-            rotate: isHovered ? 50 : 45,
-            opacity: isHovered ? 0.15 : 0.1
+            scale: isHovered ? 1.25 : 1,
+            rotate: isHovered ? 60 : 45,
+            opacity: isHovered ? 0.45 : 0.2,
+            borderWidth: isHovered ? 3 : 2
           }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         />
         
         {/* Medium square - center left */}
         <motion.div 
-          className="absolute top-1/2 left-1/4 w-32 h-32 border border-elegant-black"
+          className="absolute top-1/2 left-1/4 w-32 h-32 border-2 border-elegant-black"
           style={{ x: x3, y: y3 }}
           animate={{ 
-            scale: isHovered ? 1.08 : 1,
-            opacity: isHovered ? 0.2 : 0.1
+            scale: isHovered ? 1.3 : 1,
+            opacity: isHovered ? 0.5 : 0.18,
+            borderWidth: isHovered ? 3 : 2
           }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         />
         
-        {/* Horizontal line - top right */}
+        {/* Dynamic horizontal line - top right */}
         <motion.div 
-          className="absolute top-1/4 right-1/4 w-96 h-px bg-elegant-black"
+          className="absolute top-1/4 right-1/4 w-96 h-0.5 bg-elegant-black"
           style={{ x: x4, y: y4 }}
           animate={{ 
-            scaleX: isHovered ? 1.1 : 1,
-            opacity: isHovered ? 0.2 : 0.1
+            scaleX: isHovered ? 1.4 : 1,
+            scaleY: isHovered ? 3 : 1,
+            opacity: isHovered ? 0.6 : 0.2
           }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         />
         
-        {/* Vertical line - bottom left */}
+        {/* Dynamic vertical line - bottom left */}
         <motion.div 
-          className="absolute bottom-1/4 left-1/3 w-px h-64 bg-elegant-black"
+          className="absolute bottom-1/4 left-1/3 w-0.5 h-64 bg-elegant-black"
           style={{ x: x5, y: y5 }}
           animate={{ 
-            scaleY: isHovered ? 1.15 : 1,
-            opacity: isHovered ? 0.2 : 0.1
+            scaleY: isHovered ? 1.5 : 1,
+            scaleX: isHovered ? 3 : 1,
+            opacity: isHovered ? 0.6 : 0.2
           }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         />
         
-        {/* Additional floating elements for depth */}
+        {/* Large circle - top right */}
         <motion.div 
-          className="absolute top-20 right-20 w-12 h-12 border border-elegant-black rounded-full"
+          className="absolute top-20 right-20 w-20 h-20 border-2 border-elegant-black rounded-full"
           style={{ x: x6, y: y6 }}
           animate={{ 
-            scale: isHovered ? 1.2 : 1,
-            opacity: isHovered ? 0.25 : 0.1
+            scale: isHovered ? 1.8 : 1,
+            opacity: isHovered ? 0.5 : 0.15,
+            borderWidth: isHovered ? 4 : 2
           }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         />
         
+        {/* Solid square - bottom left */}
         <motion.div 
-          className="absolute bottom-20 left-20 w-6 h-6 bg-elegant-black"
+          className="absolute bottom-20 left-20 w-12 h-12 bg-elegant-black"
           style={{ x: x7, y: y7 }}
           animate={{ 
-            scale: isHovered ? 1.5 : 1,
-            rotate: isHovered ? 90 : 0,
-            opacity: isHovered ? 0.3 : 0.1
+            scale: isHovered ? 2.5 : 1,
+            rotate: isHovered ? 180 : 0,
+            opacity: isHovered ? 0.7 : 0.2
           }}
           transition={{ duration: 0.5, ease: "easeOut" }}
+        />
+        
+        {/* Triangle - center top */}
+        <motion.div 
+          className="absolute top-16 left-1/2 w-0 h-0 border-l-8 border-r-8 border-b-16 border-l-transparent border-r-transparent border-b-elegant-black transform -translate-x-1/2"
+          style={{ x: x8, y: y8 }}
+          animate={{ 
+            scale: isHovered ? 2 : 1,
+            rotate: isHovered ? 120 : 0,
+            opacity: isHovered ? 0.6 : 0.15
+          }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        />
+        
+        {/* Small accent circle - center right */}
+        <motion.div 
+          className="absolute top-1/3 right-16 w-8 h-8 bg-elegant-black rounded-full"
+          style={{ x: x9, y: y9 }}
+          animate={{ 
+            scale: isHovered ? 3 : 1,
+            opacity: isHovered ? 0.8 : 0.2
+          }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
         />
       </div>
       
