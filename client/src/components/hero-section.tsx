@@ -17,31 +17,31 @@ export default function HeroSection() {
   const x = useSpring(mouseX, springConfig);
   const y = useSpring(mouseY, springConfig);
   
-  // Transform values with subtle wobble motion when extended
-  const x1 = useTransform(x, [-1, 1], [-15, 15]);
-  const y1 = useTransform(y, [-1, 1], [-12, 12]);
-  const x2 = useTransform(x, [-1, 1], [12, -12]);
-  const y2 = useTransform(y, [-1, 1], [15, -15]);
-  const x3 = useTransform(x, [-1, 1], [-10, 10]);
-  const y3 = useTransform(y, [-1, 1], [-18, 18]);
-  const x4 = useTransform(x, [-1, 1], [18, -18]);
-  const y4 = useTransform(y, [-1, 1], [10, -10]);
-  const x5 = useTransform(x, [-1, 1], [-12, 12]);
-  const y5 = useTransform(y, [-1, 1], [-8, 8]);
+  // Transform values with much stronger cursor influence
+  const x1 = useTransform(x, [-1, 1], [-35, 35]);
+  const y1 = useTransform(y, [-1, 1], [-28, 28]);
+  const x2 = useTransform(x, [-1, 1], [32, -32]);
+  const y2 = useTransform(y, [-1, 1], [38, -38]);
+  const x3 = useTransform(x, [-1, 1], [-25, 25]);
+  const y3 = useTransform(y, [-1, 1], [-42, 42]);
+  const x4 = useTransform(x, [-1, 1], [42, -42]);
+  const y4 = useTransform(y, [-1, 1], [25, -25]);
+  const x5 = useTransform(x, [-1, 1], [-30, 30]);
+  const y5 = useTransform(y, [-1, 1], [-20, 20]);
   
   // Additional transforms for satellite elements
-  const x6 = useTransform(x, [-1, 1], [8, -8]);
-  const y6 = useTransform(y, [-1, 1], [-15, 15]);
-  const x7 = useTransform(x, [-1, 1], [-12, 12]);
-  const y7 = useTransform(y, [-1, 1], [12, -12]);
-  const x8 = useTransform(x, [-1, 1], [14, -14]);
-  const y8 = useTransform(y, [-1, 1], [-8, 8]);
-  const x9 = useTransform(x, [-1, 1], [-10, 10]);
-  const y9 = useTransform(y, [-1, 1], [14, -14]);
-  const x10 = useTransform(x, [-1, 1], [16, -16]);
-  const y10 = useTransform(y, [-1, 1], [-12, 12]);
-  const x11 = useTransform(x, [-1, 1], [-14, 14]);
-  const y11 = useTransform(y, [-1, 1], [16, -16]);
+  const x6 = useTransform(x, [-1, 1], [20, -20]);
+  const y6 = useTransform(y, [-1, 1], [-35, 35]);
+  const x7 = useTransform(x, [-1, 1], [-30, 30]);
+  const y7 = useTransform(y, [-1, 1], [28, -28]);
+  const x8 = useTransform(x, [-1, 1], [32, -32]);
+  const y8 = useTransform(y, [-1, 1], [-18, 18]);
+  const x9 = useTransform(x, [-1, 1], [-24, 24]);
+  const y9 = useTransform(y, [-1, 1], [32, -32]);
+  const x10 = useTransform(x, [-1, 1], [38, -38]);
+  const y10 = useTransform(y, [-1, 1], [-28, 28]);
+  const x11 = useTransform(x, [-1, 1], [-32, 32]);
+  const y11 = useTransform(y, [-1, 1], [38, -38]);
   
   // Cursor transforms
   const cursorX = useTransform(mouseX, [-1, 1], [-8, -8]);
@@ -423,7 +423,7 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="text-xl md:text-2xl text-elegant-gray font-light tracking-wider italic mb-24"
+            className="text-xl md:text-2xl text-elegant-gray font-light tracking-wider italic mb-12"
           >
             c'est simply... magnifique
           </motion.p>

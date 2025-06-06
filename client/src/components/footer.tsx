@@ -11,7 +11,7 @@ export default function Footer() {
               <img 
                 src={applifiqueTitle}
                 alt="Applifique"
-                className="h-8 object-contain brightness-0 invert"
+                className="h-10 object-contain brightness-0 invert"
               />
               <p className="text-elegant-gray text-sm font-light tracking-wide mt-3">c'est simply... magnifique</p>
             </div>
