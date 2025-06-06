@@ -1,4 +1,5 @@
 import { FaYoutube, FaReddit, FaDiscord } from "react-icons/fa";
+import applifiqueTitle from "@assets/App_Title.png";
 
 export default function Footer() {
   return (
@@ -7,13 +8,12 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row items-center justify-between">
           <div className="flex items-center mb-12 lg:mb-0">
             <div>
-              <div className="relative">
-                <span className="text-2xl font-light text-elegant-white tracking-[0.2em] font-serif italic">
-                  Applifique
-                </span>
-                <div className="absolute -bottom-1 left-0 w-full h-px bg-gradient-to-r from-elegant-white/30 via-elegant-white/60 to-elegant-white/30"></div>
-              </div>
-              <p className="text-elegant-gray text-sm font-light tracking-wide mt-1">c'est simply... magnifique</p>
+              <img 
+                src={applifiqueTitle}
+                alt="Applifique"
+                className="h-8 object-contain brightness-0 invert"
+              />
+              <p className="text-elegant-gray text-sm font-light tracking-wide mt-3">c'est simply... magnifique</p>
             </div>
           </div>
           

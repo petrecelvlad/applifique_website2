@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { motion } from "framer-motion";
+import applifiqueTitle from "@assets/App_Title.png";
 
 export default function Navigation() {
   const scrollToSection = (sectionId: string) => {
@@ -21,12 +22,11 @@ export default function Navigation() {
     >
       <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
         <div className="flex items-center">
-          <div className="relative">
-            <span className="text-2xl font-light text-elegant-black tracking-[0.2em] font-serif italic">
-              Applifique
-            </span>
-            <div className="absolute -bottom-1 left-0 w-full h-px bg-gradient-to-r from-elegant-black/30 via-elegant-black/60 to-elegant-black/30"></div>
-          </div>
+          <img 
+            src={applifiqueTitle}
+            alt="Applifique"
+            className="h-8 object-contain"
+          />
         </div>
         
         <div className="hidden md:flex items-center space-x-12">
