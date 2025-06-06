@@ -353,25 +353,27 @@ export default function HeroSection() {
           className="absolute space-y-1"
           style={{ x: x11, y: y11 }}
           animate={{ 
-            scale: isHovered ? 1.4 : 1,
-            opacity: isHovered ? 0.9 : 0.25,
             top: isHovered ? '25%' : '44%',
             left: isHovered ? '15%' : '38%',
-            x: [0, -2, 0, 2, 0]
+            scale: isHovered ? 1.4 : 1,
+            opacity: isHovered ? 0.9 : 0.25
           }}
           transition={{ 
-            duration: 0.6, 
-            ease: "easeOut",
-            top: { duration: 0.8, ease: "easeInOut" },
-            left: { duration: 0.8, ease: "easeInOut" },
-            x: { duration: 4.2, repeat: Infinity, ease: "easeInOut" }
+            duration: 0.8, 
+            ease: "easeOut"
           }}
         >
-          <div className="w-4 h-4 bg-elegant-black/30 rounded-full border-2 border-elegant-black/50 relative">
-            <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-elegant-black/70 rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
-          </div>
-          <div className="w-4 h-4 bg-white/10 rounded-full border-2 border-elegant-black/50"></div>
-          <div className="w-4 h-4 bg-white/10 rounded-full border-2 border-elegant-black/50"></div>
+          <motion.div
+            className="space-y-1"
+            animate={{ x: [0, -2, 0, 2, 0] }}
+            transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div className="w-4 h-4 bg-elegant-black/30 rounded-full border-2 border-elegant-black/50 relative">
+              <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-elegant-black/70 rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+            </div>
+            <div className="w-4 h-4 bg-white/10 rounded-full border-2 border-elegant-black/50"></div>
+            <div className="w-4 h-4 bg-white/10 rounded-full border-2 border-elegant-black/50"></div>
+          </motion.div>
         </motion.div>
       </div>
       
