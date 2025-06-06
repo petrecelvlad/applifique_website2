@@ -21,7 +21,12 @@ export default function Navigation() {
     >
       <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
         <div className="flex items-center">
-          <span className="text-2xl font-light text-elegant-black tracking-wide">Applifique</span>
+          <div className="relative">
+            <span className="text-2xl font-light text-elegant-black tracking-[0.2em] font-serif italic">
+              Applifique
+            </span>
+            <div className="absolute -bottom-1 left-0 w-full h-px bg-gradient-to-r from-elegant-black/30 via-elegant-black/60 to-elegant-black/30"></div>
+          </div>
         </div>
         
         <div className="hidden md:flex items-center space-x-12">

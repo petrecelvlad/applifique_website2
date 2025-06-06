@@ -300,22 +300,26 @@ export default function HeroSection() {
           animate={{ 
             top: isHovered ? '55%' : '51%',
             right: isHovered ? '8%' : '36%',
-            x: [0, 3, 0, -3, 0]
+            scale: isHovered ? 1.5 : 1,
+            opacity: isHovered ? 0.9 : 0.25
           }}
           transition={{ 
-            duration: 0.3, 
-            ease: "easeOut",
-            top: { duration: 0.8, ease: "easeInOut" },
-            right: { duration: 0.8, ease: "easeInOut" },
-            x: { duration: 4.8, repeat: Infinity, ease: "easeInOut" }
+            duration: 0.8, 
+            ease: "easeOut"
           }}
         >
-          <div className="w-8 h-5 bg-elegant-black/50 rounded-full relative">
-            <div className="absolute right-0.5 top-0.5 w-4 h-4 bg-white/90 rounded-full shadow"></div>
-          </div>
-          <div className="w-8 h-5 bg-elegant-black/20 rounded-full relative">
-            <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-elegant-black/60 rounded-full"></div>
-          </div>
+          <motion.div
+            className="flex items-center space-x-2"
+            animate={{ x: [0, 3, 0, -3, 0] }}
+            transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div className="w-8 h-5 bg-elegant-black/50 rounded-full relative">
+              <div className="absolute right-0.5 top-0.5 w-4 h-4 bg-white/90 rounded-full shadow"></div>
+            </div>
+            <div className="w-8 h-5 bg-elegant-black/20 rounded-full relative">
+              <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-elegant-black/60 rounded-full"></div>
+            </div>
+          </motion.div>
         </motion.div>
         
         {/* Text Input Field - new element */}
@@ -323,23 +327,25 @@ export default function HeroSection() {
           className="absolute w-40 h-10 bg-white/5 border border-elegant-black/30 rounded flex items-center px-3"
           style={{ x: x10, y: y10 }}
           animate={{ 
-            scale: isHovered ? 1.3 : 1,
-            opacity: isHovered ? 0.8 : 0.25,
-            backgroundColor: isHovered ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.05)",
             bottom: isHovered ? '8%' : '42%',
             right: isHovered ? '15%' : '38%',
-            y: [0, 2, 0, -2, 0]
+            scale: isHovered ? 1.3 : 1,
+            opacity: isHovered ? 0.8 : 0.25,
+            backgroundColor: isHovered ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.05)"
           }}
           transition={{ 
-            duration: 0.7, 
-            ease: "easeOut",
-            bottom: { duration: 0.8, ease: "easeInOut" },
-            right: { duration: 0.8, ease: "easeInOut" },
-            y: { duration: 5.5, repeat: Infinity, ease: "easeInOut" }
+            duration: 0.8, 
+            ease: "easeOut"
           }}
         >
-          <div className="w-2 h-4 bg-elegant-black/60 animate-pulse"></div>
-          <div className="ml-2 w-20 h-1.5 bg-elegant-black/30 rounded"></div>
+          <motion.div
+            className="flex items-center"
+            animate={{ y: [0, 2, 0, -2, 0] }}
+            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div className="w-2 h-4 bg-elegant-black/60 animate-pulse"></div>
+            <div className="ml-2 w-20 h-1.5 bg-elegant-black/30 rounded"></div>
+          </motion.div>
         </motion.div>
         
         {/* Radio Button Group - new element */}
