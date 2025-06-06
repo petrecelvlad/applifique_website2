@@ -122,24 +122,45 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
         
-        {/* Circular Loading Spinner - far bottom right */}
+        {/* ID Card - top right corner */}
         <motion.div 
-          className="absolute w-14 h-14 rounded-full border-4 border-elegant-black/20 border-t-elegant-black/60"
+          className="absolute w-20 h-28 bg-elegant-black/15 border border-elegant-black/30 rounded-lg p-2"
           style={{ x: x2, y: y2 }}
           animate={{ 
-            bottom: isHovered ? '12%' : '35%',
-            right: isHovered ? '10%' : '25%',
+            top: isHovered ? '12%' : '20%',
+            right: isHovered ? '8%' : '15%',
             scale: isHovered ? 1.3 : 1,
             opacity: isHovered ? 0.9 : 0.3,
-            borderTopColor: isHovered ? "rgba(0,0,0,0.8)" : "rgba(0,0,0,0.6)",
-            rotate: 360
+            backgroundColor: isHovered ? "rgba(0,0,0,0.25)" : "rgba(0,0,0,0.15)"
           }}
           transition={{ 
             duration: 0.8, 
-            ease: "easeOut",
-            rotate: { duration: 1.5, repeat: Infinity, ease: "linear" }
+            ease: "easeOut"
           }}
-        />
+        >
+          <motion.div
+            className="relative w-full h-full"
+            animate={{ y: [0, -1, 0, 1, 0] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            {/* Close button */}
+            <div className="absolute top-0 right-0 w-2 h-2 text-elegant-black/60 text-xs flex items-center justify-center">
+              <div className="w-1.5 h-0.5 bg-elegant-black/60 rotate-45 absolute"></div>
+              <div className="w-1.5 h-0.5 bg-elegant-black/60 -rotate-45 absolute"></div>
+            </div>
+            
+            {/* Avatar circle */}
+            <div className="w-8 h-8 bg-elegant-black/30 rounded-full border border-elegant-black/40 mx-auto mt-1 mb-2"></div>
+            
+            {/* Text lines */}
+            <div className="space-y-1">
+              <div className="w-12 h-1 bg-elegant-black/40 rounded mx-auto"></div>
+              <div className="w-10 h-0.5 bg-elegant-black/30 rounded mx-auto"></div>
+              <div className="w-8 h-0.5 bg-elegant-black/25 rounded mx-auto"></div>
+              <div className="w-11 h-0.5 bg-elegant-black/30 rounded mx-auto mt-2"></div>
+            </div>
+          </motion.div>
+        </motion.div>
         
         {/* Range Slider - mid left */}
         <motion.div 
@@ -423,7 +444,7 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="text-xl md:text-2xl text-elegant-gray font-light tracking-wider italic mb-12"
+            className="text-xl md:text-2xl text-elegant-gray font-light tracking-wider italic mb-6"
           >
             c'est simply... magnifique
           </motion.p>
