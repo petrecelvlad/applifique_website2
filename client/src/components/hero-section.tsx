@@ -90,144 +90,263 @@ export default function HeroSection() {
       {/* Subtle architectural grid overlay */}
       <div className="absolute inset-0 architectural-grid-fine opacity-30"></div>
       
-      {/* Interactive UI components with dramatic cursor-responsive motion */}
+      {/* Interactive complex UI widgets with dramatic cursor-responsive motion */}
       <div className="absolute inset-0">
-        {/* Card Component - top left */}
+        {/* Blog Post Card - top left */}
         <motion.div 
-          className="absolute top-32 left-32 w-64 h-40 border border-elegant-black bg-white/5 rounded-lg shadow-sm"
+          className="absolute top-32 left-32 w-72 h-48 border border-elegant-black bg-white/5 rounded-lg shadow-sm"
           style={{ x: x1, y: y1 }}
           animate={{ 
             scale: isHovered ? 1.15 : 1,
-            opacity: isHovered ? 0.6 : 0.2,
-            backgroundColor: isHovered ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.05)"
+            opacity: isHovered ? 0.7 : 0.25,
+            backgroundColor: isHovered ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.05)"
           }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <div className="p-4 space-y-2">
-            <div className="w-3/4 h-3 bg-elegant-black/30 rounded"></div>
-            <div className="w-1/2 h-2 bg-elegant-black/20 rounded"></div>
-            <div className="w-full h-2 bg-elegant-black/20 rounded"></div>
+          <div className="p-4">
+            {/* Image placeholder */}
+            <div className="w-full h-20 bg-elegant-black/20 rounded mb-3"></div>
+            {/* Title */}
+            <div className="w-5/6 h-3 bg-elegant-black/40 rounded mb-2"></div>
+            {/* Content lines */}
+            <div className="w-full h-2 bg-elegant-black/25 rounded mb-1"></div>
+            <div className="w-3/4 h-2 bg-elegant-black/25 rounded mb-3"></div>
+            {/* Author and date */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <div className="w-4 h-4 bg-elegant-black/30 rounded-full"></div>
+                <div className="w-12 h-1.5 bg-elegant-black/30 rounded"></div>
+              </div>
+              <div className="w-16 h-1.5 bg-elegant-black/25 rounded"></div>
+            </div>
           </div>
         </motion.div>
         
-        {/* Button Component - bottom right */}
+        {/* Chat Message Bubble - bottom right */}
         <motion.div 
-          className="absolute bottom-32 right-32 w-32 h-12 border border-elegant-black bg-elegant-black/10 rounded-md flex items-center justify-center"
+          className="absolute bottom-32 right-32 w-64 h-32 border border-elegant-black bg-white/5 rounded-2xl"
           style={{ x: x2, y: y2 }}
           animate={{ 
             scale: isHovered ? 1.25 : 1,
-            opacity: isHovered ? 0.7 : 0.25,
-            backgroundColor: isHovered ? "rgba(0,0,0,0.2)" : "rgba(0,0,0,0.1)"
+            opacity: isHovered ? 0.8 : 0.3,
+            backgroundColor: isHovered ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.05)"
           }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div className="w-16 h-2 bg-elegant-black/50 rounded"></div>
+          <div className="p-4">
+            {/* Avatar and name */}
+            <div className="flex items-center space-x-2 mb-2">
+              <div className="w-6 h-6 bg-elegant-black/40 rounded-full"></div>
+              <div className="w-16 h-2 bg-elegant-black/35 rounded"></div>
+              <div className="w-8 h-1.5 bg-elegant-black/25 rounded"></div>
+            </div>
+            {/* Message content */}
+            <div className="w-full h-2 bg-elegant-black/30 rounded mb-1"></div>
+            <div className="w-4/5 h-2 bg-elegant-black/30 rounded mb-3"></div>
+            {/* Send button */}
+            <div className="flex justify-end">
+              <div className="w-12 h-5 bg-elegant-black/40 rounded-full flex items-center justify-center">
+                <div className="w-2 h-2 bg-white/60 rounded-full"></div>
+              </div>
+            </div>
+          </div>
         </motion.div>
         
-        {/* Input Field - center left */}
+        {/* Login Form Widget - center left */}
         <motion.div 
-          className="absolute top-1/2 left-1/4 w-48 h-10 border border-elegant-black bg-white/5 rounded"
+          className="absolute top-1/2 left-1/4 w-56 h-44 border border-elegant-black bg-white/5 rounded-lg"
           style={{ x: x3, y: y3 }}
           animate={{ 
             scale: isHovered ? 1.3 : 1,
-            opacity: isHovered ? 0.6 : 0.2,
-            backgroundColor: isHovered ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.05)"
+            opacity: isHovered ? 0.75 : 0.25,
+            backgroundColor: isHovered ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.05)"
           }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <div className="p-2">
-            <div className="w-20 h-2 bg-elegant-black/30 rounded"></div>
+          <div className="p-4 space-y-3">
+            {/* Title */}
+            <div className="w-20 h-3 bg-elegant-black/40 rounded mx-auto"></div>
+            {/* Email input */}
+            <div className="w-full h-8 border border-elegant-black/30 rounded bg-white/5 px-2 flex items-center">
+              <div className="w-24 h-1.5 bg-elegant-black/30 rounded"></div>
+            </div>
+            {/* Password input */}
+            <div className="w-full h-8 border border-elegant-black/30 rounded bg-white/5 px-2 flex items-center">
+              <div className="w-6 h-1.5 bg-elegant-black/30 rounded"></div>
+              <div className="flex-1"></div>
+              <div className="w-3 h-3 bg-elegant-black/25 rounded"></div>
+            </div>
+            {/* Login button */}
+            <div className="w-full h-9 bg-elegant-black/30 rounded flex items-center justify-center">
+              <div className="w-12 h-2 bg-white/60 rounded"></div>
+            </div>
           </div>
         </motion.div>
         
-        {/* Navigation Bar - top center */}
+        {/* Dashboard Widget - top center */}
         <motion.div 
-          className="absolute top-1/4 right-1/4 w-80 h-8 bg-elegant-black/10 rounded-full flex items-center justify-around px-4"
+          className="absolute top-1/4 right-1/4 w-80 h-24 bg-elegant-black/8 rounded-lg border border-elegant-black/20"
           style={{ x: x4, y: y4 }}
           animate={{ 
             scale: isHovered ? 1.2 : 1,
-            opacity: isHovered ? 0.6 : 0.2,
-            backgroundColor: isHovered ? "rgba(0,0,0,0.15)" : "rgba(0,0,0,0.1)"
+            opacity: isHovered ? 0.7 : 0.25,
+            backgroundColor: isHovered ? "rgba(0,0,0,0.12)" : "rgba(0,0,0,0.08)"
           }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <div className="w-8 h-2 bg-elegant-black/40 rounded"></div>
-          <div className="w-8 h-2 bg-elegant-black/40 rounded"></div>
-          <div className="w-8 h-2 bg-elegant-black/40 rounded"></div>
-          <div className="w-8 h-2 bg-elegant-black/40 rounded"></div>
-        </motion.div>
-        
-        {/* Sidebar - bottom left */}
-        <motion.div 
-          className="absolute bottom-1/4 left-1/3 w-6 h-48 bg-elegant-black/10 rounded-sm"
-          style={{ x: x5, y: y5 }}
-          animate={{ 
-            scale: isHovered ? 1.3 : 1,
-            opacity: isHovered ? 0.6 : 0.2,
-            backgroundColor: isHovered ? "rgba(0,0,0,0.15)" : "rgba(0,0,0,0.1)"
-          }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <div className="p-1 space-y-2">
-            <div className="w-full h-1 bg-elegant-black/40 rounded"></div>
-            <div className="w-full h-1 bg-elegant-black/40 rounded"></div>
-            <div className="w-full h-1 bg-elegant-black/40 rounded"></div>
+          <div className="p-3">
+            {/* Header with tabs */}
+            <div className="flex space-x-3 mb-2">
+              <div className="w-12 h-2 bg-elegant-black/40 rounded"></div>
+              <div className="w-12 h-2 bg-elegant-black/25 rounded"></div>
+              <div className="w-12 h-2 bg-elegant-black/25 rounded"></div>
+            </div>
+            {/* Chart visualization */}
+            <div className="flex items-end space-x-1 h-8">
+              <div className="w-3 h-4 bg-elegant-black/30"></div>
+              <div className="w-3 h-6 bg-elegant-black/30"></div>
+              <div className="w-3 h-3 bg-elegant-black/30"></div>
+              <div className="w-3 h-7 bg-elegant-black/30"></div>
+              <div className="w-3 h-5 bg-elegant-black/30"></div>
+            </div>
           </div>
         </motion.div>
         
-        {/* Profile Avatar - top right */}
+        {/* Settings Panel - bottom left */}
         <motion.div 
-          className="absolute top-20 right-20 w-16 h-16 border border-elegant-black rounded-full bg-white/5 flex items-center justify-center"
-          style={{ x: x6, y: y6 }}
+          className="absolute bottom-1/4 left-1/3 w-48 h-56 bg-elegant-black/8 rounded-lg border border-elegant-black/20"
+          style={{ x: x5, y: y5 }}
           animate={{ 
-            scale: isHovered ? 1.8 : 1,
-            opacity: isHovered ? 0.7 : 0.2,
-            backgroundColor: isHovered ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.05)"
-          }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-        >
-          <div className="w-8 h-8 bg-elegant-black/40 rounded-full"></div>
-        </motion.div>
-        
-        {/* Loading Spinner - bottom left */}
-        <motion.div 
-          className="absolute bottom-20 left-20 w-8 h-8 border-2 border-elegant-black/20 border-t-elegant-black/60 rounded-full"
-          style={{ x: x7, y: y7 }}
-          animate={{ 
-            scale: isHovered ? 2.5 : 1,
-            rotate: isHovered ? 360 : 0,
-            opacity: isHovered ? 0.8 : 0.25,
-            borderTopColor: isHovered ? "rgba(0,0,0,0.8)" : "rgba(0,0,0,0.6)"
-          }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-        />
-        
-        {/* Message Notification - center top */}
-        <motion.div 
-          className="absolute top-16 left-1/2 w-24 h-8 bg-elegant-black/10 rounded-full transform -translate-x-1/2 flex items-center justify-center"
-          style={{ x: x8, y: y8 }}
-          animate={{ 
-            scale: isHovered ? 2 : 1,
-            opacity: isHovered ? 0.7 : 0.2,
-            backgroundColor: isHovered ? "rgba(0,0,0,0.2)" : "rgba(0,0,0,0.1)"
+            scale: isHovered ? 1.3 : 1,
+            opacity: isHovered ? 0.7 : 0.25,
+            backgroundColor: isHovered ? "rgba(0,0,0,0.12)" : "rgba(0,0,0,0.08)"
           }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <div className="w-12 h-1.5 bg-elegant-black/50 rounded"></div>
+          <div className="p-3 space-y-3">
+            {/* Header */}
+            <div className="w-16 h-2.5 bg-elegant-black/40 rounded"></div>
+            {/* Setting items */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="w-20 h-1.5 bg-elegant-black/30 rounded"></div>
+                <div className="w-8 h-4 bg-elegant-black/25 rounded-full"></div>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="w-16 h-1.5 bg-elegant-black/30 rounded"></div>
+                <div className="w-8 h-4 bg-elegant-black/25 rounded-full"></div>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="w-24 h-1.5 bg-elegant-black/30 rounded"></div>
+                <div className="w-8 h-4 bg-elegant-black/25 rounded-full"></div>
+              </div>
+            </div>
+            {/* Slider */}
+            <div className="w-full h-1 bg-elegant-black/20 rounded relative">
+              <div className="absolute left-1/3 w-2 h-2 bg-elegant-black/40 rounded-full -top-0.5"></div>
+            </div>
+          </div>
         </motion.div>
         
-        {/* Toggle Switch - center right */}
+        {/* User Profile Card - top right */}
         <motion.div 
-          className="absolute top-1/3 right-16 w-12 h-6 bg-elegant-black/20 rounded-full flex items-center px-1"
+          className="absolute top-20 right-20 w-48 h-32 border border-elegant-black rounded-xl bg-white/5"
+          style={{ x: x6, y: y6 }}
+          animate={{ 
+            scale: isHovered ? 1.8 : 1,
+            opacity: isHovered ? 0.8 : 0.25,
+            backgroundColor: isHovered ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.05)"
+          }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+        >
+          <div className="p-3">
+            <div className="flex items-center space-x-3 mb-2">
+              <div className="w-10 h-10 bg-elegant-black/30 rounded-full"></div>
+              <div className="space-y-1">
+                <div className="w-16 h-2 bg-elegant-black/40 rounded"></div>
+                <div className="w-20 h-1.5 bg-elegant-black/25 rounded"></div>
+              </div>
+            </div>
+            <div className="flex justify-between items-center">
+              <div className="flex space-x-1">
+                <div className="w-8 h-4 bg-elegant-black/25 rounded text-xs"></div>
+                <div className="w-8 h-4 bg-elegant-black/25 rounded text-xs"></div>
+              </div>
+              <div className="w-6 h-6 bg-elegant-black/30 rounded"></div>
+            </div>
+          </div>
+        </motion.div>
+        
+        {/* Loading Progress Widget - bottom left */}
+        <motion.div 
+          className="absolute bottom-20 left-20 w-40 h-16 bg-white/5 rounded-lg border border-elegant-black/20"
+          style={{ x: x7, y: y7 }}
+          animate={{ 
+            scale: isHovered ? 2.5 : 1,
+            opacity: isHovered ? 0.8 : 0.3,
+            backgroundColor: isHovered ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.05)"
+          }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <div className="p-2">
+            <div className="w-16 h-2 bg-elegant-black/30 rounded mb-2"></div>
+            <div className="w-full h-2 bg-elegant-black/15 rounded overflow-hidden">
+              <div className="w-2/3 h-full bg-elegant-black/40"></div>
+            </div>
+            <div className="flex justify-between mt-1">
+              <div className="w-6 h-1 bg-elegant-black/20 rounded"></div>
+              <div className="w-8 h-1 bg-elegant-black/20 rounded"></div>
+            </div>
+          </div>
+        </motion.div>
+        
+        {/* Notification Toast - center top */}
+        <motion.div 
+          className="absolute top-16 left-1/2 w-56 h-16 bg-white/8 rounded-lg transform -translate-x-1/2 border border-elegant-black/20"
+          style={{ x: x8, y: y8 }}
+          animate={{ 
+            scale: isHovered ? 2 : 1,
+            opacity: isHovered ? 0.8 : 0.25,
+            backgroundColor: isHovered ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.08)"
+          }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div className="p-2 flex items-center space-x-2">
+            <div className="w-8 h-8 bg-elegant-black/30 rounded-full flex items-center justify-center">
+              <div className="w-3 h-3 bg-white/60 rounded-full"></div>
+            </div>
+            <div className="flex-1 space-y-1">
+              <div className="w-20 h-1.5 bg-elegant-black/40 rounded"></div>
+              <div className="w-28 h-1 bg-elegant-black/25 rounded"></div>
+            </div>
+            <div className="w-4 h-4 bg-elegant-black/25 rounded"></div>
+          </div>
+        </motion.div>
+        
+        {/* Feature Toggle Panel - center right */}
+        <motion.div 
+          className="absolute top-1/3 right-16 w-36 h-20 bg-white/5 rounded-lg border border-elegant-black/20"
           style={{ x: x9, y: y9 }}
           animate={{ 
             scale: isHovered ? 2.5 : 1,
-            opacity: isHovered ? 0.8 : 0.2,
-            backgroundColor: isHovered ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.2)"
+            opacity: isHovered ? 0.8 : 0.25,
+            backgroundColor: isHovered ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.05)"
           }}
           transition={{ duration: 0.3, ease: "easeOut" }}
         >
-          <div className="w-4 h-4 bg-elegant-black/60 rounded-full"></div>
+          <div className="p-2 space-y-2">
+            <div className="w-20 h-2 bg-elegant-black/35 rounded"></div>
+            <div className="flex items-center justify-between">
+              <div className="w-16 h-1.5 bg-elegant-black/25 rounded"></div>
+              <div className="w-8 h-4 bg-elegant-black/30 rounded-full relative">
+                <div className="absolute right-0.5 top-0.5 w-3 h-3 bg-elegant-black/60 rounded-full"></div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="w-12 h-1.5 bg-elegant-black/25 rounded"></div>
+              <div className="w-8 h-4 bg-elegant-black/20 rounded-full"></div>
+            </div>
+          </div>
         </motion.div>
       </div>
       
