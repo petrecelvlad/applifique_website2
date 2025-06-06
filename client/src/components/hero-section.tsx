@@ -38,6 +38,10 @@ export default function HeroSection() {
   const y8 = useTransform(y, [-1, 1], [-8, 8]);
   const x9 = useTransform(x, [-1, 1], [-10, 10]);
   const y9 = useTransform(y, [-1, 1], [14, -14]);
+  const x10 = useTransform(x, [-1, 1], [16, -16]);
+  const y10 = useTransform(y, [-1, 1], [-12, 12]);
+  const x11 = useTransform(x, [-1, 1], [-14, 14]);
+  const y11 = useTransform(y, [-1, 1], [16, -16]);
   
   // Cursor transforms
   const cursorX = useTransform(mouseX, [-1, 1], [-8, -8]);
@@ -98,15 +102,20 @@ export default function HeroSection() {
           style={{ 
             x: x1, 
             y: y1,
-            top: '15%',
-            left: '8%'
+            top: isHovered ? '15%' : '42%',
+            left: isHovered ? '8%' : '35%'
           }}
           animate={{ 
             scale: isHovered ? 1.15 : 1,
             opacity: isHovered ? 0.8 : 0.25,
-            backgroundColor: isHovered ? "rgba(0,0,0,0.25)" : "rgba(0,0,0,0.15)"
+            backgroundColor: isHovered ? "rgba(0,0,0,0.25)" : "rgba(0,0,0,0.15)",
+            y: [0, -3, 0, 3, 0]
           }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ 
+            duration: 0.6, 
+            ease: "easeOut",
+            y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+          }}
         >
           <div className="flex items-center space-x-2">
             <div className="w-4 h-4 bg-white/60 rounded"></div>
@@ -120,22 +129,21 @@ export default function HeroSection() {
           style={{ 
             x: x2, 
             y: y2,
-            bottom: '12%',
-            right: '10%'
+            bottom: isHovered ? '12%' : '40%',
+            right: isHovered ? '10%' : '30%'
           }}
           animate={{ 
             scale: isHovered ? 1.3 : 1,
             opacity: isHovered ? 0.9 : 0.3,
-            borderTopColor: isHovered ? "rgba(0,0,0,0.8)" : "rgba(0,0,0,0.6)"
+            borderTopColor: isHovered ? "rgba(0,0,0,0.8)" : "rgba(0,0,0,0.6)",
+            rotate: 360
           }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
-            className="w-full h-full"
-          />
-        </motion.div>
+          transition={{ 
+            duration: 0.8, 
+            ease: "easeOut",
+            rotate: { duration: 1.5, repeat: Infinity, ease: "linear" }
+          }}
+        />
         
         {/* Range Slider - mid left */}
         <motion.div 
@@ -143,14 +151,19 @@ export default function HeroSection() {
           style={{ 
             x: x3, 
             y: y3,
-            top: '48%',
-            left: '6%'
+            top: isHovered ? '48%' : '50%',
+            left: isHovered ? '6%' : '38%'
           }}
           animate={{ 
             scale: isHovered ? 1.2 : 1,
-            opacity: isHovered ? 0.8 : 0.25
+            opacity: isHovered ? 0.8 : 0.25,
+            x: [0, 2, 0, -2, 0]
           }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          transition={{ 
+            duration: 0.7, 
+            ease: "easeOut",
+            x: { duration: 3.5, repeat: Infinity, ease: "easeInOut" }
+          }}
         >
           <div className="w-full h-2 bg-elegant-black/20 rounded-full relative">
             <div className="w-2/5 h-full bg-elegant-black/50 rounded-full"></div>
@@ -164,15 +177,19 @@ export default function HeroSection() {
           style={{ 
             x: x4, 
             y: y4,
-            top: '18%',
-            right: '8%'
+            top: isHovered ? '18%' : '45%',
+            right: isHovered ? '8%' : '35%'
           }}
           animate={{ 
             scale: isHovered ? 1.25 : 1,
             opacity: isHovered ? 0.8 : 0.25,
-            rotate: isHovered ? 5 : 0
+            rotate: [0, 2, 0, -2, 0]
           }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={{ 
+            duration: 0.5, 
+            ease: "easeOut",
+            rotate: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+          }}
         >
           <div className="w-7 h-7 bg-elegant-black/30 rounded"></div>
           <div className="w-7 h-7 bg-elegant-black/30 rounded-full"></div>
@@ -188,15 +205,20 @@ export default function HeroSection() {
           style={{ 
             x: x5, 
             y: y5,
-            bottom: '15%',
-            left: '12%'
+            bottom: isHovered ? '15%' : '42%',
+            left: isHovered ? '12%' : '35%'
           }}
           animate={{ 
             scale: isHovered ? 1.3 : 1,
             opacity: isHovered ? 0.8 : 0.25,
-            backgroundColor: isHovered ? "rgba(0,0,0,0.2)" : "rgba(0,0,0,0.15)"
+            backgroundColor: isHovered ? "rgba(0,0,0,0.2)" : "rgba(0,0,0,0.15)",
+            x: [0, -2, 0, 2, 0]
           }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ 
+            duration: 0.6, 
+            ease: "easeOut",
+            x: { duration: 4.5, repeat: Infinity, ease: "easeInOut" }
+          }}
         >
           <div className="w-full h-3/4 bg-elegant-black/50 absolute bottom-0"></div>
         </motion.div>
@@ -207,15 +229,19 @@ export default function HeroSection() {
           style={{ 
             x: x6, 
             y: y6,
-            top: '35%',
-            right: '12%'
+            top: isHovered ? '35%' : '48%',
+            right: isHovered ? '12%' : '35%'
           }}
           animate={{ 
             scale: isHovered ? 1.4 : 1,
             opacity: isHovered ? 0.9 : 0.3,
-            rotate: isHovered ? 8 : 0
+            rotate: [0, 3, 0, -3, 0]
           }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
+          transition={{ 
+            duration: 0.4, 
+            ease: "easeOut",
+            rotate: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+          }}
         >
           <div className="w-full h-full bg-elegant-black/30 rounded-full border-2 border-elegant-black/40 relative">
             <div className="absolute -top-1 -right-1 w-4 h-4 bg-elegant-black/60 rounded-full border-2 border-white/80"></div>
@@ -228,14 +254,19 @@ export default function HeroSection() {
           style={{ 
             x: x7, 
             y: y7,
-            bottom: '35%',
-            left: '10%'
+            bottom: isHovered ? '35%' : '48%',
+            left: isHovered ? '10%' : '40%'
           }}
           animate={{ 
             scale: isHovered ? 1.5 : 1,
-            opacity: isHovered ? 0.9 : 0.25
+            opacity: isHovered ? 0.9 : 0.25,
+            y: [0, -2, 0, 2, 0]
           }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={{ 
+            duration: 0.5, 
+            ease: "easeOut",
+            y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+          }}
         >
           <div className="w-4 h-4 bg-elegant-black/50 rounded border border-elegant-black/60 flex items-center justify-center">
             <div className="w-2 h-2 bg-white/80 rounded-sm"></div>
@@ -252,15 +283,19 @@ export default function HeroSection() {
           style={{ 
             x: x8, 
             y: y8,
-            top: '8%',
-            left: '48%'
+            top: isHovered ? '8%' : '40%',
+            left: isHovered ? '48%' : '50%'
           }}
           animate={{ 
             scale: isHovered ? 1.4 : 1,
             opacity: isHovered ? 0.9 : 0.3,
-            y: isHovered ? -8 : 0
+            y: [0, -4, 0, 4, 0]
           }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ 
+            duration: 0.6, 
+            ease: "easeOut",
+            y: { duration: 3.2, repeat: Infinity, ease: "easeInOut" }
+          }}
         >
           <div className="w-12 h-12 bg-elegant-black/25 rounded-lg flex items-center justify-center relative">
             <div className="w-6 h-6 bg-elegant-black/50 rounded"></div>
@@ -276,14 +311,19 @@ export default function HeroSection() {
           style={{ 
             x: x9, 
             y: y9,
-            top: '55%',
-            right: '8%'
+            top: isHovered ? '55%' : '52%',
+            right: isHovered ? '8%' : '42%'
           }}
           animate={{ 
             scale: isHovered ? 1.5 : 1,
-            opacity: isHovered ? 0.9 : 0.25
+            opacity: isHovered ? 0.9 : 0.25,
+            x: [0, 3, 0, -3, 0]
           }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
+          transition={{ 
+            duration: 0.3, 
+            ease: "easeOut",
+            x: { duration: 4.8, repeat: Infinity, ease: "easeInOut" }
+          }}
         >
           <div className="w-8 h-5 bg-elegant-black/50 rounded-full relative">
             <div className="absolute right-0.5 top-0.5 w-4 h-4 bg-white/90 rounded-full shadow"></div>
@@ -291,6 +331,58 @@ export default function HeroSection() {
           <div className="w-8 h-5 bg-elegant-black/20 rounded-full relative">
             <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-elegant-black/60 rounded-full"></div>
           </div>
+        </motion.div>
+        
+        {/* Text Input Field - new element */}
+        <motion.div 
+          className="absolute w-40 h-10 bg-white/5 border border-elegant-black/30 rounded flex items-center px-3"
+          style={{ 
+            x: x10, 
+            y: y10,
+            bottom: isHovered ? '8%' : '48%',
+            right: isHovered ? '15%' : '45%'
+          }}
+          animate={{ 
+            scale: isHovered ? 1.3 : 1,
+            opacity: isHovered ? 0.8 : 0.25,
+            backgroundColor: isHovered ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.05)",
+            y: [0, 2, 0, -2, 0]
+          }}
+          transition={{ 
+            duration: 0.7, 
+            ease: "easeOut",
+            y: { duration: 5.5, repeat: Infinity, ease: "easeInOut" }
+          }}
+        >
+          <div className="w-2 h-4 bg-elegant-black/60 animate-pulse"></div>
+          <div className="ml-2 w-20 h-1.5 bg-elegant-black/30 rounded"></div>
+        </motion.div>
+        
+        {/* Radio Button Group - new element */}
+        <motion.div 
+          className="absolute space-y-1"
+          style={{ 
+            x: x11, 
+            y: y11,
+            top: isHovered ? '25%' : '47%',
+            left: isHovered ? '15%' : '44%'
+          }}
+          animate={{ 
+            scale: isHovered ? 1.4 : 1,
+            opacity: isHovered ? 0.9 : 0.25,
+            x: [0, -2, 0, 2, 0]
+          }}
+          transition={{ 
+            duration: 0.6, 
+            ease: "easeOut",
+            x: { duration: 4.2, repeat: Infinity, ease: "easeInOut" }
+          }}
+        >
+          <div className="w-4 h-4 bg-elegant-black/30 rounded-full border-2 border-elegant-black/50 relative">
+            <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-elegant-black/70 rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+          </div>
+          <div className="w-4 h-4 bg-white/10 rounded-full border-2 border-elegant-black/50"></div>
+          <div className="w-4 h-4 bg-white/10 rounded-full border-2 border-elegant-black/50"></div>
         </motion.div>
       </div>
       
