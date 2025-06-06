@@ -86,7 +86,7 @@ export default function HeroSection() {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center bg-elegant-white overflow-hidden architectural-grid cursor-none"
+      className="relative min-h-screen flex items-center justify-center bg-elegant-white overflow-hidden architectural-grid"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
@@ -99,39 +99,47 @@ export default function HeroSection() {
         {/* Primary Action Button - far top left */}
         <motion.div 
           className="absolute w-36 h-12 bg-elegant-black/15 rounded-lg border border-elegant-black/30 flex items-center justify-center hover:shadow-lg"
-          style={{ x: x1, y: y1 }}
+          style={{ 
+            top: isHovered ? '15%' : '38%',
+            left: isHovered ? '8%' : '28%',
+            x: x1,
+            y: y1
+          }}
           animate={{ 
             scale: isHovered ? 1.15 : 1,
             opacity: isHovered ? 0.8 : 0.25,
-            backgroundColor: isHovered ? "rgba(0,0,0,0.25)" : "rgba(0,0,0,0.15)",
-            top: isHovered ? '15%' : '38%',
-            left: isHovered ? '8%' : '28%',
-            y: [0, -3, 0, 3, 0]
+            backgroundColor: isHovered ? "rgba(0,0,0,0.25)" : "rgba(0,0,0,0.15)"
           }}
           transition={{ 
             duration: 0.8, 
             ease: "easeOut",
             top: { duration: 0.8, ease: "easeInOut" },
-            left: { duration: 0.8, ease: "easeInOut" },
-            y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+            left: { duration: 0.8, ease: "easeInOut" }
           }}
         >
-          <div className="flex items-center space-x-2">
+          <motion.div 
+            className="flex items-center space-x-2"
+            animate={{ y: [0, -3, 0, 3, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          >
             <div className="w-4 h-4 bg-white/60 rounded"></div>
             <div className="w-16 h-2 bg-white/70 rounded"></div>
-          </div>
+          </motion.div>
         </motion.div>
         
         {/* Circular Loading Spinner - far bottom right */}
         <motion.div 
           className="absolute w-14 h-14 rounded-full border-4 border-elegant-black/20 border-t-elegant-black/60"
-          style={{ x: x2, y: y2 }}
+          style={{ 
+            bottom: isHovered ? '12%' : '35%',
+            right: isHovered ? '10%' : '25%',
+            x: x2,
+            y: y2
+          }}
           animate={{ 
             scale: isHovered ? 1.3 : 1,
             opacity: isHovered ? 0.9 : 0.3,
             borderTopColor: isHovered ? "rgba(0,0,0,0.8)" : "rgba(0,0,0,0.6)",
-            bottom: isHovered ? '12%' : '35%',
-            right: isHovered ? '10%' : '25%',
             rotate: 360
           }}
           transition={{ 
@@ -146,26 +154,31 @@ export default function HeroSection() {
         {/* Range Slider - mid left */}
         <motion.div 
           className="absolute w-44 h-6 flex items-center"
-          style={{ x: x3, y: y3 }}
+          style={{ 
+            top: isHovered ? '48%' : '49%',
+            left: isHovered ? '6%' : '32%'
+          }}
           animate={{ 
             scale: isHovered ? 1.2 : 1,
             opacity: isHovered ? 0.8 : 0.25,
-            top: isHovered ? '48%' : '49%',
-            left: isHovered ? '6%' : '32%',
-            x: [0, 2, 0, -2, 0]
+            x: x3,
+            y: y3
           }}
           transition={{ 
             duration: 0.7, 
             ease: "easeOut",
             top: { duration: 0.8, ease: "easeInOut" },
-            left: { duration: 0.8, ease: "easeInOut" },
-            x: { duration: 3.5, repeat: Infinity, ease: "easeInOut" }
+            left: { duration: 0.8, ease: "easeInOut" }
           }}
         >
-          <div className="w-full h-2 bg-elegant-black/20 rounded-full relative">
+          <motion.div 
+            className="w-full h-2 bg-elegant-black/20 rounded-full relative"
+            animate={{ x: [0, 2, 0, -2, 0] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+          >
             <div className="w-2/5 h-full bg-elegant-black/50 rounded-full"></div>
             <div className="absolute w-4 h-4 bg-elegant-black/70 rounded-full border-2 border-white/80 shadow transform -translate-y-1/2 top-1/2" style={{ left: '40%' }}></div>
-          </div>
+          </motion.div>
         </motion.div>
         
         {/* Icon Grid - far top right */}
