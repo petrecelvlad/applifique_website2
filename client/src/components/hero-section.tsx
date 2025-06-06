@@ -17,27 +17,27 @@ export default function HeroSection() {
   const x = useSpring(mouseX, springConfig);
   const y = useSpring(mouseY, springConfig);
   
-  // Transform values with much more pronounced motion for dramatic effect
-  const x1 = useTransform(x, [-1, 1], [-60, 60]);
-  const y1 = useTransform(y, [-1, 1], [-45, 45]);
-  const x2 = useTransform(x, [-1, 1], [50, -50]);
-  const y2 = useTransform(y, [-1, 1], [70, -70]);
-  const x3 = useTransform(x, [-1, 1], [-40, 40]);
-  const y3 = useTransform(y, [-1, 1], [-80, 80]);
-  const x4 = useTransform(x, [-1, 1], [80, -80]);
-  const y4 = useTransform(y, [-1, 1], [35, -35]);
-  const x5 = useTransform(x, [-1, 1], [-70, 70]);
-  const y5 = useTransform(y, [-1, 1], [-25, 25]);
+  // Transform values with moderate motion around center point
+  const x1 = useTransform(x, [-1, 1], [-25, 25]);
+  const y1 = useTransform(y, [-1, 1], [-20, 20]);
+  const x2 = useTransform(x, [-1, 1], [20, -20]);
+  const y2 = useTransform(y, [-1, 1], [25, -25]);
+  const x3 = useTransform(x, [-1, 1], [-15, 15]);
+  const y3 = useTransform(y, [-1, 1], [-30, 30]);
+  const x4 = useTransform(x, [-1, 1], [30, -30]);
+  const y4 = useTransform(y, [-1, 1], [15, -15]);
+  const x5 = useTransform(x, [-1, 1], [-20, 20]);
+  const y5 = useTransform(y, [-1, 1], [-10, 10]);
   
-  // Additional geometric elements with varied motion
-  const x6 = useTransform(x, [-1, 1], [30, -30]);
-  const y6 = useTransform(y, [-1, 1], [-60, 60]);
-  const x7 = useTransform(x, [-1, 1], [-45, 45]);
-  const y7 = useTransform(y, [-1, 1], [45, -45]);
-  const x8 = useTransform(x, [-1, 1], [65, -65]);
-  const y8 = useTransform(y, [-1, 1], [-30, 30]);
-  const x9 = useTransform(x, [-1, 1], [-55, 55]);
-  const y9 = useTransform(y, [-1, 1], [55, -55]);
+  // Additional transforms for satellite elements
+  const x6 = useTransform(x, [-1, 1], [12, -12]);
+  const y6 = useTransform(y, [-1, 1], [-25, 25]);
+  const x7 = useTransform(x, [-1, 1], [-18, 18]);
+  const y7 = useTransform(y, [-1, 1], [18, -18]);
+  const x8 = useTransform(x, [-1, 1], [22, -22]);
+  const y8 = useTransform(y, [-1, 1], [-12, 12]);
+  const x9 = useTransform(x, [-1, 1], [-16, 16]);
+  const y9 = useTransform(y, [-1, 1], [20, -20]);
   
   // Cursor transforms
   const cursorX = useTransform(mouseX, [-1, 1], [-8, -8]);
@@ -90,84 +90,109 @@ export default function HeroSection() {
       {/* Subtle architectural grid overlay */}
       <div className="absolute inset-0 architectural-grid-fine opacity-30"></div>
       
-      {/* Interactive diverse UI elements with dramatic cursor-responsive motion */}
+      {/* Interactive diverse UI elements orbiting around the title */}
       <div className="absolute inset-0">
-        {/* Primary Action Button - top left */}
+        {/* Primary Action Button - top left relative to center */}
         <motion.div 
-          className="absolute top-32 left-32 w-40 h-12 bg-elegant-black/15 rounded-lg border border-elegant-black/30 flex items-center justify-center hover:shadow-lg"
-          style={{ x: x1, y: y1 }}
+          className="absolute top-1/2 left-1/2 w-32 h-10 bg-elegant-black/15 rounded-lg border border-elegant-black/30 flex items-center justify-center hover:shadow-lg transform -translate-x-1/2 -translate-y-1/2"
+          style={{ 
+            x: x1, 
+            y: y1,
+            marginLeft: '-180px',
+            marginTop: '-120px'
+          }}
           animate={{ 
-            scale: isHovered ? 1.4 : 1,
+            scale: isHovered ? 1.2 : 1,
             opacity: isHovered ? 0.8 : 0.3,
-            backgroundColor: isHovered ? "rgba(0,0,0,0.25)" : "rgba(0,0,0,0.15)",
-            y: isHovered ? -5 : 0
+            backgroundColor: isHovered ? "rgba(0,0,0,0.25)" : "rgba(0,0,0,0.15)"
           }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-white/60 rounded"></div>
-            <div className="w-16 h-2 bg-white/70 rounded"></div>
+            <div className="w-3 h-3 bg-white/60 rounded"></div>
+            <div className="w-12 h-1.5 bg-white/70 rounded"></div>
           </div>
         </motion.div>
         
-        {/* Circular Loading Spinner - bottom right */}
+        {/* Circular Loading Spinner - bottom right relative to center */}
         <motion.div 
-          className="absolute bottom-32 right-32 w-16 h-16 rounded-full border-4 border-elegant-black/20 border-t-elegant-black/60"
-          style={{ x: x2, y: y2 }}
+          className="absolute top-1/2 left-1/2 w-12 h-12 rounded-full border-3 border-elegant-black/20 border-t-elegant-black/60 transform -translate-x-1/2 -translate-y-1/2"
+          style={{ 
+            x: x2, 
+            y: y2,
+            marginLeft: '160px',
+            marginTop: '100px'
+          }}
           animate={{ 
-            scale: isHovered ? 2 : 1,
-            rotate: isHovered ? 360 : 0,
+            scale: isHovered ? 1.4 : 1,
             opacity: isHovered ? 0.9 : 0.4,
             borderTopColor: isHovered ? "rgba(0,0,0,0.8)" : "rgba(0,0,0,0.6)"
           }}
-          transition={{ 
-            duration: isHovered ? 1 : 0.8, 
-            ease: "easeOut",
-            rotate: { duration: 2, repeat: isHovered ? Infinity : 0, ease: "linear" }
-          }}
-        />
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+            className="w-full h-full"
+          />
+        </motion.div>
         
-        {/* Range Slider - center left */}
+        {/* Range Slider - left relative to center */}
         <motion.div 
-          className="absolute top-1/2 left-1/4 w-48 h-6 flex items-center"
-          style={{ x: x3, y: y3 }}
+          className="absolute top-1/2 left-1/2 w-40 h-6 flex items-center transform -translate-x-1/2 -translate-y-1/2"
+          style={{ 
+            x: x3, 
+            y: y3,
+            marginLeft: '-140px',
+            marginTop: '20px'
+          }}
           animate={{ 
-            scale: isHovered ? 1.5 : 1,
+            scale: isHovered ? 1.3 : 1,
             opacity: isHovered ? 0.8 : 0.3
           }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
           <div className="w-full h-2 bg-elegant-black/20 rounded-full relative">
             <div className="w-1/3 h-full bg-elegant-black/50 rounded-full"></div>
-            <div className="absolute left-1/3 w-4 h-4 bg-elegant-black/70 rounded-full border-2 border-white/80 -top-1 shadow"></div>
+            <div className="absolute w-3 h-3 bg-elegant-black/70 rounded-full border-2 border-white/80 shadow transform -translate-y-1/2 top-1/2" style={{ left: '33%' }}></div>
           </div>
         </motion.div>
         
-        {/* Icon Grid - top center */}
+        {/* Icon Grid - top right relative to center */}
         <motion.div 
-          className="absolute top-1/4 right-1/4 grid grid-cols-3 gap-2"
-          style={{ x: x4, y: y4 }}
+          className="absolute top-1/2 left-1/2 grid grid-cols-3 gap-1 transform -translate-x-1/2 -translate-y-1/2"
+          style={{ 
+            x: x4, 
+            y: y4,
+            marginLeft: '120px',
+            marginTop: '-80px'
+          }}
           animate={{ 
-            scale: isHovered ? 1.6 : 1,
+            scale: isHovered ? 1.3 : 1,
             opacity: isHovered ? 0.8 : 0.3,
             rotate: isHovered ? 5 : 0
           }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <div className="w-8 h-8 bg-elegant-black/30 rounded"></div>
-          <div className="w-8 h-8 bg-elegant-black/30 rounded-full"></div>
-          <div className="w-8 h-8 bg-elegant-black/30 rounded transform rotate-45"></div>
-          <div className="w-8 h-8 bg-elegant-black/30 rounded-full"></div>
-          <div className="w-8 h-8 bg-elegant-black/40 rounded"></div>
-          <div className="w-8 h-8 bg-elegant-black/30 rounded-full"></div>
+          <div className="w-6 h-6 bg-elegant-black/30 rounded"></div>
+          <div className="w-6 h-6 bg-elegant-black/30 rounded-full"></div>
+          <div className="w-6 h-6 bg-elegant-black/30 rounded transform rotate-45"></div>
+          <div className="w-6 h-6 bg-elegant-black/30 rounded-full"></div>
+          <div className="w-6 h-6 bg-elegant-black/40 rounded"></div>
+          <div className="w-6 h-6 bg-elegant-black/30 rounded-full"></div>
         </motion.div>
         
-        {/* Vertical Progress Bar - bottom left */}
+        {/* Vertical Progress Bar - bottom left relative to center */}
         <motion.div 
-          className="absolute bottom-1/4 left-1/3 w-6 h-32 bg-elegant-black/15 rounded-full overflow-hidden"
-          style={{ x: x5, y: y5 }}
+          className="absolute top-1/2 left-1/2 w-4 h-24 bg-elegant-black/15 rounded-full overflow-hidden transform -translate-x-1/2 -translate-y-1/2"
+          style={{ 
+            x: x5, 
+            y: y5,
+            marginLeft: '-100px',
+            marginTop: '80px'
+          }}
           animate={{ 
-            scale: isHovered ? 1.8 : 1,
+            scale: isHovered ? 1.4 : 1,
             opacity: isHovered ? 0.8 : 0.3,
             backgroundColor: isHovered ? "rgba(0,0,0,0.2)" : "rgba(0,0,0,0.15)"
           }}
@@ -178,78 +203,93 @@ export default function HeroSection() {
         
         {/* Avatar with Status Dot - top right */}
         <motion.div 
-          className="absolute top-20 right-20 w-16 h-16 relative"
-          style={{ x: x6, y: y6 }}
+          className="absolute top-1/2 left-1/2 w-12 h-12 transform -translate-x-1/2 -translate-y-1/2"
+          style={{ 
+            x: x6, 
+            y: y6,
+            marginLeft: '140px',
+            marginTop: '-40px'
+          }}
           animate={{ 
-            scale: isHovered ? 2.2 : 1,
+            scale: isHovered ? 1.6 : 1,
             opacity: isHovered ? 0.9 : 0.4,
             rotate: isHovered ? 10 : 0
           }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <div className="w-full h-full bg-elegant-black/30 rounded-full border-2 border-elegant-black/40"></div>
-          <div className="absolute -top-1 -right-1 w-4 h-4 bg-elegant-black/60 rounded-full border-2 border-white/80"></div>
+          <div className="w-full h-full bg-elegant-black/30 rounded-full border-2 border-elegant-black/40 relative">
+            <div className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-elegant-black/60 rounded-full border-2 border-white/80"></div>
+          </div>
         </motion.div>
         
         {/* Checkbox Group - bottom left */}
         <motion.div 
-          className="absolute bottom-20 left-20 space-y-2"
-          style={{ x: x7, y: y7 }}
+          className="absolute top-1/2 left-1/2 space-y-1 transform -translate-x-1/2 -translate-y-1/2"
+          style={{ 
+            x: x7, 
+            y: y7,
+            marginLeft: '-80px',
+            marginTop: '120px'
+          }}
           animate={{ 
-            scale: isHovered ? 2.8 : 1,
+            scale: isHovered ? 1.8 : 1,
             opacity: isHovered ? 0.9 : 0.3
           }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-elegant-black/50 rounded border border-elegant-black/60 flex items-center justify-center">
-              <div className="w-2 h-2 bg-white/80 rounded-sm"></div>
-            </div>
+          <div className="w-3 h-3 bg-elegant-black/50 rounded border border-elegant-black/60 flex items-center justify-center">
+            <div className="w-1.5 h-1.5 bg-white/80 rounded-sm"></div>
           </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-white/10 rounded border border-elegant-black/60"></div>
-          </div>
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 bg-elegant-black/50 rounded border border-elegant-black/60 flex items-center justify-center">
-              <div className="w-2 h-2 bg-white/80 rounded-sm"></div>
-            </div>
+          <div className="w-3 h-3 bg-white/10 rounded border border-elegant-black/60"></div>
+          <div className="w-3 h-3 bg-elegant-black/50 rounded border border-elegant-black/60 flex items-center justify-center">
+            <div className="w-1.5 h-1.5 bg-white/80 rounded-sm"></div>
           </div>
         </motion.div>
         
         {/* Badge with Counter - center top */}
         <motion.div 
-          className="absolute top-16 left-1/2 transform -translate-x-1/2 relative"
-          style={{ x: x8, y: y8 }}
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          style={{ 
+            x: x8, 
+            y: y8,
+            marginLeft: '40px',
+            marginTop: '-140px'
+          }}
           animate={{ 
-            scale: isHovered ? 2.4 : 1,
+            scale: isHovered ? 1.6 : 1,
             opacity: isHovered ? 0.9 : 0.4,
-            y: isHovered ? -10 : 0
+            y: isHovered ? -5 : 0
           }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <div className="w-12 h-12 bg-elegant-black/25 rounded-lg flex items-center justify-center">
-            <div className="w-6 h-6 bg-elegant-black/50 rounded"></div>
-          </div>
-          <div className="absolute -top-2 -right-2 w-5 h-5 bg-elegant-black/70 rounded-full flex items-center justify-center border-2 border-white/80">
-            <div className="w-2 h-1 bg-white/90 rounded"></div>
+          <div className="w-10 h-10 bg-elegant-black/25 rounded-lg flex items-center justify-center relative">
+            <div className="w-5 h-5 bg-elegant-black/50 rounded"></div>
+            <div className="absolute -top-1 -right-1 w-4 h-4 bg-elegant-black/70 rounded-full flex items-center justify-center border-2 border-white/80">
+              <div className="w-1.5 h-0.5 bg-white/90 rounded"></div>
+            </div>
           </div>
         </motion.div>
         
         {/* Multi-Toggle Switch - center right */}
         <motion.div 
-          className="absolute top-1/3 right-16 flex items-center space-x-1"
-          style={{ x: x9, y: y9 }}
+          className="absolute top-1/2 left-1/2 flex items-center space-x-1 transform -translate-x-1/2 -translate-y-1/2"
+          style={{ 
+            x: x9, 
+            y: y9,
+            marginLeft: '120px',
+            marginTop: '40px'
+          }}
           animate={{ 
-            scale: isHovered ? 2.8 : 1,
+            scale: isHovered ? 1.8 : 1,
             opacity: isHovered ? 0.9 : 0.3
           }}
           transition={{ duration: 0.3, ease: "easeOut" }}
         >
-          <div className="w-8 h-5 bg-elegant-black/50 rounded-full relative">
-            <div className="absolute right-0.5 top-0.5 w-4 h-4 bg-white/90 rounded-full shadow"></div>
+          <div className="w-6 h-4 bg-elegant-black/50 rounded-full relative">
+            <div className="absolute right-0.5 top-0.5 w-3 h-3 bg-white/90 rounded-full shadow"></div>
           </div>
-          <div className="w-8 h-5 bg-elegant-black/20 rounded-full relative">
-            <div className="absolute left-0.5 top-0.5 w-4 h-4 bg-elegant-black/60 rounded-full"></div>
+          <div className="w-6 h-4 bg-elegant-black/20 rounded-full relative">
+            <div className="absolute left-0.5 top-0.5 w-3 h-3 bg-elegant-black/60 rounded-full"></div>
           </div>
         </motion.div>
       </div>
