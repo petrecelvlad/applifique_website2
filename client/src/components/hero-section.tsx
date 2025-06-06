@@ -28,6 +28,16 @@ export default function HeroSection() {
   const y4 = useTransform(y, [-1, 1], [10, -10]);
   const x5 = useTransform(x, [-1, 1], [-30, 30]);
   const y5 = useTransform(y, [-1, 1], [-10, 10]);
+  
+  // Additional transforms for floating elements
+  const x6 = useTransform(x, [-1, 1], [10, -10]);
+  const y6 = useTransform(y, [-1, 1], [-20, 20]);
+  const x7 = useTransform(x, [-1, 1], [-15, 15]);
+  const y7 = useTransform(y, [-1, 1], [15, -15]);
+  
+  // Cursor transforms
+  const cursorX = useTransform(mouseX, [-1, 1], [-8, -8]);
+  const cursorY = useTransform(mouseY, [-1, 1], [-8, -8]);
 
   const handleMouseMove = (event: React.MouseEvent) => {
     if (!containerRef.current) return;
@@ -137,10 +147,7 @@ export default function HeroSection() {
         {/* Additional floating elements for depth */}
         <motion.div 
           className="absolute top-20 right-20 w-12 h-12 border border-elegant-black rounded-full"
-          style={{ 
-            x: useTransform(x, [-1, 1], [10, -10]), 
-            y: useTransform(y, [-1, 1], [-20, 20]) 
-          }}
+          style={{ x: x6, y: y6 }}
           animate={{ 
             scale: isHovered ? 1.2 : 1,
             opacity: isHovered ? 0.25 : 0.1
@@ -150,10 +157,7 @@ export default function HeroSection() {
         
         <motion.div 
           className="absolute bottom-20 left-20 w-6 h-6 bg-elegant-black"
-          style={{ 
-            x: useTransform(x, [-1, 1], [-15, 15]), 
-            y: useTransform(y, [-1, 1], [15, -15]) 
-          }}
+          style={{ x: x7, y: y7 }}
           animate={{ 
             scale: isHovered ? 1.5 : 1,
             rotate: isHovered ? 90 : 0,
@@ -168,8 +172,8 @@ export default function HeroSection() {
         <motion.div
           className="fixed pointer-events-none z-50 w-4 h-4 bg-elegant-black rounded-full mix-blend-difference"
           style={{
-            x: useTransform(mouseX, [-1, 1], [-8, -8]),
-            y: useTransform(mouseY, [-1, 1], [-8, -8]),
+            x: cursorX,
+            y: cursorY,
             left: 0,
             top: 0
           }}
