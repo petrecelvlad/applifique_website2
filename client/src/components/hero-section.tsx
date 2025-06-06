@@ -96,91 +96,12 @@ export default function HeroSection() {
       
       {/* Interactive diverse UI elements orbiting around the title image specifically */}
       <div className="absolute inset-0">
-        {/* Tree Model Hierarchy - top left */}
-        <motion.div 
-          className="absolute w-52 bg-elegant-black/10 rounded-lg border border-elegant-black/25 p-3"
-          style={{ x: x1, y: y1 }}
-          animate={{ 
-            top: isHovered ? '8%' : '32%',
-            left: isHovered ? '5%' : '25%',
-            scale: isHovered ? 1.1 : 1,
-            opacity: isHovered ? 0.9 : 0.3,
-            backgroundColor: isHovered ? "rgba(0,0,0,0.15)" : "rgba(0,0,0,0.1)"
-          }}
-          transition={{ 
-            duration: 0.8, 
-            ease: "easeOut"
-          }}
-        >
-          <motion.div 
-            className="space-y-1 text-xs font-mono"
-            animate={{ y: [0, -2, 0, 2, 0] }}
-            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            {/* Root folder */}
-            <div className="flex items-center space-x-1">
-              <div className="w-3 h-3 bg-elegant-black/50 rounded-sm flex items-center justify-center">
-                <div className="w-1.5 h-1.5 bg-white/70 rounded-sm"></div>
-              </div>
-              <div className="w-12 h-2 bg-elegant-black/40 rounded"></div>
-            </div>
-            
-            {/* First child folder */}
-            <div className="flex items-center space-x-1 ml-4">
-              <div className="w-2.5 h-2.5 bg-elegant-black/40 rounded-sm flex items-center justify-center">
-                <div className="w-1 h-1 bg-white/60 rounded-sm"></div>
-              </div>
-              <div className="w-10 h-1.5 bg-elegant-black/35 rounded"></div>
-            </div>
-            
-            {/* Files under first folder */}
-            <div className="ml-8 space-y-0.5">
-              <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-elegant-black/30 rounded"></div>
-                <div className="w-8 h-1 bg-elegant-black/25 rounded"></div>
-              </div>
-              <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-elegant-black/30 rounded"></div>
-                <div className="w-7 h-1 bg-elegant-black/25 rounded"></div>
-              </div>
-              <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-elegant-black/30 rounded"></div>
-                <div className="w-9 h-1 bg-elegant-black/25 rounded"></div>
-              </div>
-            </div>
-            
-            {/* Second child folder */}
-            <div className="flex items-center space-x-1 ml-4">
-              <div className="w-2.5 h-2.5 bg-elegant-black/40 rounded-sm flex items-center justify-center">
-                <div className="w-1 h-1 bg-white/60 rounded-sm"></div>
-              </div>
-              <div className="w-11 h-1.5 bg-elegant-black/35 rounded"></div>
-            </div>
-            
-            {/* Files under second folder */}
-            <div className="ml-8 space-y-0.5">
-              <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-elegant-black/30 rounded"></div>
-                <div className="w-6 h-1 bg-elegant-black/25 rounded"></div>
-              </div>
-              <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-elegant-black/30 rounded"></div>
-                <div className="w-10 h-1 bg-elegant-black/25 rounded"></div>
-              </div>
-              <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-elegant-black/30 rounded"></div>
-                <div className="w-8 h-1 bg-elegant-black/25 rounded"></div>
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        {/* Primary Action Button - moved to mid-left */}
+        {/* Primary Action Button - far top left */}
         <motion.div 
           className="absolute w-36 h-12 bg-elegant-black/15 rounded-lg border border-elegant-black/30 flex items-center justify-center hover:shadow-lg"
-          style={{ x: x10, y: y10 }}
+          style={{ x: x1, y: y1 }}
           animate={{ 
-            top: isHovered ? '45%' : '48%',
+            top: isHovered ? '15%' : '38%',
             left: isHovered ? '8%' : '28%',
             scale: isHovered ? 1.15 : 1,
             opacity: isHovered ? 0.8 : 0.25,
