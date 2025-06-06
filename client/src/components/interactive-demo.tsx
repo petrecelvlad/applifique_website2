@@ -127,20 +127,21 @@ Clean, spacious design that reflects architectural blueprint concepts through st
   );
 
   return (
-    <section id="demo" className="py-24 bg-gradient-to-br from-gray-50 to-blueprint-50">
+    <section id="demo" className="py-32 bg-elegant-black">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            See <span className="text-blueprint-500">Applifique</span> in Action
+          <h2 className="text-3xl md:text-4xl font-light text-elegant-white mb-8 tracking-wide">
+            Architecture in Motion
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Watch how our AI transforms a simple app idea into a comprehensive development blueprint with organized file structure and detailed documentation.
+          <div className="w-24 h-px bg-elegant-white mx-auto mb-8"></div>
+          <p className="text-lg text-elegant-light-gray max-w-2xl mx-auto font-light leading-relaxed">
+            Experience the precision of automated blueprint generation through intelligent architectural planning.
           </p>
         </motion.div>
 
@@ -152,9 +153,9 @@ Clean, spacious design that reflects architectural blueprint concepts through st
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+            className="bg-elegant-charcoal rounded-none border border-elegant-gray overflow-hidden"
           >
-            <div className="bg-gray-900 text-white px-6 py-4 flex items-center justify-between">
+            <div className="bg-elegant-black text-elegant-white px-6 py-4 flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="flex space-x-2">
                   <div className="w-3 h-3 bg-red-500 rounded-full"></div>

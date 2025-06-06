@@ -84,28 +84,29 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-br from-blueprint-50 to-gray-50">
+    <section id="contact" className="py-32 bg-elegant-white">
       <div className="max-w-4xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
+          className="bg-elegant-white border border-elegant-light-gray overflow-hidden"
         >
           <div className="lg:flex">
             {/* Content side */}
-            <div className="lg:w-1/2 p-12">
-              <div className="mb-8">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                  Ready to Blueprint Your Next App?
+            <div className="lg:w-1/2 p-16">
+              <div className="mb-12">
+                <h2 className="text-3xl md:text-4xl font-light text-elegant-black mb-8 tracking-wide">
+                  Join the Architecture
                 </h2>
-                <p className="text-xl text-gray-600 leading-relaxed">
-                  Join our exclusive beta program and be among the first to experience the future of app development planning.
+                <div className="w-16 h-px bg-elegant-black mb-8"></div>
+                <p className="text-lg text-elegant-gray leading-relaxed font-light">
+                  Be among the first to experience precision-engineered development planning.
                 </p>
               </div>
 
-              <div className="space-y-6 mb-8">
+              <div className="space-y-8 mb-12">
                 {benefits.map((benefit, index) => (
                   <motion.div
                     key={benefit}
@@ -115,47 +116,45 @@ export default function ContactSection() {
                     viewport={{ once: true }}
                     className="flex items-start space-x-4"
                   >
-                    <div className="w-6 h-6 bg-blueprint-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <Check className="text-white w-3 h-3" />
-                    </div>
-                    <p className="text-gray-700">{benefit}</p>
+                    <div className="w-2 h-2 bg-elegant-black mt-3 flex-shrink-0"></div>
+                    <p className="text-elegant-gray font-light leading-relaxed">{benefit}</p>
                   </motion.div>
                 ))}
               </div>
             </div>
 
             {/* Form side */}
-            <div className="lg:w-1/2 bg-gradient-to-br from-blueprint-500 to-blueprint-600 p-12 text-white">
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="lg:w-1/2 bg-elegant-black p-16 text-elegant-white">
+              <form onSubmit={handleSubmit} className="space-y-8">
                 <div>
-                  <Label className="block text-sm font-medium mb-2 opacity-90">Full Name</Label>
+                  <Label className="block text-sm font-light mb-3 text-elegant-light-gray tracking-wide">Full Name</Label>
                   <Input
                     type="text"
                     placeholder="Enter your full name"
                     value={formData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                    className="w-full px-0 py-3 bg-transparent border-0 border-b border-elegant-gray text-elegant-white placeholder-elegant-gray focus:outline-none focus:border-elegant-white transition-colors font-light"
                     required
                   />
                 </div>
                 
                 <div>
-                  <Label className="block text-sm font-medium mb-2 opacity-90">Email Address</Label>
+                  <Label className="block text-sm font-light mb-3 text-elegant-light-gray tracking-wide">Email Address</Label>
                   <Input
                     type="email"
                     placeholder="your@email.com"
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                    className="w-full px-0 py-3 bg-transparent border-0 border-b border-elegant-gray text-elegant-white placeholder-elegant-gray focus:outline-none focus:border-elegant-white transition-colors font-light"
                     required
                   />
                 </div>
                 
                 <div>
-                  <Label className="block text-sm font-medium mb-2 opacity-90">What type of app are you planning?</Label>
-                  <Select value={formData.appType} onValueChange={(value) => handleInputChange('appType', value)}>
-                    <SelectTrigger className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent">
-                      <SelectValue placeholder="Select app type..." />
+                  <Label className="block text-sm font-light mb-3 text-elegant-light-gray tracking-wide">Application Type</Label>
+                  <Select value={formData.appType || ""} onValueChange={(value) => handleInputChange('appType', value)}>
+                    <SelectTrigger className="w-full px-0 py-3 bg-transparent border-0 border-b border-elegant-gray text-elegant-white focus:outline-none focus:border-elegant-white transition-colors">
+                      <SelectValue placeholder="Select type..." />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="web">Web Application</SelectItem>
@@ -168,45 +167,45 @@ export default function ContactSection() {
                 </div>
                 
                 <div>
-                  <Label className="block text-sm font-medium mb-2 opacity-90">Tell us about your app idea (Optional)</Label>
+                  <Label className="block text-sm font-light mb-3 text-elegant-light-gray tracking-wide">Project Description (Optional)</Label>
                   <Textarea
-                    placeholder="Briefly describe what you want to build..."
+                    placeholder="Describe your vision..."
                     rows={3}
                     value={formData.description}
                     onChange={(e) => handleInputChange('description', e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent resize-none"
+                    className="w-full px-0 py-3 bg-transparent border-0 border-b border-elegant-gray text-elegant-white placeholder-elegant-gray focus:outline-none focus:border-elegant-white transition-colors resize-none font-light"
                   />
                 </div>
                 
                 <Button
                   type="submit"
                   disabled={mutation.isPending || isSubmitted}
-                  className="w-full bg-white text-blueprint-600 px-6 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50 disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full bg-elegant-white text-elegant-black px-8 py-4 font-light tracking-wide hover:bg-elegant-light-gray transition-all border border-elegant-white disabled:opacity-70 disabled:cursor-not-allowed mt-12"
                 >
                   {isSubmitted ? (
                     <>
-                      <Check className="mr-3 w-5 h-5" />
-                      Thank You!
+                      <Check className="mr-3 w-4 h-4" />
+                      Submitted
                     </>
                   ) : mutation.isPending ? (
                     <>
                       <motion.div
                         animate={{ rotate: 360 }}
                         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        className="mr-3 w-5 h-5 border-2 border-blueprint-600 border-t-transparent rounded-full"
+                        className="mr-3 w-4 h-4 border border-elegant-black border-t-transparent rounded-full"
                       />
-                      Joining...
+                      Processing...
                     </>
                   ) : (
                     <>
-                      <Send className="mr-3 w-5 h-5" />
-                      Join the Waitlist
+                      <Send className="mr-3 w-4 h-4" />
+                      Request Access
                     </>
                   )}
                 </Button>
                 
-                <p className="text-xs opacity-75 text-center">
-                  We respect your privacy. No spam, ever. Unsubscribe anytime.
+                <p className="text-xs text-elegant-gray text-center font-light tracking-wide mt-8">
+                  Confidential and secure. No unsolicited communications.
                 </p>
               </form>
             </div>
