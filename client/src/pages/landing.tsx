@@ -11,8 +11,8 @@ export default function LandingPage() {
     <div className="min-h-screen bg-elegant-white overflow-x-hidden">
       <Navigation />
       <HeroSection />
-      <FeaturesSection />
       <InteractiveDemo />
+      <FeaturesSection />
       <HowItWorks />
       <ContactSection />
       <Footer />

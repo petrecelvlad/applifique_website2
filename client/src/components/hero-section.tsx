@@ -44,7 +44,7 @@ export default function HeroSection() {
             <motion.img 
               src={applifiqueTitle}
               alt="Applifique"
-              className="h-24 md:h-32 object-contain filter invert"
+              className="h-24 md:h-32 object-contain"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.5, ease: "easeOut" }}

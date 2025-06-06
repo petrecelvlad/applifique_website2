@@ -171,7 +171,7 @@ export default function ContactSection() {
                   <Textarea
                     placeholder="Describe your vision..."
                     rows={3}
-                    value={formData.description}
+                    value={formData.description || ""}
                     onChange={(e) => handleInputChange('description', e.target.value)}
                     className="w-full px-0 py-3 bg-transparent border-0 border-b border-elegant-gray text-elegant-white placeholder-elegant-gray focus:outline-none focus:border-elegant-white transition-colors resize-none font-light"
                   />
