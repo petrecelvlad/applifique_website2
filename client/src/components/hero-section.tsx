@@ -99,22 +99,17 @@ export default function HeroSection() {
         {/* Primary Action Button - far top left */}
         <motion.div 
           className="absolute w-36 h-12 bg-elegant-black/15 rounded-lg border border-elegant-black/30 flex items-center justify-center hover:shadow-lg"
-          style={{ 
+          style={{ x: x1, y: y1 }}
+          animate={{ 
             top: isHovered ? '15%' : '38%',
             left: isHovered ? '8%' : '28%',
-            x: x1,
-            y: y1
-          }}
-          animate={{ 
             scale: isHovered ? 1.15 : 1,
             opacity: isHovered ? 0.8 : 0.25,
             backgroundColor: isHovered ? "rgba(0,0,0,0.25)" : "rgba(0,0,0,0.15)"
           }}
           transition={{ 
             duration: 0.8, 
-            ease: "easeOut",
-            top: { duration: 0.8, ease: "easeInOut" },
-            left: { duration: 0.8, ease: "easeInOut" }
+            ease: "easeOut"
           }}
         >
           <motion.div 
@@ -130,13 +125,10 @@ export default function HeroSection() {
         {/* Circular Loading Spinner - far bottom right */}
         <motion.div 
           className="absolute w-14 h-14 rounded-full border-4 border-elegant-black/20 border-t-elegant-black/60"
-          style={{ 
+          style={{ x: x2, y: y2 }}
+          animate={{ 
             bottom: isHovered ? '12%' : '35%',
             right: isHovered ? '10%' : '25%',
-            x: x2,
-            y: y2
-          }}
-          animate={{ 
             scale: isHovered ? 1.3 : 1,
             opacity: isHovered ? 0.9 : 0.3,
             borderTopColor: isHovered ? "rgba(0,0,0,0.8)" : "rgba(0,0,0,0.6)",
@@ -145,8 +137,6 @@ export default function HeroSection() {
           transition={{ 
             duration: 0.8, 
             ease: "easeOut",
-            bottom: { duration: 0.8, ease: "easeInOut" },
-            right: { duration: 0.8, ease: "easeInOut" },
             rotate: { duration: 1.5, repeat: Infinity, ease: "linear" }
           }}
         />
@@ -154,21 +144,16 @@ export default function HeroSection() {
         {/* Range Slider - mid left */}
         <motion.div 
           className="absolute w-44 h-6 flex items-center"
-          style={{ 
-            top: isHovered ? '48%' : '49%',
-            left: isHovered ? '6%' : '32%'
-          }}
+          style={{ x: x3, y: y3 }}
           animate={{ 
+            top: isHovered ? '48%' : '49%',
+            left: isHovered ? '6%' : '32%',
             scale: isHovered ? 1.2 : 1,
-            opacity: isHovered ? 0.8 : 0.25,
-            x: x3,
-            y: y3
+            opacity: isHovered ? 0.8 : 0.25
           }}
           transition={{ 
             duration: 0.7, 
-            ease: "easeOut",
-            top: { duration: 0.8, ease: "easeInOut" },
-            left: { duration: 0.8, ease: "easeInOut" }
+            ease: "easeOut"
           }}
         >
           <motion.div 
@@ -186,17 +171,15 @@ export default function HeroSection() {
           className="absolute grid grid-cols-3 gap-2"
           style={{ x: x4, y: y4 }}
           animate={{ 
-            scale: isHovered ? 1.25 : 1,
-            opacity: isHovered ? 0.8 : 0.25,
             top: isHovered ? '18%' : '40%',
             right: isHovered ? '8%' : '28%',
+            scale: isHovered ? 1.25 : 1,
+            opacity: isHovered ? 0.8 : 0.25,
             rotate: [0, 2, 0, -2, 0]
           }}
           transition={{ 
-            duration: 0.5, 
+            duration: 0.8, 
             ease: "easeOut",
-            top: { duration: 0.8, ease: "easeInOut" },
-            right: { duration: 0.8, ease: "easeInOut" },
             rotate: { duration: 5, repeat: Infinity, ease: "easeInOut" }
           }}
         >
@@ -213,22 +196,22 @@ export default function HeroSection() {
           className="absolute w-5 h-28 bg-elegant-black/15 rounded-full overflow-hidden"
           style={{ x: x5, y: y5 }}
           animate={{ 
-            scale: isHovered ? 1.3 : 1,
-            opacity: isHovered ? 0.8 : 0.25,
-            backgroundColor: isHovered ? "rgba(0,0,0,0.2)" : "rgba(0,0,0,0.15)",
             bottom: isHovered ? '15%' : '38%',
             left: isHovered ? '12%' : '30%',
-            x: [0, -2, 0, 2, 0]
+            scale: isHovered ? 1.3 : 1,
+            opacity: isHovered ? 0.8 : 0.25,
+            backgroundColor: isHovered ? "rgba(0,0,0,0.2)" : "rgba(0,0,0,0.15)"
           }}
           transition={{ 
-            duration: 0.6, 
-            ease: "easeOut",
-            bottom: { duration: 0.8, ease: "easeInOut" },
-            left: { duration: 0.8, ease: "easeInOut" },
-            x: { duration: 4.5, repeat: Infinity, ease: "easeInOut" }
+            duration: 0.8, 
+            ease: "easeOut"
           }}
         >
-          <div className="w-full h-3/4 bg-elegant-black/50 absolute bottom-0"></div>
+          <motion.div 
+            className="w-full h-3/4 bg-elegant-black/50 absolute bottom-0"
+            animate={{ x: [0, -2, 0, 2, 0] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+          />
         </motion.div>
         
         {/* Avatar with Status Dot - mid top right */}
@@ -236,17 +219,15 @@ export default function HeroSection() {
           className="absolute w-14 h-14"
           style={{ x: x6, y: y6 }}
           animate={{ 
-            scale: isHovered ? 1.4 : 1,
-            opacity: isHovered ? 0.9 : 0.3,
             top: isHovered ? '35%' : '46%',
             right: isHovered ? '12%' : '30%',
+            scale: isHovered ? 1.4 : 1,
+            opacity: isHovered ? 0.9 : 0.3,
             rotate: [0, 3, 0, -3, 0]
           }}
           transition={{ 
-            duration: 0.4, 
+            duration: 0.8, 
             ease: "easeOut",
-            top: { duration: 0.8, ease: "easeInOut" },
-            right: { duration: 0.8, ease: "easeInOut" },
             rotate: { duration: 6, repeat: Infinity, ease: "easeInOut" }
           }}
         >
@@ -260,27 +241,29 @@ export default function HeroSection() {
           className="absolute space-y-2"
           style={{ x: x7, y: y7 }}
           animate={{ 
-            scale: isHovered ? 1.5 : 1,
-            opacity: isHovered ? 0.9 : 0.25,
             bottom: isHovered ? '35%' : '43%',
             left: isHovered ? '10%' : '35%',
-            y: [0, -2, 0, 2, 0]
+            scale: isHovered ? 1.5 : 1,
+            opacity: isHovered ? 0.9 : 0.25
           }}
           transition={{ 
-            duration: 0.5, 
-            ease: "easeOut",
-            bottom: { duration: 0.8, ease: "easeInOut" },
-            left: { duration: 0.8, ease: "easeInOut" },
-            y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+            duration: 0.8, 
+            ease: "easeOut"
           }}
         >
-          <div className="w-4 h-4 bg-elegant-black/50 rounded border border-elegant-black/60 flex items-center justify-center">
-            <div className="w-2 h-2 bg-white/80 rounded-sm"></div>
-          </div>
-          <div className="w-4 h-4 bg-white/10 rounded border border-elegant-black/60"></div>
-          <div className="w-4 h-4 bg-elegant-black/50 rounded border border-elegant-black/60 flex items-center justify-center">
-            <div className="w-2 h-2 bg-white/80 rounded-sm"></div>
-          </div>
+          <motion.div
+            className="space-y-2"
+            animate={{ y: [0, -2, 0, 2, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div className="w-4 h-4 bg-elegant-black/50 rounded border border-elegant-black/60 flex items-center justify-center">
+              <div className="w-2 h-2 bg-white/80 rounded-sm"></div>
+            </div>
+            <div className="w-4 h-4 bg-white/10 rounded border border-elegant-black/60"></div>
+            <div className="w-4 h-4 bg-elegant-black/50 rounded border border-elegant-black/60 flex items-center justify-center">
+              <div className="w-2 h-2 bg-white/80 rounded-sm"></div>
+            </div>
+          </motion.div>
         </motion.div>
         
         {/* Badge with Counter - top center */}
@@ -288,26 +271,26 @@ export default function HeroSection() {
           className="absolute"
           style={{ x: x8, y: y8 }}
           animate={{ 
-            scale: isHovered ? 1.4 : 1,
-            opacity: isHovered ? 0.9 : 0.3,
             top: isHovered ? '8%' : '36%',
             left: isHovered ? '48%' : '49%',
-            y: [0, -4, 0, 4, 0]
+            scale: isHovered ? 1.4 : 1,
+            opacity: isHovered ? 0.9 : 0.3
           }}
           transition={{ 
-            duration: 0.6, 
-            ease: "easeOut",
-            top: { duration: 0.8, ease: "easeInOut" },
-            left: { duration: 0.8, ease: "easeInOut" },
-            y: { duration: 3.2, repeat: Infinity, ease: "easeInOut" }
+            duration: 0.8, 
+            ease: "easeOut"
           }}
         >
-          <div className="w-12 h-12 bg-elegant-black/25 rounded-lg flex items-center justify-center relative">
+          <motion.div
+            className="w-12 h-12 bg-elegant-black/25 rounded-lg flex items-center justify-center relative"
+            animate={{ y: [0, -4, 0, 4, 0] }}
+            transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+          >
             <div className="w-6 h-6 bg-elegant-black/50 rounded"></div>
             <div className="absolute -top-2 -right-2 w-5 h-5 bg-elegant-black/70 rounded-full flex items-center justify-center border-2 border-white/80">
               <div className="w-2 h-1 bg-white/90 rounded"></div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
         
         {/* Multi-Toggle Switch - mid right */}
@@ -315,8 +298,6 @@ export default function HeroSection() {
           className="absolute flex items-center space-x-2"
           style={{ x: x9, y: y9 }}
           animate={{ 
-            scale: isHovered ? 1.5 : 1,
-            opacity: isHovered ? 0.9 : 0.25,
             top: isHovered ? '55%' : '51%',
             right: isHovered ? '8%' : '36%',
             x: [0, 3, 0, -3, 0]
