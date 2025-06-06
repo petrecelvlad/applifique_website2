@@ -4,35 +4,33 @@
 
 :root {
   --background: 0 0% 100%;
-  --foreground: 20 14.3% 4.1%;
-  --muted: 60 4.8% 95.9%;
-  --muted-foreground: 25 5.3% 44.7%;
+  --foreground: 0 0% 3.9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
   --popover: 0 0% 100%;
-  --popover-foreground: 20 14.3% 4.1%;
+  --popover-foreground: 0 0% 3.9%;
   --card: 0 0% 100%;
-  --card-foreground: 20 14.3% 4.1%;
-  --border: 20 5.9% 90%;
-  --input: 20 5.9% 90%;
-  --primary: 207 90% 54%;
-  --primary-foreground: 211 100% 99%;
-  --secondary: 60 4.8% 95.9%;
-  --secondary-foreground: 24 9.8% 10%;
-  --accent: 60 4.8% 95.9%;
-  --accent-foreground: 24 9.8% 10%;
+  --card-foreground: 0 0% 3.9%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
   --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 60 9.1% 97.8%;
-  --ring: 20 14.3% 4.1%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 0 0% 3.9%;
   --radius: 0.5rem;
   
-  /* Custom Applifique colors */
-  --blueprint-50: 235 100% 97%;
-  --blueprint-100: 231 100% 90%;
-  --blueprint-500: 207 90% 54%;
-  --blueprint-600: 207 90% 42%;
-  --blueprint-700: 207 90% 30%;
-  
-  --technical-500: 15 100% 60%;
-  --technical-600: 15 100% 48%;
+  /* Elegant Applifique colors */
+  --elegant-black: 0 0% 3%;
+  --elegant-charcoal: 0 0% 15%;
+  --elegant-gray: 0 0% 45%;
+  --elegant-light-gray: 0 0% 85%;
+  --elegant-white: 0 0% 98%;
+  --elegant-accent: 210 15% 25%;
 }
 
 .dark {
@@ -74,83 +72,93 @@
     font-family: 'JetBrains Mono', monospace;
   }
   
-  .text-blueprint-50 {
-    color: hsl(var(--blueprint-50));
+  .text-elegant-black {
+    color: hsl(var(--elegant-black));
   }
   
-  .text-blueprint-100 {
-    color: hsl(var(--blueprint-100));
+  .text-elegant-charcoal {
+    color: hsl(var(--elegant-charcoal));
   }
   
-  .text-blueprint-500 {
-    color: hsl(var(--blueprint-500));
+  .text-elegant-gray {
+    color: hsl(var(--elegant-gray));
   }
   
-  .text-blueprint-600 {
-    color: hsl(var(--blueprint-600));
+  .text-elegant-light-gray {
+    color: hsl(var(--elegant-light-gray));
   }
   
-  .text-blueprint-700 {
-    color: hsl(var(--blueprint-700));
+  .text-elegant-white {
+    color: hsl(var(--elegant-white));
   }
   
-  .bg-blueprint-50 {
-    background-color: hsl(var(--blueprint-50));
+  .text-elegant-accent {
+    color: hsl(var(--elegant-accent));
   }
   
-  .bg-blueprint-100 {
-    background-color: hsl(var(--blueprint-100));
+  .bg-elegant-black {
+    background-color: hsl(var(--elegant-black));
   }
   
-  .bg-blueprint-500 {
-    background-color: hsl(var(--blueprint-500));
+  .bg-elegant-charcoal {
+    background-color: hsl(var(--elegant-charcoal));
   }
   
-  .bg-blueprint-600 {
-    background-color: hsl(var(--blueprint-600));
+  .bg-elegant-gray {
+    background-color: hsl(var(--elegant-gray));
   }
   
-  .bg-blueprint-700 {
-    background-color: hsl(var(--blueprint-700));
+  .bg-elegant-light-gray {
+    background-color: hsl(var(--elegant-light-gray));
   }
   
-  .border-blueprint-200 {
-    border-color: hsl(var(--blueprint-100));
+  .bg-elegant-white {
+    background-color: hsl(var(--elegant-white));
   }
   
-  .border-blueprint-500 {
-    border-color: hsl(var(--blueprint-500));
+  .bg-elegant-accent {
+    background-color: hsl(var(--elegant-accent));
   }
   
-  .text-technical-500 {
-    color: hsl(var(--technical-500));
+  .border-elegant-black {
+    border-color: hsl(var(--elegant-black));
   }
   
-  .text-technical-600 {
-    color: hsl(var(--technical-600));
+  .border-elegant-charcoal {
+    border-color: hsl(var(--elegant-charcoal));
   }
   
-  .bg-technical-500 {
-    background-color: hsl(var(--technical-500));
+  .border-elegant-gray {
+    border-color: hsl(var(--elegant-gray));
   }
   
-  .bg-technical-600 {
-    background-color: hsl(var(--technical-600));
+  .border-elegant-light-gray {
+    border-color: hsl(var(--elegant-light-gray));
   }
   
-  .hover\:bg-blueprint-600:hover {
-    background-color: hsl(var(--blueprint-600));
+  .hover\:bg-elegant-charcoal:hover {
+    background-color: hsl(var(--elegant-charcoal));
   }
   
-  .hover\:text-blueprint-500:hover {
-    color: hsl(var(--blueprint-500));
+  .hover\:text-elegant-white:hover {
+    color: hsl(var(--elegant-white));
   }
   
-  .hover\:border-blueprint-500:hover {
-    border-color: hsl(var(--blueprint-500));
+  .hover\:border-elegant-black:hover {
+    border-color: hsl(var(--elegant-black));
   }
   
-  .hover\:border-blueprint-200:hover {
-    border-color: hsl(var(--blueprint-100));
+  .architectural-grid {
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  
+  .architectural-grid-fine {
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+    background-size: 20px 20px;
   }
 }
