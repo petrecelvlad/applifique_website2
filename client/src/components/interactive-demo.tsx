@@ -288,60 +288,62 @@ Clean, spacious design that reflects architectural blueprint concepts through st
               </div>
             </div>
             
-            <div className="h-96 overflow-y-auto p-6 space-y-4">
-              <AnimatePresence>
-                {chatMessages.map((message) => (
-                  <motion.div
-                    key={message.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    {message.type === 'user' ? (
-                      <div className="flex justify-end">
-                        <div className="bg-blueprint-500 text-white px-4 py-3 rounded-2xl rounded-br-lg max-w-xs">
-                          <p className="text-sm">{message.content}</p>
+            <div className="h-80 p-4 flex flex-col justify-end">
+              <div className="space-y-3">
+                <AnimatePresence>
+                  {chatMessages.map((message) => (
+                    <motion.div
+                      key={message.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      {message.type === 'user' ? (
+                        <div className="flex justify-end">
+                          <div className="bg-blueprint-500 text-white px-4 py-3 rounded-2xl rounded-br-lg max-w-xs">
+                            <p className="text-sm">{message.content}</p>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex items-start space-x-3">
+                          <div className="w-8 h-8 bg-blueprint-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <Bot className="text-blueprint-500 w-4 h-4" />
+                          </div>
+                          <div className="bg-gray-100 px-4 py-3 rounded-2xl rounded-bl-lg max-w-md">
+                            <p className="text-sm text-gray-800">{message.content}</p>
+                            {message.typing && <TypingIndicator />}
+                          </div>
+                        </div>
+                      )}
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+                
+                {/* Generated structure preview */}
+                <AnimatePresence>
+                  {showStructurePreview && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex items-start space-x-3"
+                    >
+                      <div className="w-8 h-8 bg-blueprint-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <Bot className="text-blueprint-500 w-4 h-4" />
+                      </div>
+                      <div className="bg-gray-100 px-4 py-3 rounded-2xl rounded-bl-lg max-w-md">
+                        <p className="text-sm text-gray-800 mb-2">Here's the generated project structure:</p>
+                        <div className="bg-white p-3 rounded border text-xs font-mono">
+                          <div className="text-blueprint-500">📁 Foundation/</div>
+                          <div className="ml-3 text-gray-600">📄 Master_Design_Doc.md</div>
+                          <div className="ml-3 text-gray-600">📄 Page_Layout_Doc.md</div>
+                          <div className="ml-3 text-gray-600">📄 UI_UX_Style_Doc.md</div>
                         </div>
                       </div>
-                    ) : (
-                      <div className="flex items-start space-x-3">
-                        <div className="w-8 h-8 bg-blueprint-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                          <Bot className="text-blueprint-500 w-4 h-4" />
-                        </div>
-                        <div className="bg-gray-100 px-4 py-3 rounded-2xl rounded-bl-lg max-w-md">
-                          <p className="text-sm text-gray-800">{message.content}</p>
-                          {message.typing && <TypingIndicator />}
-                        </div>
-                      </div>
-                    )}
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-              
-              {/* Generated structure preview */}
-              <AnimatePresence>
-                {showStructurePreview && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="flex items-start space-x-3"
-                  >
-                    <div className="w-8 h-8 bg-blueprint-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <Bot className="text-blueprint-500 w-4 h-4" />
-                    </div>
-                    <div className="bg-gray-100 px-4 py-3 rounded-2xl rounded-bl-lg max-w-md">
-                      <p className="text-sm text-gray-800 mb-2">Here's the generated project structure:</p>
-                      <div className="bg-white p-3 rounded border text-xs font-mono">
-                        <div className="text-blueprint-500">📁 Foundation/</div>
-                        <div className="ml-3 text-gray-600">📄 Master_Design_Doc.md</div>
-                        <div className="ml-3 text-gray-600">📄 Page_Layout_Doc.md</div>
-                        <div className="ml-3 text-gray-600">📄 UI_UX_Style_Doc.md</div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
             
             {/* Chat input */}
