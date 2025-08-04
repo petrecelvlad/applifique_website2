@@ -3,6 +3,7 @@ import { ArrowDown } from "lucide-react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import applifiqueTitle from "@assets/App_Title.png";
 import { useEffect, useRef, useState } from "react";
+import { useScrollNavigation } from "@/hooks/use-scroll-navigation";
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLElement>(null);
@@ -69,24 +70,25 @@ export default function HeroSection() {
     mouseY.set(0);
   };
 
-  const scrollToDemo = () => {
-    const element = document.getElementById('demo');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  let goToSection: (index: number) => void;
+  let isScrolling = false;
+  
+  try {
+    const navigation = useScrollNavigation();
+    goToSection = navigation.goToSection;
+    isScrolling = navigation.isScrolling;
+  } catch {
+    // Fallback for when not in scroll context
+    goToSection = () => {};
+  }
 
-  const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  const navigateToDemo = () => !isScrolling && goToSection(1);
+  const navigateToContact = () => !isScrolling && goToSection(4);
 
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center bg-elegant-white overflow-hidden architectural-grid"
+      className="relative w-full h-full flex items-center justify-center bg-transparent overflow-hidden architectural-grid"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
@@ -457,7 +459,7 @@ export default function HeroSection() {
             className="flex flex-col items-center space-y-8"
           >
             <Button 
-              onClick={scrollToDemo}
+              onClick={navigateToDemo}
               variant="ghost"
               className="text-elegant-black hover:text-elegant-charcoal font-light tracking-wide text-lg border-b border-elegant-black border-opacity-20 hover:border-opacity-60 rounded-none px-0 pb-1 transition-all duration-300"
             >

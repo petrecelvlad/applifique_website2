@@ -111,7 +111,7 @@ Clean, spacious design that reflects architectural blueprint concepts through st
   );
 
   return (
-    <section id="demo" className="py-32 bg-elegant-black">
+    <section id="demo" className="w-full h-full flex items-center justify-center bg-transparent py-16">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}

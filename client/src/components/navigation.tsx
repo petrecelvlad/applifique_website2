@@ -2,16 +2,26 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { motion } from "framer-motion";
 import applifiqueTitle from "@assets/App_Title.png";
+import { useScrollNavigation } from "@/hooks/use-scroll-navigation";
 
 export default function Navigation() {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  let goToSection: (index: number) => void;
+  let isScrolling = false;
+  
+  try {
+    const navigation = useScrollNavigation();
+    goToSection = navigation.goToSection;
+    isScrolling = navigation.isScrolling;
+  } catch {
+    // Fallback for when not in scroll context
+    goToSection = () => {};
+  }
+
+  const navigateToSection = (sectionIndex: number) => {
+    if (!isScrolling) {
+      goToSection(sectionIndex);
     }
   };
-
-  const scrollToContact = () => scrollToSection('contact');
 
   return (
     <motion.nav 
@@ -31,25 +41,25 @@ export default function Navigation() {
         
         <div className="hidden md:flex items-center space-x-12">
           <button 
-            onClick={() => scrollToSection('features')}
+            onClick={() => navigateToSection(2)}
             className="text-elegant-gray hover:text-elegant-black transition-colors font-light tracking-wide"
           >
             Features
           </button>
           <button 
-            onClick={() => scrollToSection('demo')}
+            onClick={() => navigateToSection(1)}
             className="text-elegant-gray hover:text-elegant-black transition-colors font-light tracking-wide"
           >
             Demo
           </button>
           <button 
-            onClick={() => scrollToSection('contact')}
+            onClick={() => navigateToSection(4)}
             className="text-elegant-gray hover:text-elegant-black transition-colors font-light tracking-wide"
           >
             Contact
           </button>
           <Button 
-            onClick={scrollToContact}
+            onClick={() => navigateToSection(4)}
             className="bg-elegant-black hover:bg-elegant-charcoal text-elegant-white px-8 py-3 font-light tracking-wide transition-all border border-elegant-black"
           >
             Join Waitlist

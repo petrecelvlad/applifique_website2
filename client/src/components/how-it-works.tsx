@@ -24,7 +24,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="py-32 bg-elegant-white">
+    <section className="w-full h-full flex items-center justify-center bg-transparent py-16">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}

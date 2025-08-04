@@ -36,7 +36,7 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section id="features" className="py-32 bg-elegant-white">
+    <section id="features" className="w-full h-full flex items-center justify-center bg-transparent py-16">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
