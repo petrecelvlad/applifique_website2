@@ -75,7 +75,7 @@ Clean, spacious design that reflects architectural blueprint concepts through st
         {
           id: '1',
           type: 'user',
-          content: 'I need help planning a landing page for my app called "Applifique". It\'s a blueprint builder for app development.'
+          content: 'I need help planning a landing page for my blueprint builder app called "Applifique".'
         }
       ]);
 
@@ -84,7 +84,7 @@ Clean, spacious design that reflects architectural blueprint concepts through st
         setChatMessages(prev => [...prev, {
           id: '2',
           type: 'ai',
-          content: "I've created a foundation structure with design documents, layout specifications, and style guides. This blueprint will ensure your landing page effectively communicates Applifique's value proposition.",
+          content: "Sounds magnifique! I've created a foundation structure with design documents, layout specifications, and style guides.",
           typing: true
         }]);
 
@@ -259,7 +259,7 @@ Clean, spacious design that reflects architectural blueprint concepts through st
                   <Bot className="w-4 h-4 text-blueprint-500" />
                 </div>
                 <div>
-                  <span className="font-semibold">Applifique AI Assistant</span>
+                  <span className="font-semibold">Applifique Assistant</span>
                   <div className="text-xs text-gray-600">Online • Generating blueprint...</div>
                 </div>
               </div>
