@@ -1,20 +1,24 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function AnimatedBlueprint() {
   const svgRef = useRef<SVGSVGElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!svgRef.current) return;
+    if (!svgRef.current || !containerRef.current) return;
+
+    // Create timeline but keep it paused initially
+    const tl = gsap.timeline({ paused: true });
 
     // Initial state: hide all elements
     gsap.set(".subgraph-box", { opacity: 0, scale: 0.8 });
     gsap.set(".component-box", { opacity: 0, scale: 0.8 });
     gsap.set(".connector-line", { strokeDashoffset: 100, opacity: 0 });
     gsap.set(".node-text", { opacity: 0 });
-
-    // Create timeline for sequenced animations
-    const tl = gsap.timeline({ delay: 0.5 });
 
     // 1. Animate subgraph containers
     tl.to(".subgraph-box", {
@@ -48,10 +52,24 @@ export default function AnimatedBlueprint() {
       ease: "power2.out"
     }, "-=0.4");
 
+    // ScrollTrigger logic
+    ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top 80%",
+      end: "bottom 20%",
+      toggleActions: "restart pause resume pause",
+      onEnter: () => tl.restart(),
+      onEnterBack: () => tl.restart(),
+    });
+
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div ref={containerRef} className="w-full max-w-4xl mx-auto">
       <svg
         ref={svgRef}
         viewBox="0 0 800 600"
@@ -199,31 +217,31 @@ export default function AnimatedBlueprint() {
 
         {/* Connector Lines */}
         {/* App to Services */}
-        <line className="connector-line" x1="100" y1="120" x2="150" y2="320" stroke="#0066CC" strokeWidth="2" opacity="0.7" strokeDasharray="10 5" />
+        <line className="connector-line" x1="100" y1="120" x2="150" y2="320" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
         
         {/* App to UI Components */}
-        <line className="connector-line" x1="130" y1="105" x2="320" y2="105" stroke="#0066CC" strokeWidth="2" opacity="0.7" strokeDasharray="10 5" />
+        <line className="connector-line" x1="130" y1="105" x2="320" y2="105" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
         
         {/* Canvas connections */}
-        <line className="connector-line" x1="380" y1="185" x2="570" y2="105" stroke="#0066CC" strokeWidth="2" opacity="0.7" strokeDasharray="10 5" />
+        <line className="connector-line" x1="380" y1="185" x2="570" y2="105" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
         
         {/* BlueprintPanel to MindMapPanel */}
-        <line className="connector-line" x1="610" y1="120" x2="610" y2="130" stroke="#0066CC" strokeWidth="2" opacity="0.7" strokeDasharray="10 5" />
+        <line className="connector-line" x1="610" y1="120" x2="610" y2="130" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
         
         {/* MindMapPanel to PreviewPanel */}
-        <line className="connector-line" x1="610" y1="160" x2="610" y2="170" stroke="#0066CC" strokeWidth="2" opacity="0.7" strokeDasharray="10 5" />
+        <line className="connector-line" x1="610" y1="160" x2="610" y2="170" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
         
         {/* BlueprintGenerator connections */}
-        <line className="connector-line" x1="170" y1="185" x2="370" y2="335" stroke="#0066CC" strokeWidth="2" opacity="0.7" strokeDasharray="10 5" />
+        <line className="connector-line" x1="170" y1="185" x2="370" y2="335" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
         
         {/* MindMapPanel to MindMapGenerator */}
-        <line className="connector-line" x1="610" y1="160" x2="420" y2="360" stroke="#0066CC" strokeWidth="2" opacity="0.7" strokeDasharray="10 5" />
+        <line className="connector-line" x1="610" y1="160" x2="420" y2="360" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
         
         {/* GeminiService to types */}
-        <line className="connector-line" x1="150" y1="145" x2="180" y2="185" stroke="#0066CC" strokeWidth="2" opacity="0.7" strokeDasharray="10 5" />
+        <line className="connector-line" x1="150" y1="145" x2="180" y2="185" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
         
         {/* Services GeminiService to types */}
-        <line className="connector-line" x1="220" y1="335" x2="205" y2="200" stroke="#0066CC" strokeWidth="2" opacity="0.7" strokeDasharray="10 5" />
+        <line className="connector-line" x1="220" y1="335" x2="205" y2="200" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
       </svg>
     </div>
   );

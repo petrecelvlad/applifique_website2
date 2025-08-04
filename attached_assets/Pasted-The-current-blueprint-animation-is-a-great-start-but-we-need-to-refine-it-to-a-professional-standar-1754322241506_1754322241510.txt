@@ -1,0 +1,47 @@
+The current blueprint animation is a great start, but we need to refine it to a professional standard. I have two specific upgrades that need to be implemented in the AnimatedBlueprint.tsx component.
+Objective:
+Refine the blueprint animation with two key upgrades: first, change the connector lines to have rounded corners for a softer, more architectural feel; second, make the animation trigger and replay based on the component's visibility as the user scrolls.
+Instructions:
+Part 1: Refine the Connector Line Aesthetics
+Modify the SVG: In the AnimatedBlueprint.tsx component, locate the SVG markup.
+Apply stroke-linejoin: For all the <path> or <line> elements that represent the connectors between the boxes, add the following SVG attribute: stroke-linejoin="round". This is a simple and effective way to soften the corners where lines meet.
+Adjust stroke-width (Optional): You may want to slightly increase the stroke-width of the lines (e.g., to 2 or 3) to make the rounded corners more pronounced and visually pleasing.
+Part 2: Implement Scroll-Triggered Animation
+This is the most critical part. We will use the GSAP ScrollTrigger plugin.
+Install/Import the Plugin:
+First, ensure GSAP's ScrollTrigger is available. You may need to import it at the top of AnimatedBlueprint.tsx:
+Generated javascript
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+Use code with caution.
+JavaScript
+Refactor the useEffect Hook:
+You will wrap the existing animation logic within a ScrollTrigger.create() block. This will link our animation timeline to the scroll position.
+The useEffect hook should be rewritten to look like this:
+Generated javascript
+useEffect(() => {
+    const componentContainer = /* reference to your component's main div */;
+    const tl = gsap.timeline({ paused: true }); // Create the timeline but leave it paused
+
+    // ... (Keep all your existing animation logic here: gsap.set(...), tl.to(...) for boxes, lines, text) ...
+    
+    // --- NEW SCROLLTRIGGER LOGIC ---
+    ScrollTrigger.create({
+        trigger: componentContainer, // The element that triggers the animation
+        start: "top 80%", // Start when the top of the component is 80% down the viewport
+        end: "bottom 20%", // End when the bottom of the component is 20% from the top
+        // This is the magic part that handles replaying the animation
+        toggleActions: "restart pause resume pause",
+        // toggleActions means: onEnter, onLeave, onEnterBack, onLeaveBack
+        // "restart" means: when it enters the screen (from bottom or top), play from the beginning.
+        // "pause" means: when it leaves the screen (from bottom or top), pause it where it is.
+        onEnter: () => tl.restart(),
+        onEnterBack: () => tl.restart(),
+    });
+
+}, []); // Empty dependency array ensures this setup runs only once.
+Use code with caution.
+JavaScript
+Ensure you have a container reference: Make sure the main div of your AnimatedBlueprint component has a ref so you can pass it to the trigger property of ScrollTrigger.
+Execute these changes. The result should be a significantly more polished user experience where the diagram's lines are aesthetically pleasing, and the entire animation serves as a delightful, responsive "reveal" that plays fresh for the user every time they scroll to that section of the page.
