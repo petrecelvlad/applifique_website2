@@ -79,37 +79,21 @@ Clean, spacious design that reflects architectural blueprint concepts through st
         }
       ]);
 
-      // First AI response
+      // AI response
       setTimeout(() => {
         setChatMessages(prev => [...prev, {
           id: '2',
           type: 'ai',
-          content: "Perfect! I'll help you create a comprehensive blueprint for your Applifique landing page. Let me analyze your requirements and generate a structured project layout.",
+          content: "I've created a foundation structure with design documents, layout specifications, and style guides. This blueprint will ensure your landing page effectively communicates Applifique's value proposition.",
           typing: true
         }]);
 
-        // Remove typing and add second message
         setTimeout(() => {
           setChatMessages(prev => prev.map(msg => 
             msg.id === '2' ? { ...msg, typing: false } : msg
           ));
-
-          setTimeout(() => {
-            setChatMessages(prev => [...prev, {
-              id: '3',
-              type: 'ai',
-              content: "I've created a foundation structure with design documents, layout specifications, and style guides. This blueprint will ensure your landing page effectively communicates Applifique's value proposition.",
-              typing: true
-            }]);
-
-            setTimeout(() => {
-              setChatMessages(prev => prev.map(msg => 
-                msg.id === '3' ? { ...msg, typing: false } : msg
-              ));
-              setShowStructurePreview(true);
-            }, 3000);
-          }, 1500);
-        }, 2500);
+          setShowStructurePreview(true);
+        }, 3000);
       }, 2000);
     };
 
@@ -300,8 +284,8 @@ Clean, spacious design that reflects architectural blueprint concepts through st
                     >
                       {message.type === 'user' ? (
                         <div className="flex justify-end">
-                          <div className="bg-blueprint-500 text-white px-4 py-3 rounded-2xl rounded-br-lg max-w-xs">
-                            <p className="text-sm">{message.content}</p>
+                          <div className="bg-white border-2 border-blueprint-500 text-blueprint-700 px-4 py-3 rounded-2xl rounded-br-lg max-w-xs">
+                            <p className="text-sm font-medium">{message.content}</p>
                           </div>
                         </div>
                       ) : (
