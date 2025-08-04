@@ -10,7 +10,7 @@ export default function InteractiveDemo() {
 
   const fileContents = {
     'master-design': {
-      title: 'Master_Design_Doc.md',
+      title: 'Master Design Doc',
       content: `# Master Design Document - Applifique Landing Page
 
 ## 1. Project Overview
@@ -29,7 +29,7 @@ Applifique transforms complex app ideas into structured blueprints, simplifying 
 - Modern component patterns`
     },
     'layout': {
-      title: 'Page_Layout_Doc.md',
+      title: 'Page Layout Doc',
       content: `# Page Layout Document
 
 ## 1. Layout Philosophy
@@ -47,7 +47,7 @@ Clean, spacious design that reflects architectural blueprint concepts through st
 - Fluid typography scaling`
     },
     'style': {
-      title: 'UI_UX_Style_Doc.md',
+      title: 'UI/UX Style Doc',
       content: `# UI/UX Style Guide
 
 ## 1. Color Palette
@@ -319,9 +319,9 @@ Clean, spacious design that reflects architectural blueprint concepts through st
                         <p className="text-sm text-gray-800 mb-2">Here's the generated project structure:</p>
                         <div className="bg-white p-3 rounded border text-xs font-mono">
                           <div className="text-blueprint-500">📁 Foundation/</div>
-                          <div className="ml-3 text-gray-600">📄 Master_Design_Doc.md</div>
-                          <div className="ml-3 text-gray-600">📄 Page_Layout_Doc.md</div>
-                          <div className="ml-3 text-gray-600">📄 UI_UX_Style_Doc.md</div>
+                          <div className="ml-3 text-gray-600">📄 Master Design Doc</div>
+                          <div className="ml-3 text-gray-600">📄 Page Layout Doc</div>
+                          <div className="ml-3 text-gray-600">📄 UI/UX Style Doc</div>
                         </div>
                       </div>
                     </motion.div>
