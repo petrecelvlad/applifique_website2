@@ -1,0 +1,24 @@
+Hello Agent. We are making a final aesthetic and functional improvement to the blueprint animation. We need to change the connector lines from straight diagonals to clean, 90-degree orthogonal paths.
+Objective:
+Refactor the AnimatedBlueprint.tsx component to calculate and render right-angled connector lines, improving the diagram's readability by avoiding intersections with component boxes.
+Instructions:
+You will modify only one file: src/components/sections/AnimatedBlueprint.tsx.
+Part 1: Create the Path Calculation Helper Function
+Inside the AnimatedBlueprint.tsx file, but outside the main component function, create a new helper function. Let's call it createOrthogonalPath.
+This function will accept four arguments: startX, startY, endX, endY.
+Inside the function, implement a "Midpoint Routing" algorithm. It will calculate a path with two corners.
+Calculate the horizontal midpoint: const midX = startX + (endX - startX) / 2;
+The function must return an SVG path string in the following format:
+Generated javascript
+return `M ${startX} ${startY} L ${midX} ${startY} L ${midX} ${endY} L ${endX} ${endY}`;
+Use code with caution.
+JavaScript
+This string tells the SVG to: Move to start, draw a line horizontally to the midpoint, draw a line vertically to the new Y level, and then draw a line horizontally to the end point.
+Part 2: Integrate the Helper into the Component
+Change Lines to Paths: In your component's SVG markup, you must ensure all connector lines are <path> elements, not <line> elements.
+Calculate and Apply Paths:
+The logic that renders the SVG will now need to first determine the coordinates of the boxes it's connecting.
+For each connection, you will call your new createOrthogonalPath() helper function with the appropriate start and end coordinates.
+You will then dynamically set the d attribute of each <path> element to the string returned by the helper function.
+The animation logic (using GSAP's DrawSVGPlugin or the stroke-dasharray method) will not need to change. It will automatically work on the new, more complex <path> elements.
+Execute this refactoring. The final result should be the same elegant animation, but with clean, right-angled connector lines that create a much more professional and readable architectural diagram. This is the final polish for our MVP demo.

@@ -4,6 +4,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Helper function to create orthogonal paths with 90-degree turns
+function createOrthogonalPath(startX: number, startY: number, endX: number, endY: number): string {
+  const midX = startX + (endX - startX) / 2;
+  return `M ${startX} ${startY} L ${midX} ${startY} L ${midX} ${endY} L ${endX} ${endY}`;
+}
+
 export default function AnimatedBlueprint() {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -215,33 +221,123 @@ export default function AnimatedBlueprint() {
         <rect className="component-box" x="370" y="360" width="100" height="30" rx="6" fill="url(#componentGradient)" stroke="#0066CC" strokeWidth="1" />
         <text className="node-text" x="420" y="379" textAnchor="middle" fontSize="10" fill="#333">MindMapGenerator</text>
 
-        {/* Connector Lines */}
+        {/* Orthogonal Connector Paths */}
         {/* App to Services */}
-        <line className="connector-line" x1="100" y1="120" x2="150" y2="320" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
+        <path 
+          className="connector-line" 
+          d={createOrthogonalPath(100, 120, 150, 320)} 
+          stroke="#0066CC" 
+          strokeWidth="3" 
+          opacity="0.7" 
+          strokeDasharray="10 5" 
+          strokeLinejoin="round" 
+          strokeLinecap="round" 
+          fill="none" 
+        />
         
         {/* App to UI Components */}
-        <line className="connector-line" x1="130" y1="105" x2="320" y2="105" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
+        <path 
+          className="connector-line" 
+          d={createOrthogonalPath(130, 105, 320, 105)} 
+          stroke="#0066CC" 
+          strokeWidth="3" 
+          opacity="0.7" 
+          strokeDasharray="10 5" 
+          strokeLinejoin="round" 
+          strokeLinecap="round" 
+          fill="none" 
+        />
         
         {/* Canvas connections */}
-        <line className="connector-line" x1="380" y1="185" x2="570" y2="105" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
+        <path 
+          className="connector-line" 
+          d={createOrthogonalPath(380, 185, 570, 105)} 
+          stroke="#0066CC" 
+          strokeWidth="3" 
+          opacity="0.7" 
+          strokeDasharray="10 5" 
+          strokeLinejoin="round" 
+          strokeLinecap="round" 
+          fill="none" 
+        />
         
         {/* BlueprintPanel to MindMapPanel */}
-        <line className="connector-line" x1="610" y1="120" x2="610" y2="130" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
+        <path 
+          className="connector-line" 
+          d={createOrthogonalPath(610, 120, 610, 130)} 
+          stroke="#0066CC" 
+          strokeWidth="3" 
+          opacity="0.7" 
+          strokeDasharray="10 5" 
+          strokeLinejoin="round" 
+          strokeLinecap="round" 
+          fill="none" 
+        />
         
         {/* MindMapPanel to PreviewPanel */}
-        <line className="connector-line" x1="610" y1="160" x2="610" y2="170" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
+        <path 
+          className="connector-line" 
+          d={createOrthogonalPath(610, 160, 610, 170)} 
+          stroke="#0066CC" 
+          strokeWidth="3" 
+          opacity="0.7" 
+          strokeDasharray="10 5" 
+          strokeLinejoin="round" 
+          strokeLinecap="round" 
+          fill="none" 
+        />
         
         {/* BlueprintGenerator connections */}
-        <line className="connector-line" x1="170" y1="185" x2="370" y2="335" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
+        <path 
+          className="connector-line" 
+          d={createOrthogonalPath(170, 185, 370, 335)} 
+          stroke="#0066CC" 
+          strokeWidth="3" 
+          opacity="0.7" 
+          strokeDasharray="10 5" 
+          strokeLinejoin="round" 
+          strokeLinecap="round" 
+          fill="none" 
+        />
         
         {/* MindMapPanel to MindMapGenerator */}
-        <line className="connector-line" x1="610" y1="160" x2="420" y2="360" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
+        <path 
+          className="connector-line" 
+          d={createOrthogonalPath(610, 160, 420, 360)} 
+          stroke="#0066CC" 
+          strokeWidth="3" 
+          opacity="0.7" 
+          strokeDasharray="10 5" 
+          strokeLinejoin="round" 
+          strokeLinecap="round" 
+          fill="none" 
+        />
         
         {/* GeminiService to types */}
-        <line className="connector-line" x1="150" y1="145" x2="180" y2="185" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
+        <path 
+          className="connector-line" 
+          d={createOrthogonalPath(150, 145, 180, 185)} 
+          stroke="#0066CC" 
+          strokeWidth="3" 
+          opacity="0.7" 
+          strokeDasharray="10 5" 
+          strokeLinejoin="round" 
+          strokeLinecap="round" 
+          fill="none" 
+        />
         
         {/* Services GeminiService to types */}
-        <line className="connector-line" x1="220" y1="335" x2="205" y2="200" stroke="#0066CC" strokeWidth="3" opacity="0.7" strokeDasharray="10 5" strokeLinejoin="round" strokeLinecap="round" />
+        <path 
+          className="connector-line" 
+          d={createOrthogonalPath(220, 335, 205, 200)} 
+          stroke="#0066CC" 
+          strokeWidth="3" 
+          opacity="0.7" 
+          strokeDasharray="10 5" 
+          strokeLinejoin="round" 
+          strokeLinecap="round" 
+          fill="none" 
+        />
       </svg>
     </div>
   );
