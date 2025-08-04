@@ -269,14 +269,14 @@ Clean, spacious design that reflects architectural blueprint concepts through st
             viewport={{ once: true }}
             className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
           >
-            <div className="bg-gradient-to-r from-blueprint-500 to-blueprint-600 text-white px-6 py-4 flex items-center justify-between">
+            <div className="bg-white border-b border-gray-100 text-gray-900 px-6 py-4 flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                  <Bot className="w-4 h-4" />
+                <div className="w-8 h-8 bg-blueprint-100 rounded-full flex items-center justify-center">
+                  <Bot className="w-4 h-4 text-blueprint-500" />
                 </div>
                 <div>
                   <span className="font-semibold">Applifique AI Assistant</span>
-                  <div className="text-xs opacity-90">Online • Generating blueprint...</div>
+                  <div className="text-xs text-gray-600">Online • Generating blueprint...</div>
                 </div>
               </div>
               <div className="flex space-x-2">
@@ -288,7 +288,7 @@ Clean, spacious design that reflects architectural blueprint concepts through st
               </div>
             </div>
             
-            <div className="h-80 p-4 flex flex-col justify-end">
+            <div className="h-80 p-4 flex flex-col justify-start overflow-hidden">
               <div className="space-y-3">
                 <AnimatePresence>
                   {chatMessages.map((message) => (
