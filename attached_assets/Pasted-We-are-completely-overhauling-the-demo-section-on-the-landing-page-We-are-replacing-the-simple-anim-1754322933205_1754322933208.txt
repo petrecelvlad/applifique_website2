@@ -1,0 +1,71 @@
+We are completely overhauling the demo section on the landing page. We are replacing the simple animated blueprint with a fully choreographed, interactive demo that simulates a user building an e-commerce application.
+Objective:
+Create a new InteractiveDemo.tsx component that features a mock chat panel on the left and a dynamic SVG blueprint on the right. The two must be animated in perfect synchronization to tell the story of the application's creation.
+Instructions:
+Phase 1: Create the New Blueprint and Component Structure
+Define the E-commerce Blueprint: First, we need the "final state" of the blueprint for a modern e-commerce site. It should include User Authentication, a Product Catalog, a Shopping Cart, a Payment System (Stripe), and an AI Chatbot (Gemini). Use this Mermaid syntax as your target:
+Generated mermaid
+graph TD
+    subgraph "App Core"
+        App
+    end
+    subgraph "UI Components"
+        ProductGrid
+        ShoppingCart
+        CheckoutForm
+        AIChatWidget
+    end
+    subgraph "Services"
+        StripeService
+        GeminiService
+    end
+    subgraph "Backend API"
+        AuthAPI
+        ProductsAPI
+        OrdersAPI
+        ChatAPI
+    end
+    subgraph "Database"
+        UsersTable
+        ProductsTable
+        OrdersTable
+    end
+
+    App --> ProductGrid & ShoppingCart & CheckoutForm & AIChatWidget
+    CheckoutForm --> StripeService
+    AIChatWidget --> GeminiService
+    StripeService --> OrdersAPI
+    GeminiService --> ChatAPI
+    ProductsAPI --> ProductsTable
+    OrdersAPI --> OrdersTable
+    AuthAPI --> UsersTable
+Use code with caution.
+Mermaid
+Create InteractiveDemo.tsx:
+Create a new file for this component.
+The component's layout will be a two-column grid.
+Left Column: A styled, mock chat panel. It will have a container for chat bubbles.
+Right Column: The container for the SVG blueprint, which you will generate from the Mermaid syntax above. Give every element (boxes, text, lines) in the SVG a unique and predictable id (e.g., id="box-ProductGrid", id="line-App-ProductGrid") so we can target them with GSAP.
+Phase 2: Implement the Master Animation Timeline
+This is the core of the feature. You will use a single GSAP timeline to choreograph the entire demo. All elements should be initially hidden (opacity: 0).
+Initialize GSAP and Timeline:
+Import GSAP and ScrollTrigger as before. The animation should still be triggered by scrolling into view.
+Create a master gsap.timeline() that is linked to the ScrollTrigger.
+Choreograph the Animation Sequence (Add to the timeline):
+Step 1: The First Request.
+a. Animate the appearance of the first user chat bubble: "Let's build an e-commerce site." Use a "typing" animation effect for the text.
+b. Simultaneously, fade in the first core nodes of the blueprint: App, UI Components, Backend API, Database.
+Step 2: The First AI Response & Build.
+a. Animate the AI's reply: "Great. I've laid out the core structure. What's next?"
+b. As the AI replies, draw the initial connections between App and the main subgraphs.
+Step 3: The Payment System Request.
+a. Animate the user's next request: "We need a payment system. Let's use Stripe."
+b. Animate the AI's reply: "Understood. Integrating Stripe."
+c. As the AI replies, fade in the StripeService, CheckoutForm, and OrdersAPI nodes, and then draw their connecting lines.
+Step 4: The AI Chatbot Request.
+a. Animate the user's final request: "Also, add an AI-powered chatbot for customer support."
+b. Animate the AI's reply: "Excellent idea. Adding the Gemini-powered chat module."
+c. As the AI replies, fade in the GeminiService, AIChatWidget, and ChatAPI nodes, and then draw their final connections.
+Step 5: The Finale.
+a. Once all animations are complete, add a final AI message: "Your initial architecture is complete."
+This is a complex task. Take your time to sequence each step on the GSAP timeline, using delays ('>+0.5') to create a natural rhythm. The goal is a seamless, narrative-driven experience. Execute this vision.
