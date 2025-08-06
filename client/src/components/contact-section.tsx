@@ -63,7 +63,7 @@ export default function ContactSection() {
                 {/* Simple Email Form */}
                 <div className="space-y-6">
                   <form 
-                    action="https://assets.mailerlite.com/jsonp/1711800/forms/109434002103779154/subscribe" 
+                    action="https://assets.mailerlite.com/jsonp/1711800/forms/VwNvZ7/subscribe" 
                     method="post"
                     target="_blank"
                     className="space-y-6"
