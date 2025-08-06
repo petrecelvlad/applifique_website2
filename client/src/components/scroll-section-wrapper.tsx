@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 interface ScrollSectionWrapperProps {
   children: React.ReactNode;
   className?: string;
-  background?: 'dark' | 'light' | 'gradient';
+  background?: 'dark' | 'light' | 'primary';
 }
 
 export default function ScrollSectionWrapper({ 
@@ -11,10 +11,12 @@ export default function ScrollSectionWrapper({
   className = "",
   background = 'light'
 }: ScrollSectionWrapperProps) {
+  // Design Principles: Light Theme with White Background (#FFFFFF)
+  // Architectural grid as persistent element within main content viewport
   const backgroundClasses = {
-    dark: 'bg-gradient-to-br from-gray-900 via-gray-800 to-black',
-    light: 'bg-elegant-white',
-    gradient: 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
+    dark: 'bg-elegant-charcoal text-elegant-white',
+    light: 'bg-elegant-white architectural-grid',
+    primary: 'bg-elegant-white architectural-grid'
   };
 
   return (

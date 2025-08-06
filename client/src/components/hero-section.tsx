@@ -446,7 +446,7 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="text-xl md:text-2xl text-elegant-gray font-light tracking-wider italic mb-6"
+            className="text-xl md:text-2xl text-secondary tracking-wider italic mb-6"
           >
             c'est simply... magnifique
           </motion.p>
@@ -461,7 +461,7 @@ export default function HeroSection() {
             <Button 
               onClick={navigateToDemo}
               variant="ghost"
-              className="text-elegant-black hover:text-elegant-charcoal font-light tracking-wide text-lg border-b border-elegant-black border-opacity-20 hover:border-opacity-60 rounded-none px-0 pb-1 transition-all duration-300"
+              className="heading-primary hover:text-elegant-charcoal text-lg border-b border-elegant-black border-opacity-20 hover:border-opacity-60 rounded-none px-0 pb-1 transition-all duration-300"
             >
               Discover More
             </Button>
@@ -470,7 +470,7 @@ export default function HeroSection() {
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              <ArrowDown className="w-5 h-5 text-elegant-gray" />
+              <ArrowDown className="w-5 h-5 text-tertiary" />
             </motion.div>
           </motion.div>
         </motion.div>

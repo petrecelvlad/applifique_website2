@@ -120,11 +120,11 @@ Clean, spacious design that reflects architectural blueprint concepts through st
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-4xl font-light text-elegant-white mb-8 tracking-wide">
+          <h2 className="text-3xl md:text-4xl heading-primary mb-8">
             Architecture in Motion
           </h2>
-          <div className="w-24 h-px bg-elegant-white mx-auto mb-8"></div>
-          <p className="text-lg text-elegant-light-gray max-w-2xl mx-auto font-light leading-relaxed">
+          <div className="w-24 h-px bg-elegant-black mx-auto mb-8"></div>
+          <p className="text-lg text-secondary max-w-2xl mx-auto">
             Experience the precision of automated blueprint generation through intelligent architectural planning.
           </p>
         </motion.div>

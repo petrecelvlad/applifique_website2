@@ -97,11 +97,11 @@ export default function ContactSection() {
             {/* Content side */}
             <div className="lg:w-1/2 p-16">
               <div className="mb-12">
-                <h2 className="text-3xl md:text-4xl font-light text-elegant-black mb-8 tracking-wide">
+                <h2 className="text-3xl md:text-4xl heading-primary mb-8">
                   Join the Architecture
                 </h2>
                 <div className="w-16 h-px bg-elegant-black mb-8"></div>
-                <p className="text-lg text-elegant-gray leading-relaxed font-light">
+                <p className="text-lg text-secondary">
                   Be among the first to experience precision-engineered development planning.
                 </p>
               </div>
@@ -117,7 +117,7 @@ export default function ContactSection() {
                     className="flex items-start space-x-4"
                   >
                     <div className="w-2 h-2 bg-elegant-black mt-3 flex-shrink-0"></div>
-                    <p className="text-elegant-gray font-light leading-relaxed">{benefit}</p>
+                    <p className="text-secondary">{benefit}</p>
                   </motion.div>
                 ))}
               </div>

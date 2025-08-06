@@ -33,11 +33,11 @@ export default function HowItWorks() {
           viewport={{ once: true }}
           className="text-center mb-24"
         >
-          <h2 className="text-3xl md:text-4xl font-light text-elegant-black mb-8 tracking-wide">
+          <h2 className="text-3xl md:text-4xl heading-primary mb-8">
             Methodology
           </h2>
           <div className="w-24 h-px bg-elegant-black mx-auto mb-8"></div>
-          <p className="text-lg text-elegant-gray max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-lg text-secondary max-w-2xl mx-auto">
             A systematic approach to architectural planning that transforms ideas into executable blueprints.
           </p>
         </motion.div>
@@ -58,14 +58,14 @@ export default function HowItWorks() {
               >
                 <div className="relative mb-12">
                   <div className="w-20 h-20 border border-elegant-light-gray flex items-center justify-center mx-auto group-hover:border-elegant-black transition-all duration-500">
-                    <step.icon className="text-elegant-gray group-hover:text-elegant-black w-8 h-8 transition-colors duration-300" />
+                    <step.icon className="text-tertiary group-hover:text-elegant-black w-8 h-8 transition-colors duration-300" />
                   </div>
-                  <div className="absolute -top-3 -right-3 text-xs font-mono text-elegant-gray tracking-wider">
+                  <div className="absolute -top-3 -right-3 text-xs font-mono text-tertiary tracking-wider">
                     {step.number}
                   </div>
                 </div>
-                <h3 className="text-xl font-light text-elegant-black mb-6 tracking-wide">{step.title}</h3>
-                <p className="text-elegant-gray leading-relaxed font-light">
+                <h3 className="text-xl heading-primary mb-6">{step.title}</h3>
+                <p className="text-secondary">
                   {step.description}
                 </p>
               </motion.div>

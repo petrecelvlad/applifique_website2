@@ -43,13 +43,13 @@ export default function FeaturesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-24"
+          className="text-center section-spacing-large"
         >
-          <h2 className="text-3xl md:text-4xl font-light text-elegant-black mb-8 tracking-wide">
+          <h2 className="text-3xl md:text-4xl heading-primary mb-8">
             Refined Development Architecture
           </h2>
           <div className="w-24 h-px bg-elegant-black mx-auto mb-8"></div>
-          <p className="text-lg text-elegant-gray max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-lg text-secondary max-w-2xl mx-auto">
             Precision-engineered tools for the discerning developer who values clarity, structure, and architectural excellence.
           </p>
         </motion.div>
@@ -65,10 +65,10 @@ export default function FeaturesSection() {
               className="group text-center"
             >
               <div className="w-16 h-16 mx-auto mb-8 border border-elegant-light-gray flex items-center justify-center group-hover:border-elegant-black transition-all duration-500">
-                <feature.icon className="text-elegant-gray group-hover:text-elegant-black w-7 h-7 transition-colors duration-300" />
+                <feature.icon className="text-tertiary group-hover:text-elegant-black w-7 h-7 transition-colors duration-300" />
               </div>
-              <h3 className="text-lg font-light text-elegant-black mb-4 tracking-wide">{feature.title}</h3>
-              <p className="text-elegant-gray leading-relaxed font-light text-sm">
+              <h3 className="text-lg heading-primary mb-4">{feature.title}</h3>
+              <p className="text-secondary text-sm">
                 {feature.description}
               </p>
             </motion.div>

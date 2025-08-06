@@ -2,6 +2,26 @@
 
 Applifique is a modern full-stack web application that helps users transform complex app ideas into structured blueprints through AI-powered architecture generation. The platform features an elegant landing page with interactive demos, waitlist functionality, and a focus on simplifying the development planning process. Built as a rebranded evolution from "Blueprint Builder," Applifique aims to make app development planning more accessible and systematic.
 
+## Recent Design Principles Implementation (August 2025)
+
+Applied comprehensive design principles based on "Narrative Scrollytelling" archetype with three-zone structure:
+
+**Zone 1 - Persistent Global Header**: Fixed header with Applifique logo, navigation links (Features, Demo, Contact), and primary "Join Waitlist" CTA
+**Zone 2 - Main Content Viewport**: Full-screen canvas with architectural grid background across all sections
+**Zone 3 - Navigation & Orientation Suite**: Side-dot indicator, positional counter (XX/05), and scroll cue
+
+**Design Hierarchy Implemented**:
+- Pure white background (#FFFFFF) for all sections
+- Black headlines (#000000) for maximum contrast - primary text
+- Dark grey (#333333) for body text - secondary text  
+- Light grey (#555555) for tertiary elements like step numbers
+- Generous whitespace preservation for "architectural" clean feel
+
+**Responsive Design Strategy**:
+- Desktop/Tablet: Full-page scrolling with multi-column layouts maintained
+- Mobile: Disabled scroll-snapping, standard free-scrolling, stacked vertical layouts
+- Navigation collapses to hamburger menu with mobile-optimized dropdown
+
 # User Preferences
 
 Preferred communication style: Simple, everyday language.

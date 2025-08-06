@@ -14,7 +14,7 @@ export default function LandingPage() {
       id: 'hero',
       label: 'Welcome',
       component: (
-        <ScrollSectionWrapper background="gradient">
+        <ScrollSectionWrapper background="primary">
           <div className="relative h-full">
             <Navigation />
             <HeroSection />
@@ -38,7 +38,7 @@ export default function LandingPage() {
       id: 'features',
       label: 'Features',
       component: (
-        <ScrollSectionWrapper background="gradient">
+        <ScrollSectionWrapper background="primary">
           <div className="relative h-full">
             <Navigation />
             <FeaturesSection />

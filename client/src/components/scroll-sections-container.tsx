@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollNavigationProvider } from "@/hooks/use-scroll-navigation";
+import { useMobile } from "@/hooks/use-mobile";
 
 interface Section {
   id: string;
@@ -21,6 +22,7 @@ export default function ScrollSectionsContainer({
   const isScrollingRef = useRef(false);
   const lastScrollTimeRef = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useMobile();
 
   const updateSection = useCallback((index: number) => {
     if (index < 0 || index >= sections.length || isScrollingRef.current) return;
@@ -37,7 +39,7 @@ export default function ScrollSectionsContainer({
   // Single effect for all event listeners
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container || isMobile) return; // Disable scroll-snapping on mobile
 
     let touchStartY = 0;
     let touchEndY = 0;
@@ -122,7 +124,16 @@ export default function ScrollSectionsContainer({
       container.removeEventListener('touchend', handleTouchEnd);
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [currentSection, sections.length, updateSection]);
+  }, [currentSection, sections.length, updateSection, isMobile]);
+
+  // Responsive Design Strategy: Disable scroll-snapping on mobile
+  const containerClasses = isMobile 
+    ? `${className} overflow-y-auto` 
+    : `fixed inset-0 overflow-hidden ${className}`;
+  
+  const containerStyle = isMobile 
+    ? { minHeight: '100vh', width: '100%' }
+    : { height: '100vh', width: '100vw' };
 
   return (
     <ScrollNavigationProvider
@@ -133,29 +144,35 @@ export default function ScrollSectionsContainer({
     >
       <div 
         ref={containerRef}
-        className={`fixed inset-0 overflow-hidden ${className}`}
-        style={{ height: '100vh', width: '100vw' }}
+        className={containerClasses}
+        style={containerStyle}
       >
-        {/* Section Indicator Dots */}
-        <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 flex flex-col gap-3">
-          {sections.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => !isScrollingRef.current && updateSection(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 hover:scale-125 ${
-                index === currentSection
-                  ? 'bg-elegant-black shadow-lg shadow-elegant-black/40 scale-110'
-                  : 'bg-elegant-gray/30 hover:bg-elegant-gray/60'
-              }`}
-              aria-label={`Go to section ${index + 1}${sections[index].label ? `: ${sections[index].label}` : ''}`}
-            />
-          ))}
-        </div>
+        {/* Navigation & Orientation Suite - Design Principle Zone 3 */}
+        {/* Only show on desktop - Mobile uses standard scroll */}
+        {!isMobile && (
+          <>
+            {/* Side-Dot Indicator - Provides at-a-glance sense of place */}
+            <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 flex flex-col gap-3">
+              {sections.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => !isScrollingRef.current && updateSection(index)}
+                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 hover:scale-125 ${
+                    index === currentSection
+                      ? 'bg-elegant-black shadow-lg shadow-elegant-black/30 scale-125'
+                      : 'bg-elegant-light-gray hover:bg-elegant-gray'
+                  }`}
+                  aria-label={`Go to section ${index + 1}${sections[index].label ? `: ${sections[index].label}` : ''}`}
+                />
+              ))}
+            </div>
 
-        {/* Scroll Indicator */}
-        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 text-elegant-gray/60 text-sm font-light">
-          Scroll to navigate
-        </div>
+            {/* Scroll Cue - Explicitly teaches user interaction */}
+            <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 text-tertiary text-sm font-light">
+              Scroll to navigate
+            </div>
+          </>
+        )}
 
         {/* Section Progress Bar */}
         <div className="fixed top-0 left-0 w-full h-1 bg-elegant-gray/10 z-50">
@@ -169,29 +186,43 @@ export default function ScrollSectionsContainer({
           />
         </div>
 
-        {/* Sections Container */}
+        {/* Sections Container - Responsive Design Strategy */}
         <div className="relative w-full h-full">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSection}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -40 }}
-              transition={{ 
-                duration: 0.6, 
-                ease: [0.4, 0.0, 0.2, 1] 
-              }}
-              className="absolute inset-0 w-full h-full"
-            >
-              {sections[currentSection]?.component}
-            </motion.div>
-          </AnimatePresence>
+          {isMobile ? (
+            /* Mobile: Standard free-scrolling stacked layout */
+            <div className="w-full">
+              {sections.map((section, index) => (
+                <div key={section.id} className="w-full min-h-screen">
+                  {section.component}
+                </div>
+              ))}
+            </div>
+          ) : (
+            /* Desktop: Full-page scrolling experience */
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSection}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -40 }}
+                transition={{ 
+                  duration: 0.6, 
+                  ease: [0.4, 0.0, 0.2, 1] 
+                }}
+                className="absolute inset-0 w-full h-full"
+              >
+                {sections[currentSection]?.component}
+              </motion.div>
+            </AnimatePresence>
+          )}
         </div>
 
-        {/* Section Counter */}
-        <div className="fixed bottom-6 right-6 z-50 text-elegant-gray/60 text-sm font-light">
-          {String(currentSection + 1).padStart(2, '0')} / {String(sections.length).padStart(2, '0')}
-        </div>
+        {/* Positional Counter - Explicit progress tracking (Desktop only) */}
+        {!isMobile && (
+          <div className="fixed bottom-6 right-6 z-50 text-tertiary text-sm font-light">
+            {String(currentSection + 1).padStart(2, '0')} / {String(sections.length).padStart(2, '0')}
+          </div>
+        )}
       </div>
     </ScrollNavigationProvider>
   );
