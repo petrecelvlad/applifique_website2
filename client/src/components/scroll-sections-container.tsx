@@ -18,89 +18,80 @@ export default function ScrollSectionsContainer({
   className = "" 
 }: ScrollSectionsContainerProps) {
   const [currentSection, setCurrentSection] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
+  const isScrollingRef = useRef(false);
+  const lastScrollTimeRef = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const updateSection = useCallback((index: number) => {
-    if (index < 0 || index >= sections.length) return;
+    if (index < 0 || index >= sections.length || isScrollingRef.current) return;
+    
+    isScrollingRef.current = true;
     setCurrentSection(index);
+    
+    // Reset scrolling state after animation completes
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 700);
   }, [sections.length]);
 
-  const handleScroll = useCallback((event: WheelEvent) => {
-    if (isScrolling) return;
-    
-    event.preventDefault();
-    setIsScrolling(true);
-    
-    if (event.deltaY > 0) {
-      // Scroll down
-      if (currentSection < sections.length - 1) {
-        updateSection(currentSection + 1);
-      }
-    } else {
-      // Scroll up
-      if (currentSection > 0) {
-        updateSection(currentSection - 1);
-      }
-    }
-    
-    setTimeout(() => {
-      setIsScrolling(false);
-    }, 800);
-  }, [currentSection, sections.length, updateSection, isScrolling]);
-
-  // Touch events for mobile
+  // Single effect for all event listeners
   useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
     let touchStartY = 0;
     let touchEndY = 0;
+    const SCROLL_THRESHOLD = 50; // Minimum time between scrolls (ms)
+    const TOUCH_THRESHOLD = 30;   // Minimum touch distance
+
+    const handleWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      const now = Date.now();
+      if (now - lastScrollTimeRef.current < SCROLL_THRESHOLD || isScrollingRef.current) {
+        return;
+      }
+      
+      // Only respond to significant scroll movements
+      if (Math.abs(event.deltaY) < 10) return;
+      
+      lastScrollTimeRef.current = now;
+      
+      if (event.deltaY > 0) {
+        // Scroll down
+        if (currentSection < sections.length - 1) {
+          updateSection(currentSection + 1);
+        }
+      } else {
+        // Scroll up
+        if (currentSection > 0) {
+          updateSection(currentSection - 1);
+        }
+      }
+    };
 
     const handleTouchStart = (e: TouchEvent) => {
       touchStartY = e.changedTouches[0].screenY;
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
-      if (isScrolling) return;
-      
       touchEndY = e.changedTouches[0].screenY;
       const diff = touchStartY - touchEndY;
       
-      if (Math.abs(diff) > 50) {
-        setIsScrolling(true);
-        
+      if (Math.abs(diff) > TOUCH_THRESHOLD && !isScrollingRef.current) {
         if (diff > 0 && currentSection < sections.length - 1) {
           updateSection(currentSection + 1);
         } else if (diff < 0 && currentSection > 0) {
           updateSection(currentSection - 1);
         }
-        
-        setTimeout(() => {
-          setIsScrolling(false);
-        }, 800);
       }
     };
 
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener('wheel', handleScroll, { passive: false });
-      container.addEventListener('touchstart', handleTouchStart);
-      container.addEventListener('touchend', handleTouchEnd);
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener('wheel', handleScroll);
-        container.removeEventListener('touchstart', handleTouchStart);
-        container.removeEventListener('touchend', handleTouchEnd);
-      }
-    };
-  }, [handleScroll, currentSection, sections.length, updateSection, isScrolling]);
-
-  // Keyboard navigation
-  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (isScrolling) return;
+      if (isScrollingRef.current) return;
       
-      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
         e.preventDefault();
         if (currentSection < sections.length - 1) {
           updateSection(currentSection + 1);
@@ -110,19 +101,35 @@ export default function ScrollSectionsContainer({
         if (currentSection > 0) {
           updateSection(currentSection - 1);
         }
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        updateSection(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        updateSection(sections.length - 1);
       }
     };
 
+    // Add event listeners
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    container.addEventListener('touchstart', handleTouchStart, { passive: true });
+    container.addEventListener('touchend', handleTouchEnd, { passive: true });
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentSection, sections.length, updateSection, isScrolling]);
+
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentSection, sections.length, updateSection]);
 
   return (
     <ScrollNavigationProvider
       currentSection={currentSection}
       totalSections={sections.length}
       goToSection={updateSection}
-      isScrolling={isScrolling}
+      isScrolling={isScrollingRef.current}
     >
       <div 
         ref={containerRef}
@@ -134,7 +141,7 @@ export default function ScrollSectionsContainer({
           {sections.map((_, index) => (
             <button
               key={index}
-              onClick={() => !isScrolling && updateSection(index)}
+              onClick={() => !isScrollingRef.current && updateSection(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 hover:scale-125 ${
                 index === currentSection
                   ? 'bg-elegant-black shadow-lg shadow-elegant-black/40 scale-110'
@@ -167,12 +174,12 @@ export default function ScrollSectionsContainer({
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSection}
-              initial={{ opacity: 0, y: 60 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -60 }}
+              exit={{ opacity: 0, y: -40 }}
               transition={{ 
-                duration: 0.8, 
-                ease: [0.25, 0.1, 0.25, 1] 
+                duration: 0.6, 
+                ease: [0.4, 0.0, 0.2, 1] 
               }}
               className="absolute inset-0 w-full h-full"
             >
