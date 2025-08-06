@@ -167,10 +167,7 @@ export default function ScrollSectionsContainer({
               ))}
             </div>
 
-            {/* Scroll Cue - Explicitly teaches user interaction */}
-            <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 text-tertiary text-sm font-light">
-              Scroll to navigate
-            </div>
+
           </>
         )}
 
