@@ -1,0 +1,56 @@
+1. Core Information Zones & Functional Areas
+Your designs validate a three-zone structure, which I will formalize:
+Persistent Global Header: A fixed header containing the "Applifique" logo (left), primary navigation links (Features, Demo, Contact), and the main "Join Waitlist" CTA button (right). This ensures brand presence and constant access to navigation and conversion.
+Main Content Viewport: The full-screen canvas where each of your five sections is displayed sequentially. The subtle background grid should be a persistent element within this viewport, visually unifying all sections.
+Navigation & Orientation Suite: Your design cleverly uses a dual system, which is best practice for this layout archetype.
+Side-Dot Indicator: The vertical dots on the right provide an at-a-glance sense of place.
+Positional Counter: The XX / 05 text at the bottom-right offers explicit progress tracking.
+Scroll Cue: The "Scroll to navigate" text at the bottom-center explicitly teaches the user how to interact.
+2. Optimal Layout Archetype
+Your design is a perfect execution of the "Narrative Scrollytelling" or "Full-Page Slide" archetype.
+Justification: This remains the ideal choice. It creates a focused, cinematic user journey that aligns perfectly with the methodical, step-by-step nature of an architectural process. The visual clarity of your designs makes this archetype feel premium and intentional.
+3. Information Hierarchy & Visual Weight
+Your visual design already establishes a strong hierarchy. We will codify it.
+Theme & Palette: The foundation is a Light Theme.
+Background: White (#FFFFFF).
+Primary Text (Headlines): Black (#000000) for maximum contrast and importance.
+Secondary Text (Body/Descriptions): A dark grey (e.g., #333333 or #555555) to be easily legible but clearly subordinate to headlines.
+Tertiary Elements (Step numbers, ornamental text): A lighter grey to serve as subtle guideposts without distracting.
+Whitespace: The generous negative space is a key feature. It must be preserved across all devices to maintain the clean, uncluttered "architectural" feel.
+4. Navigation & Wayfinding Strategy
+We will integrate all the navigation elements from your design into a cohesive system.
+Primary Interaction: Mouse wheel or trackpad scroll to move between full-page sections.
+Explicit Section Jumping: The header links (Features, Demo, Contact) should function as anchor links, smoothly scrolling the user to the corresponding section upon clicking.
+Orientation & Fine-Grained Control: The side-dot indicator should be clickable, allowing users to jump to any slide. This, combined with the XX / 05 counter, gives users complete awareness and control, preventing them from feeling "trapped."
+Primary Conversion Path: The "Join Waitlist" button in the header should always be the fastest path to conversion, scrolling the user directly to the final email capture slide.
+5. Mapping Key Tasks to Layout
+Task: See the product in action. The two-column "Demo" layout (Section 02) is perfectly mapped to this, showing the UI on one side and a descriptive "assistant" conversation on the other.
+Task: Understand the benefits. The 3x2 "Features" grid (Section 03) allows for quick scanning of key value propositions.
+Task: Understand the process. The horizontal "Methodology" stepper (Section 04) masterfully visualizes your 3-step process.
+6. Panel & Section Interactivity
+Each section will continue to use the scroll-snap model to enforce the one-section-per-view behavior.
+The layouts within each section (2-column, 3x2 grid, 3-step horizontal) are well-defined for desktop and should be the basis for development.
+7. Recommended UI Design Patterns
+Your design already employs several excellent patterns which we will formally adopt:
+Full-Page Scrolling & Sticky Header (Confirmed).
+Two-Column Layout: For balancing imagery and text (as in the Demo section).
+Card Grid: For presenting discrete pieces of information (as in the Features section).
+Process Stepper: For visualizing sequential information (as in the Methodology section). This is far superior to a simple bulleted list.
+8. Responsive Design Strategy
+This is the most critical area for adaptation. To preserve usability on mobile, the layout must transform significantly. Do not attempt to shrink the desktop layout onto a mobile screen.
+Desktop/Tablet: The full-page scrolling experience with multi-column layouts is maintained.
+Mobile (Crucial Adaptations):
+Abandon Scroll-Snapping: As advised previously, disable the strict 100vh section height and scroll-snapping. Transition to a standard, free-scrolling page. This is the single most important change to ensure usability.
+Header Transformation: The navigation links (Features, Demo, Contact) must collapse into a standard "hamburger" menu icon. The "Applifique" logo and "Join Waitlist" button should remain visible.
+Content Stacking: All multi-column layouts must stack vertically:
+Demo Section: The "Applifique Explorer" image should stack on top of the "Applifique Assistant" chat interface.
+Features Section: The 3x2 grid should become a 2x3 grid or, more safely, a single-column list of 6 feature blocks.
+Methodology Section: The horizontal stepper is the most complex to adapt. It must become a vertical stepper. Each step (Conceptualize, Architect, Execute) will be its own block with the icon, title, and text, stacked one after the other, perhaps with a vertical line connecting them to maintain the sense of process.
+9. Accessibility & Usability Considerations
+All previous points remain critical. With the new designs, we must add:
+Logical Tab Order on Mobile: The tabbing order must be logical: Logo -> Join Waitlist -> Hamburger Menu. When the menu is opened, focus must shift into it, and tab through the links within.
+Alternative Text: All icons and images (like the demo UI) need descriptive alt-text for screen readers. The icons in the methodology are decorative but the text communicates the meaning.
+10. Modularity & Scalability Plan
+Building each section (Hero, Demo, Features, Methodology, Form) as a distinct, self-contained component is now essential. This approach will make implementing the radically different mobile layouts much more manageable, as you can define separate view templates (desktop vs. mobile) for complex components like the Methodology stepper.
+
+
