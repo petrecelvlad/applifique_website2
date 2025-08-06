@@ -10,8 +10,31 @@ declare global {
 
 export default function ContactSection() {
   useEffect(() => {
-    // Let MailerLite automatically initialize embedded forms
-    // No manual initialization needed for embedded forms
+    // Initialize MailerLite when component mounts
+    const initializeMailerLite = () => {
+      if (typeof window.ml !== 'undefined') {
+        try {
+          window.ml('account', '1711800');
+        } catch (error) {
+          console.log('MailerLite initialization:', error);
+        }
+      }
+    };
+
+    // Check if MailerLite is loaded, if not wait for it
+    if (typeof window.ml !== 'undefined') {
+      initializeMailerLite();
+    } else {
+      const checkForML = setInterval(() => {
+        if (typeof window.ml !== 'undefined') {
+          clearInterval(checkForML);
+          initializeMailerLite();
+        }
+      }, 100);
+      
+      setTimeout(() => clearInterval(checkForML), 10000);
+      return () => clearInterval(checkForML);
+    }
   }, []);
 
   const benefits = [
@@ -73,58 +96,49 @@ export default function ContactSection() {
                 </div>
                 
                 {/* MailerLite Form */}
-                <div 
-                  className="ml-form-embed"
-                  data-account="1711800"
-                  data-form="7cN6Mh"
-                  style={{ minHeight: '300px' }}
-                >
-                  {/* MailerLite Form */}
+                <div className="space-y-6">
                   <form 
-                    className="ml-block-form space-y-6" 
-                    action="https://assets.mailerlite.com/jsonp/1711800/forms/7cN6Mh/subscribe" 
-                    data-code="7cN6Mh" 
-                    method="post" 
-                    target="_blank"
+                    action="https://app.mailerlite.com/webforms/submit/7cN6Mh" 
+                    method="POST"
+                    className="space-y-6"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      const formData = new FormData(e.target as HTMLFormElement);
+                      const email = formData.get('email') as string;
+                      
+                      if (email && email.includes('@')) {
+                        // Submit to MailerLite
+                        fetch('https://app.mailerlite.com/webforms/submit/7cN6Mh', {
+                          method: 'POST',
+                          body: formData,
+                          mode: 'no-cors'
+                        }).then(() => {
+                          alert('Thank you for joining our waitlist!');
+                          (e.target as HTMLFormElement).reset();
+                        }).catch(() => {
+                          // Fallback: Open MailerLite form in new tab
+                          window.open(`https://app.mailerlite.com/webforms/landing/7cN6Mh?email=${encodeURIComponent(email)}`, '_blank');
+                        });
+                      }
+                    }}
                   >
-                    <div className="ml-form-formContent">
-                      <div className="ml-form-fieldRow">
-                        <div className="ml-field-group ml-field-email ml-validate-email ml-validate-required">
-                          <input 
-                            type="email" 
-                            className="w-full px-0 py-3 bg-transparent border-0 border-b border-elegant-gray text-elegant-white placeholder-elegant-gray focus:outline-none focus:border-elegant-white transition-colors font-light" 
-                            data-inputmask="" 
-                            name="fields[email]" 
-                            placeholder="Enter your email address" 
-                            autoComplete="email"
-                            required
-                          />
-                        </div>
-                      </div>
+                    <div>
+                      <input 
+                        type="email" 
+                        name="email"
+                        placeholder="Enter your email address"
+                        className="w-full px-0 py-3 bg-transparent border-0 border-b border-elegant-gray text-elegant-white placeholder-elegant-gray focus:outline-none focus:border-elegant-white transition-colors font-light"
+                        required
+                      />
                     </div>
-                    
                     <input type="hidden" name="ml-submit" value="1" />
-                    <input type="hidden" name="anticsrf" value="true" />
-                    
-                    <div className="ml-form-submitContent">
-                      <button 
-                        type="submit" 
-                        className="w-full bg-elegant-white text-elegant-black px-8 py-3 font-light tracking-wide hover:bg-elegant-light-gray transition-all border border-elegant-white"
-                      >
-                        Join Waitlist
-                      </button>
-                      <button disabled style={{ display: 'none' }} type="submit" className="loading">
-                        Loading...
-                      </button>
-                    </div>
+                    <button 
+                      type="submit"
+                      className="w-full bg-elegant-white text-elegant-black px-8 py-3 font-light tracking-wide hover:bg-elegant-light-gray transition-all border border-elegant-white"
+                    >
+                      Join Waitlist
+                    </button>
                   </form>
-                  
-                  <div className="ml-form-successContent" style={{ display: 'none' }}>
-                    <div className="text-center text-elegant-white">
-                      <h4>Thank you!</h4>
-                      <p>You have successfully joined our subscriber list.</p>
-                    </div>
-                  </div>
                 </div>
                 
                 <p className="text-xs text-elegant-gray text-center font-light tracking-wide mt-8">
