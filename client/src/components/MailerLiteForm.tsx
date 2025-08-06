@@ -16,35 +16,36 @@ export default function MailerLiteForm({ formId, className = "" }: MailerLiteFor
   const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Wait for MailerLite script to load and initialize the form
+    // Wait for MailerLite script to load and scan for embedded forms
     const initializeForm = () => {
       if (typeof window.ml !== 'undefined' && formRef.current) {
         try {
-          // Tell MailerLite to find and initialize the embedded form
-          window.ml('forms.create', formId);
+          // MailerLite automatically scans for embedded forms, we just need to trigger a rescan
+          window.ml('account', '1711800');
         } catch (error) {
           console.log('MailerLite form initialization:', error);
         }
       }
     };
 
-    // Check if MailerLite is already loaded
-    if (typeof window.ml !== 'undefined') {
-      initializeForm();
-    } else {
-      // Wait for MailerLite script to load
-      const checkForML = setInterval(() => {
-        if (typeof window.ml !== 'undefined') {
-          clearInterval(checkForML);
-          initializeForm();
-        }
-      }, 100);
-      
-      // Clear interval after 10 seconds to prevent indefinite checking
-      setTimeout(() => clearInterval(checkForML), 10000);
-      
-      return () => clearInterval(checkForML);
-    }
+    // Delay initialization to ensure DOM is ready
+    const timer = setTimeout(() => {
+      if (typeof window.ml !== 'undefined') {
+        initializeForm();
+      } else {
+        // Wait for MailerLite script to load
+        const checkForML = setInterval(() => {
+          if (typeof window.ml !== 'undefined') {
+            clearInterval(checkForML);
+            initializeForm();
+          }
+        }, 100);
+        
+        setTimeout(() => clearInterval(checkForML), 10000);
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [formId]);
 
   return (
