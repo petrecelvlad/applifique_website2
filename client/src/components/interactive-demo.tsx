@@ -251,7 +251,7 @@ Clean, spacious design that reflects architectural blueprint concepts through st
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+            className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden w-full max-w-md mx-auto"
           >
             <div className="bg-white border-b border-gray-100 text-gray-900 px-6 py-4 flex items-center justify-between">
               <div className="flex items-center space-x-3">
@@ -284,7 +284,7 @@ Clean, spacious design that reflects architectural blueprint concepts through st
                     >
                       {message.type === 'user' ? (
                         <div className="flex justify-end">
-                          <div className="bg-white border-2 border-blueprint-500 text-blueprint-700 px-4 py-3 rounded-2xl rounded-br-lg max-w-xs">
+                          <div className="bg-white border-2 border-blueprint-500 text-blueprint-700 px-4 py-3 rounded-2xl rounded-br-lg w-80">
                             <p className="text-sm font-medium">{message.content}</p>
                           </div>
                         </div>
@@ -293,7 +293,7 @@ Clean, spacious design that reflects architectural blueprint concepts through st
                           <div className="w-8 h-8 bg-blueprint-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                             <Bot className="text-blueprint-500 w-4 h-4" />
                           </div>
-                          <div className="bg-gray-100 px-4 py-3 rounded-2xl rounded-bl-lg max-w-md">
+                          <div className="bg-gray-100 px-4 py-3 rounded-2xl rounded-bl-lg w-80">
                             <p className="text-sm text-gray-800">{message.content}</p>
                             {message.typing && <TypingIndicator />}
                           </div>
@@ -315,7 +315,7 @@ Clean, spacious design that reflects architectural blueprint concepts through st
                       <div className="w-8 h-8 bg-blueprint-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                         <Bot className="text-blueprint-500 w-4 h-4" />
                       </div>
-                      <div className="bg-gray-100 px-4 py-3 rounded-2xl rounded-bl-lg max-w-md">
+                      <div className="bg-gray-100 px-4 py-3 rounded-2xl rounded-bl-lg w-80">
                         <p className="text-sm text-gray-800 mb-2">Here's the generated project structure:</p>
                         <div className="bg-white p-3 rounded border text-xs font-mono">
                           <div className="text-blueprint-500">📁 Foundation/</div>
