@@ -1,41 +1,6 @@
 import { motion } from "framer-motion";
-import { useEffect } from "react";
-
-// Declare global MailerLite
-declare global {
-  interface Window {
-    ml: (action: string, ...args: any[]) => void;
-  }
-}
 
 export default function ContactSection() {
-  useEffect(() => {
-    // Initialize MailerLite when component mounts
-    const initializeMailerLite = () => {
-      if (typeof window.ml !== 'undefined') {
-        try {
-          window.ml('account', '1711800');
-        } catch (error) {
-          console.log('MailerLite initialization:', error);
-        }
-      }
-    };
-
-    // Check if MailerLite is loaded, if not wait for it
-    if (typeof window.ml !== 'undefined') {
-      initializeMailerLite();
-    } else {
-      const checkForML = setInterval(() => {
-        if (typeof window.ml !== 'undefined') {
-          clearInterval(checkForML);
-          initializeMailerLite();
-        }
-      }, 100);
-      
-      setTimeout(() => clearInterval(checkForML), 10000);
-      return () => clearInterval(checkForML);
-    }
-  }, []);
 
   const benefits = [
     "Early access to all premium features",
@@ -95,51 +60,8 @@ export default function ContactSection() {
                   </p>
                 </div>
                 
-                {/* MailerLite Form */}
-                <div className="space-y-6">
-                  <form 
-                    action="https://app.mailerlite.com/webforms/submit/7cN6Mh" 
-                    method="POST"
-                    className="space-y-6"
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      const formData = new FormData(e.target as HTMLFormElement);
-                      const email = formData.get('email') as string;
-                      
-                      if (email && email.includes('@')) {
-                        // Submit to MailerLite
-                        fetch('https://app.mailerlite.com/webforms/submit/7cN6Mh', {
-                          method: 'POST',
-                          body: formData,
-                          mode: 'no-cors'
-                        }).then(() => {
-                          alert('Thank you for joining our waitlist!');
-                          (e.target as HTMLFormElement).reset();
-                        }).catch(() => {
-                          // Fallback: Open MailerLite form in new tab
-                          window.open(`https://app.mailerlite.com/webforms/landing/7cN6Mh?email=${encodeURIComponent(email)}`, '_blank');
-                        });
-                      }
-                    }}
-                  >
-                    <div>
-                      <input 
-                        type="email" 
-                        name="email"
-                        placeholder="Enter your email address"
-                        className="w-full px-0 py-3 bg-transparent border-0 border-b border-elegant-gray text-elegant-white placeholder-elegant-gray focus:outline-none focus:border-elegant-white transition-colors font-light"
-                        required
-                      />
-                    </div>
-                    <input type="hidden" name="ml-submit" value="1" />
-                    <button 
-                      type="submit"
-                      className="w-full bg-elegant-white text-elegant-black px-8 py-3 font-light tracking-wide hover:bg-elegant-light-gray transition-all border border-elegant-white"
-                    >
-                      Join Waitlist
-                    </button>
-                  </form>
-                </div>
+                {/* MailerLite Embedded Form */}
+                <div className="ml-embedded" data-form="VwNvZ7"></div>
                 
                 <p className="text-xs text-elegant-gray text-center font-light tracking-wide mt-8">
                   Confidential and secure. No unsolicited communications.
