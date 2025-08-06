@@ -1,23 +1,6 @@
 import { motion } from "framer-motion";
-import { useEffect } from "react";
 
 export default function ContactSection() {
-  useEffect(() => {
-    // Check if MailerLite script has loaded and initialized embedded forms
-    const initializeMailerLite = () => {
-      if (typeof window.ml !== 'undefined') {
-        // Wait a bit for MailerLite to scan and replace embedded forms
-        setTimeout(() => {
-          const embeddedDiv = document.querySelector('[data-form="VwNvZ7"]');
-          if (embeddedDiv && embeddedDiv.innerHTML.includes('ml-email-fallback')) {
-            console.log('MailerLite form not loaded, using fallback');
-          }
-        }, 2000);
-      }
-    };
-
-    initializeMailerLite();
-  }, []);
 
   const benefits = [
     "Early access to all premium features",
