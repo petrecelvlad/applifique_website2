@@ -212,11 +212,14 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-    
-    nav img {
-      /* Ensure crisp image rendering on mobile */
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
-    }
+  }
+  
+  /* Logo optimization for all screen sizes */
+  nav img {
+    image-rendering: auto;
+    max-width: 100%;
+    height: auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 }

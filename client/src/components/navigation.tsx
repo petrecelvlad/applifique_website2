@@ -42,6 +42,10 @@ export default function Navigation() {
               src={applifiqueTitle}
               alt="Applifique"
               className="h-8 md:h-10 object-contain"
+              style={{ 
+                imageRendering: 'auto',
+                filter: 'none'
+              }}
             />
           </div>
           
