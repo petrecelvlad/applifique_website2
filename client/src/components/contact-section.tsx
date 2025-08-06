@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import MailerLiteForm from "./MailerLiteForm";
 
 export default function ContactSection() {
 
@@ -61,7 +62,7 @@ export default function ContactSection() {
                 </div>
                 
                 {/* MailerLite Embedded Form */}
-                <div className="ml-embedded" data-form="VwNvZ7"></div>
+                <MailerLiteForm formId="VwNvZ7" />
                 
                 <p className="text-xs text-elegant-gray text-center font-light tracking-wide mt-8">
                   Confidential and secure. No unsolicited communications.
