@@ -10,26 +10,8 @@ declare global {
 
 export default function ContactSection() {
   useEffect(() => {
-    // Initialize MailerLite form
-    const initializeForm = () => {
-      if (typeof window.ml !== 'undefined') {
-        // Initialize forms on the page
-        window.ml('forms');
-      }
-    };
-
-    // Wait for MailerLite script to load
-    const checkForML = setInterval(() => {
-      if (typeof window.ml !== 'undefined') {
-        clearInterval(checkForML);
-        initializeForm();
-      }
-    }, 100);
-    
-    // Clear interval after 10 seconds
-    setTimeout(() => clearInterval(checkForML), 10000);
-    
-    return () => clearInterval(checkForML);
+    // Let MailerLite automatically initialize embedded forms
+    // No manual initialization needed for embedded forms
   }, []);
 
   const benefits = [
@@ -97,8 +79,14 @@ export default function ContactSection() {
                   data-form="7cN6Mh"
                   style={{ minHeight: '300px' }}
                 >
-                  {/* Manual form structure for MailerLite to replace */}
-                  <form className="ml-block-form space-y-6" data-code="7cN6Mh" method="post" target="_blank">
+                  {/* MailerLite Form */}
+                  <form 
+                    className="ml-block-form space-y-6" 
+                    action="https://assets.mailerlite.com/jsonp/1711800/forms/7cN6Mh/subscribe" 
+                    data-code="7cN6Mh" 
+                    method="post" 
+                    target="_blank"
+                  >
                     <div className="ml-form-formContent">
                       <div className="ml-form-fieldRow">
                         <div className="ml-field-group ml-field-email ml-validate-email ml-validate-required">
@@ -116,6 +104,7 @@ export default function ContactSection() {
                     </div>
                     
                     <input type="hidden" name="ml-submit" value="1" />
+                    <input type="hidden" name="anticsrf" value="true" />
                     
                     <div className="ml-form-submitContent">
                       <button 
