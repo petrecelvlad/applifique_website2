@@ -60,33 +60,8 @@ export default function ContactSection() {
                   </p>
                 </div>
                 
-                {/* Simple Email Form */}
-                <div className="space-y-6">
-                  <form 
-                    action="https://assets.mailerlite.com/jsonp/1711800/forms/VwNvZ7/subscribe" 
-                    method="post"
-                    target="_blank"
-                    className="space-y-6"
-                  >
-                    <div>
-                      <input 
-                        type="email" 
-                        name="fields[email]"
-                        placeholder="Enter your email address"
-                        className="w-full px-0 py-3 bg-transparent border-0 border-b border-elegant-gray text-elegant-white placeholder-elegant-gray focus:outline-none focus:border-elegant-white transition-colors font-light"
-                        required
-                        autoComplete="email"
-                      />
-                    </div>
-                    <input type="hidden" name="ml-submit" value="1" />
-                    <button 
-                      type="submit"
-                      className="w-full bg-elegant-white text-elegant-black px-8 py-3 font-light tracking-wide hover:bg-elegant-light-gray transition-all border border-elegant-white"
-                    >
-                      Join Waitlist
-                    </button>
-                  </form>
-                </div>
+                {/* MailerLite Embedded Form */}
+                <div className="ml-embedded" data-form="VwNvZ7"></div>
                 
                 <p className="text-xs text-elegant-gray text-center font-light tracking-wide mt-8">
                   Confidential and secure. No unsolicited communications.
