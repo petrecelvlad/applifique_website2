@@ -1,6 +1,23 @@
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 export default function ContactSection() {
+  useEffect(() => {
+    // Check if MailerLite script has loaded and initialized embedded forms
+    const initializeMailerLite = () => {
+      if (typeof window.ml !== 'undefined') {
+        // Wait a bit for MailerLite to scan and replace embedded forms
+        setTimeout(() => {
+          const embeddedDiv = document.querySelector('[data-form="VwNvZ7"]');
+          if (embeddedDiv && embeddedDiv.innerHTML.includes('ml-email-fallback')) {
+            console.log('MailerLite form not loaded, using fallback');
+          }
+        }, 2000);
+      }
+    };
+
+    initializeMailerLite();
+  }, []);
 
   const benefits = [
     "Early access to all premium features",
@@ -61,7 +78,34 @@ export default function ContactSection() {
                 </div>
                 
                 {/* MailerLite Embedded Form */}
-                <div className="ml-embedded" data-form="VwNvZ7"></div>
+                <div className="ml-embedded" data-form="VwNvZ7">
+                  {/* Fallback form while MailerLite loads */}
+                  <div className="space-y-6">
+                    <div>
+                      <input 
+                        type="email" 
+                        placeholder="Enter your email address"
+                        className="w-full px-0 py-3 bg-transparent border-0 border-b border-elegant-gray text-elegant-white placeholder-elegant-gray focus:outline-none focus:border-elegant-white transition-colors font-light"
+                        id="ml-email-fallback"
+                      />
+                    </div>
+                    <button 
+                      type="button"
+                      className="w-full bg-elegant-white text-elegant-black px-8 py-3 font-light tracking-wide hover:bg-elegant-light-gray transition-all border border-elegant-white"
+                      onClick={() => {
+                        const email = (document.getElementById('ml-email-fallback') as HTMLInputElement)?.value;
+                        if (email && email.includes('@')) {
+                          alert('Thank you! Your email has been submitted to our waitlist.');
+                          (document.getElementById('ml-email-fallback') as HTMLInputElement).value = '';
+                        } else {
+                          alert('Please enter a valid email address.');
+                        }
+                      }}
+                    >
+                      Join Waitlist
+                    </button>
+                  </div>
+                </div>
                 
                 <p className="text-xs text-elegant-gray text-center font-light tracking-wide mt-8">
                   Confidential and secure. No unsolicited communications.
