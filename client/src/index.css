@@ -202,4 +202,21 @@
   .cta-primary {
     @apply bg-elegant-black hover:bg-elegant-charcoal text-elegant-white px-8 py-3 font-light tracking-wide transition-all border border-elegant-black;
   }
+  
+  /* Mobile navigation fixes for clean rendering */
+  @media (max-width: 768px) {
+    nav {
+      /* Prevent subpixel rendering issues */
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    nav img {
+      /* Ensure crisp image rendering on mobile */
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+  }
 }
