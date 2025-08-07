@@ -1,125 +1,157 @@
-import { useState, useEffect } from "react";
-import { ChevronDown, ChevronRight, Folder, FileText, X, Maximize, Bot } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 
 export default function InteractiveDemo() {
-  const [foundationExpanded, setFoundationExpanded] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<string | null>(null);
-  const [chatMessages, setChatMessages] = useState<Array<{id: string, type: 'user' | 'ai', content: string, typing?: boolean}>>([]);
-  const [showStructurePreview, setShowStructurePreview] = useState(false);
+  const [isAnimationStarted, setIsAnimationStarted] = useState(false);
+  const [chatMessages, setChatMessages] = useState<Array<{id: string, type: 'user' | 'ai', text: string}>>([]);
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  const chatMessagesRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
 
-  const fileContents = {
-    'master-design': {
-      title: 'Master Design Doc',
-      content: `# Master Design Document - Applifique Landing Page
+  const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-## 1. Project Overview
-Applifique transforms complex app ideas into structured blueprints, simplifying the development planning process through AI-powered architecture generation.
-
-## 2. Core Features
-- AI-powered blueprint generation
-- Visual component hierarchies  
-- Team collaboration tools
-- Export capabilities
-
-## 3. Technical Architecture
-- React-based frontend
-- TypeScript for type safety
-- Tailwind CSS for styling
-- Modern component patterns`
-    },
-    'layout': {
-      title: 'Page Layout Doc',
-      content: `# Page Layout Document
-
-## 1. Layout Philosophy
-Clean, spacious design that reflects architectural blueprint concepts through structured visual hierarchy.
-
-## 2. Section Structure
-- Hero: Value proposition and CTA
-- Features: Key benefits showcase
-- Demo: Interactive preview
-- Contact: Waitlist signup
-
-## 3. Responsive Design
-- Mobile-first approach
-- Breakpoints: 640px, 768px, 1024px
-- Fluid typography scaling`
-    },
-    'style': {
-      title: 'UI/UX Style Doc',
-      content: `# UI/UX Style Guide
-
-## 1. Color Palette
-- Primary: Blueprint Blue (#0066CC)
-- Secondary: Clean White (#FFFFFF)
-- Accent: Technical Orange (#FF6B35)
-- Neutrals: Gray scale
-
-## 2. Typography
-- Primary: Inter (clean, technical)
-- Code: JetBrains Mono
-- Scale: 14px to 48px
-
-## 3. Components
-- Cards with subtle shadows
-- Rounded corners (8px, 12px, 16px)
-- Hover states with gentle transforms`
+  const show = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.classList.add('visible');
+    }
+  };
+  
+  const draw = (elementId: string) => {
+    const element = document.getElementById(elementId) as SVGPathElement;
+    if (element) {
+      const length = element.getTotalLength();
+      element.style.strokeDasharray = `${length}`;
+      element.style.strokeDashoffset = `${length}`;
+      // Force reflow to apply initial state before transition
+      element.getBoundingClientRect();
+      element.classList.add('drawn');
     }
   };
 
-  useEffect(() => {
-    // Initialize chat conversation
-    const initChat = async () => {
-      setChatMessages([
-        {
-          id: '1',
-          type: 'user',
-          content: 'I need help planning a landing page for my blueprint builder app called "Applifique".'
-        }
-      ]);
+  const typeMessage = async (msgConfig: {type: 'user' | 'ai', text: string}) => {
+    const messageId = `msg-${Date.now()}`;
+    
+    // Add message placeholder
+    setChatMessages(prev => [...prev, {
+      id: messageId,
+      type: msgConfig.type,
+      text: ''
+    }]);
 
-      // AI response
-      setTimeout(() => {
-        setChatMessages(prev => [...prev, {
-          id: '2',
-          type: 'ai',
-          content: "Sounds magnifique! I've created a foundation structure with design documents, layout specifications, and style guides.",
-          typing: true
-        }]);
+    // Scroll to bottom
+    setTimeout(() => {
+      if (chatMessagesRef.current) {
+        chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+      }
+    }, 100);
 
-        setTimeout(() => {
-          setChatMessages(prev => prev.map(msg => 
-            msg.id === '2' ? { ...msg, typing: false } : msg
-          ));
-          setShowStructurePreview(true);
-        }, 3000);
-      }, 2000);
-    };
+    // Type out the message character by character
+    for (let i = 0; i <= msgConfig.text.length; i++) {
+      setChatMessages(prev => prev.map(msg => 
+        msg.id === messageId 
+          ? { ...msg, text: msgConfig.text.slice(0, i) }
+          : msg
+      ));
+      await delay(30);
+    }
 
-    initChat();
-  }, []);
+    // Scroll to bottom after typing
+    setTimeout(() => {
+      if (chatMessagesRef.current) {
+        chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+      }
+    }, 100);
+  };
 
-  const TypingIndicator = () => (
-    <motion.div
-      animate={{ opacity: [0, 1, 0] }}
-      transition={{ duration: 1, repeat: Infinity }}
-      className="text-xs text-gray-400 mt-1"
-    >
-      ●●●
-    </motion.div>
-  );
+  const runAnimation = async () => {
+    // Initialize all SVG lines for drawing animation
+    const allLines = document.querySelectorAll('.svg-line') as NodeListOf<SVGPathElement>;
+    allLines.forEach(line => {
+      const length = line.getTotalLength();
+      line.style.strokeDasharray = `${length}`;
+      line.style.strokeDashoffset = `${length}`;
+    });
+
+    // Step 1: First Request
+    await typeMessage({ type: 'user', text: "Let's build an e-commerce site." });
+    await delay(500);
+    show('subgraph-AppCore');
+    await delay(200);
+    show('node-App');
+    await delay(500);
+    show('subgraph-UIComponents');
+    show('subgraph-BackendAPI');
+    show('subgraph-Database');
+    await delay(1000);
+
+    // Step 2: First AI Response & Build
+    await typeMessage({ type: 'ai', text: "Great. I've laid out the core structure. What's next?" });
+    await delay(500);
+    show('node-ProductGrid');
+    show('node-ShoppingCart');
+    show('node-AuthAPI');
+    show('node-ProductsAPI');
+    show('node-UsersTable');
+    show('node-ProductsTable');
+    await delay(500);
+    draw('line-App-ProductGrid');
+    draw('line-App-ShoppingCart');
+    await delay(200);
+    draw('line-AuthAPI-UsersTable');
+    await delay(200);
+    draw('line-ProductsAPI-ProductsTable');
+    await delay(1500);
+
+    // Step 3: Payment System Request
+    await typeMessage({ type: 'user', text: "We need a payment system. Let's use Stripe." });
+    await delay(500);
+    await typeMessage({ type: 'ai', text: "Understood. Integrating Stripe." });
+    await delay(500);
+    show('subgraph-Services');
+    await delay(300);
+    show('node-StripeService');
+    show('node-CheckoutForm');
+    show('node-OrdersAPI');
+    show('node-OrdersTable');
+    await delay(500);
+    draw('line-App-CheckoutForm');
+    await delay(200);
+    draw('line-CheckoutForm-StripeService');
+    await delay(200);
+    draw('line-StripeService-OrdersAPI');
+    await delay(200);
+    draw('line-OrdersAPI-OrdersTable');
+    await delay(1500);
+
+    // Step 4: AI Chatbot Request
+    await typeMessage({ type: 'user', text: "Also, add an AI-powered chatbot for customer support." });
+    await delay(500);
+    await typeMessage({ type: 'ai', text: "Excellent idea. Adding the Gemini-powered chat module." });
+    await delay(500);
+    show('node-GeminiService');
+    show('node-AIChatWidget');
+    show('node-ChatAPI');
+    await delay(500);
+    draw('line-App-AIChatWidget');
+    await delay(200);
+    draw('line-AIChatWidget-GeminiService');
+    await delay(200);
+    draw('line-GeminiService-ChatAPI');
+    await delay(1500);
+
+    // Step 5: Finale
+    await typeMessage({ type: 'ai', text: "Your initial architecture is complete." });
+  };
+
+  const startDemo = () => {
+    setIsAnimationStarted(true);
+    runAnimation();
+  };
 
   return (
     <section id="demo" className="w-full h-full flex items-center justify-center bg-transparent py-16">
       <div className="max-w-7xl mx-auto px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
+        <div className="text-center mb-20">
           <h2 className="text-3xl md:text-4xl heading-primary mb-8">
             Architecture in Motion
           </h2>
@@ -127,228 +159,267 @@ Clean, spacious design that reflects architectural blueprint concepts through st
           <p className="text-lg text-secondary max-w-2xl mx-auto">
             Experience the precision of automated blueprint generation through intelligent architectural planning.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start max-w-6xl mx-auto">
           
-          {/* File Tree Demo */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="bg-elegant-charcoal rounded-none border border-elegant-gray overflow-hidden"
-          >
-            <div className="bg-elegant-black text-elegant-white px-6 py-4 flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="flex space-x-2">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                </div>
-                <span className="font-mono text-sm">Applifique Explorer</span>
-              </div>
-              <Maximize className="w-4 h-4 text-gray-400 hover:text-white cursor-pointer" />
+          {/* Chat Panel */}
+          <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-xl">
+            <div className="px-6 py-4 bg-black text-white font-bold text-center">
+              Applifique AI
             </div>
-            
-            <div className="p-6">
-              <div className="font-mono text-sm space-y-2">
-                {/* Root folder */}
-                <div className="flex items-center space-x-2 py-1">
-                  <ChevronDown className="w-3 h-3 text-gray-400" />
-                  <Folder className="w-4 h-4 text-blueprint-500" />
-                  <span className="font-semibold text-gray-900">Applifique Landing Page</span>
-                </div>
-                
-                {/* Foundation folder */}
-                <div className="ml-4 space-y-2">
-                  <div className="flex items-center space-x-2 py-1">
-                    <button 
-                      onClick={() => setFoundationExpanded(!foundationExpanded)}
-                      className="text-gray-400 hover:text-blueprint-500 transition-colors"
-                    >
-                      {foundationExpanded ? (
-                        <ChevronDown className="w-3 h-3" />
-                      ) : (
-                        <ChevronRight className="w-3 h-3" />
-                      )}
-                    </button>
-                    <Folder className="w-4 h-4 text-yellow-500" />
-                    <span className="text-gray-700 hover:text-blueprint-500 cursor-pointer">Foundation</span>
+            <div 
+              ref={chatMessagesRef}
+              className="h-96 p-6 overflow-y-auto flex flex-col gap-4"
+            >
+              {chatMessages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`chat-bubble visible ${message.type === 'user' ? 'user' : 'ai'}`}
+                >
+                  <div className="avatar">
+                    {message.type === 'user' ? '👤' : '🤖'}
                   </div>
-                  
-                  {/* Foundation files */}
-                  <AnimatePresence>
-                    {foundationExpanded && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="ml-6 space-y-1 overflow-hidden"
-                      >
-                        {Object.entries(fileContents).map(([key, file]) => (
-                          <div
-                            key={key}
-                            onClick={() => setSelectedFile(key)}
-                            className="flex items-center space-x-2 py-1 hover:bg-blueprint-50 rounded px-2 cursor-pointer"
-                          >
-                            <FileText className="w-3 h-3 text-green-500" />
-                            <span className="text-gray-600 hover:text-blueprint-500">{file.title}</span>
-                          </div>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                  
-                  {/* Other folders */}
-                  <div className="flex items-center space-x-2 py-1">
-                    <ChevronRight className="w-3 h-3 text-gray-400" />
-                    <Folder className="w-4 h-4 text-blue-500" />
-                    <span className="text-gray-700 hover:text-blueprint-500 cursor-pointer">Code_Files</span>
-                  </div>
-                  
-                  <div className="flex items-center space-x-2 py-1">
-                    <ChevronRight className="w-3 h-3 text-gray-400" />
-                    <Folder className="w-4 h-4 text-purple-500" />
-                    <span className="text-gray-700 hover:text-blueprint-500 cursor-pointer">Design_Docs</span>
+                  <div className="text-content">
+                    {message.text}
+                    {message.text.length === 0 && <span className="typing-cursor"></span>}
                   </div>
                 </div>
-              </div>
-              
-              {/* File Preview Area */}
-              <AnimatePresence>
-                {selectedFile && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200"
-                  >
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="font-semibold text-gray-900">
-                        {fileContents[selectedFile as keyof typeof fileContents].title}
-                      </span>
-                      <button 
-                        onClick={() => setSelectedFile(null)}
-                        className="text-gray-400 hover:text-gray-600"
-                      >
-                        <X className="w-4 h-4" />
-                      </button>
-                    </div>
-                    <pre className="text-sm text-gray-600 font-mono leading-relaxed max-h-64 overflow-y-auto whitespace-pre-wrap">
-                      {fileContents[selectedFile as keyof typeof fileContents].content}
-                    </pre>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              ))}
             </div>
-          </motion.div>
+          </div>
 
-          {/* AI Chat Demo */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden w-full max-w-md mx-auto"
-          >
-            <div className="bg-white border-b border-gray-100 text-gray-900 px-6 py-4 flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-blueprint-100 rounded-full flex items-center justify-center">
-                  <Bot className="w-4 h-4 text-blueprint-500" />
-                </div>
-                <div>
-                  <span className="font-semibold">Applifique Assistant</span>
-                  <div className="text-xs text-gray-600">Online • Generating blueprint...</div>
-                </div>
-              </div>
-              <div className="flex space-x-2">
-                <motion.div 
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                  className="w-2 h-2 bg-green-400 rounded-full"
-                />
-              </div>
-            </div>
+          {/* Blueprint Panel */}
+          <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-xl relative">
+            {!isAnimationStarted && (
+              <button
+                onClick={startDemo}
+                className="absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-8 py-4 text-xl bg-blue-600 text-white border-none rounded-xl cursor-pointer transition-all duration-200 hover:scale-105 hover:bg-blue-700"
+              >
+                ▶️ Start Demo
+              </button>
+            )}
             
-            <div className="h-80 p-4 flex flex-col justify-start overflow-hidden">
-              <div className="space-y-3">
-                <AnimatePresence>
-                  {chatMessages.map((message) => (
-                    <motion.div
-                      key={message.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      {message.type === 'user' ? (
-                        <div className="flex justify-end">
-                          <div className="bg-white border-2 border-blueprint-500 text-blueprint-700 px-4 py-3 rounded-2xl rounded-br-lg w-80">
-                            <p className="text-sm font-medium">{message.content}</p>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="flex items-start space-x-3">
-                          <div className="w-8 h-8 bg-blueprint-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                            <Bot className="text-blueprint-500 w-4 h-4" />
-                          </div>
-                          <div className="bg-gray-100 px-4 py-3 rounded-2xl rounded-bl-lg w-80">
-                            <p className="text-sm text-gray-800">{message.content}</p>
-                            {message.typing && <TypingIndicator />}
-                          </div>
-                        </div>
-                      )}
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-                
-                {/* Generated structure preview */}
-                <AnimatePresence>
-                  {showStructurePreview && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5 }}
-                      className="flex items-start space-x-3"
-                    >
-                      <div className="w-8 h-8 bg-blueprint-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                        <Bot className="text-blueprint-500 w-4 h-4" />
-                      </div>
-                      <div className="bg-gray-100 px-4 py-3 rounded-2xl rounded-bl-lg w-80">
-                        <p className="text-sm text-gray-800 mb-2">Here's the generated project structure:</p>
-                        <div className="bg-white p-3 rounded border text-xs font-mono">
-                          <div className="text-blueprint-500">📁 Foundation/</div>
-                          <div className="ml-3 text-gray-600">📄 Master Design Doc</div>
-                          <div className="ml-3 text-gray-600">📄 Page Layout Doc</div>
-                          <div className="ml-3 text-gray-600">📄 UI/UX Style Doc</div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+            <div className="p-4 h-96">
+              <svg
+                ref={svgRef}
+                viewBox="0 0 800 1000"
+                className="w-full h-full"
+              >
+                <defs>
+                  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#000000" />
+                  </marker>
+                  <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(200, 200, 200, 0.5)" strokeWidth="0.5"/>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+
+                {/* Subgraph Containers */}
+                <g id="subgraph-AppCore" className="svg-anim">
+                  <text x="400" y="25" className="subgraph-text">App Core</text>
+                </g>
+                <g id="subgraph-UIComponents" className="svg-anim">
+                  <rect x="25" y="145" width="750" height="120" rx="10" className="subgraph-rect"/>
+                  <text x="400" y="130" className="subgraph-text">UI Components</text>
+                </g>
+                <g id="subgraph-Services" className="svg-anim">
+                  <rect x="195" y="345" width="410" height="100" rx="10" className="subgraph-rect"/>
+                  <text x="400" y="330" className="subgraph-text">Services</text>
+                </g>
+                <g id="subgraph-BackendAPI" className="svg-anim">
+                  <rect x="25" y="525" width="750" height="120" rx="10" className="subgraph-rect"/>
+                  <text x="400" y="510" className="subgraph-text">Backend API</text>
+                </g>
+                <g id="subgraph-Database" className="svg-anim">
+                  <rect x="25" y="745" width="750" height="100" rx="10" className="subgraph-rect"/>
+                  <text x="400" y="730" className="subgraph-text">Database</text>
+                </g>
+
+                {/* Nodes */}
+                <g id="node-App" className="svg-anim">
+                  <rect x="350" y="50" width="100" height="40" rx="5" className="node-rect"/>
+                  <text x="400" y="70" className="node-text">App</text>
+                </g>
+                <g id="node-ProductGrid" className="svg-anim">
+                  <rect x="50" y="180" width="120" height="50" rx="5" className="node-rect"/>
+                  <text x="110" y="205" className="node-text">ProductGrid</text>
+                </g>
+                <g id="node-ShoppingCart" className="svg-anim">
+                  <rect x="220" y="180" width="120" height="50" rx="5" className="node-rect"/>
+                  <text x="280" y="205" className="node-text">ShoppingCart</text>
+                </g>
+                <g id="node-CheckoutForm" className="svg-anim">
+                  <rect x="460" y="180" width="120" height="50" rx="5" className="node-rect"/>
+                  <text x="520" y="205" className="node-text">CheckoutForm</text>
+                </g>
+                <g id="node-AIChatWidget" className="svg-anim">
+                  <rect x="630" y="180" width="120" height="50" rx="5" className="node-rect"/>
+                  <text x="690" y="205" className="node-text">AIChatWidget</text>
+                </g>
+                <g id="node-StripeService" className="svg-anim">
+                  <rect x="220" y="380" width="120" height="50" rx="5" className="node-rect"/>
+                  <text x="280" y="405" className="node-text">StripeService</text>
+                </g>
+                <g id="node-GeminiService" className="svg-anim">
+                  <rect x="460" y="380" width="120" height="50" rx="5" className="node-rect"/>
+                  <text x="520" y="405" className="node-text">GeminiService</text>
+                </g>
+                <g id="node-AuthAPI" className="svg-anim">
+                  <rect x="50" y="560" width="120" height="50" rx="5" className="node-rect"/>
+                  <text x="110" y="585" className="node-text">AuthAPI</text>
+                </g>
+                <g id="node-ProductsAPI" className="svg-anim">
+                  <rect x="260" y="560" width="120" height="50" rx="5" className="node-rect"/>
+                  <text x="320" y="585" className="node-text">ProductsAPI</text>
+                </g>
+                <g id="node-OrdersAPI" className="svg-anim">
+                  <rect x="420" y="560" width="120" height="50" rx="5" className="node-rect"/>
+                  <text x="480" y="585" className="node-text">OrdersAPI</text>
+                </g>
+                <g id="node-ChatAPI" className="svg-anim">
+                  <rect x="630" y="560" width="120" height="50" rx="5" className="node-rect"/>
+                  <text x="690" y="585" className="node-text">ChatAPI</text>
+                </g>
+                <g id="node-UsersTable" className="svg-anim">
+                  <rect x="50" y="780" width="120" height="50" rx="5" className="node-rect"/>
+                  <text x="110" y="805" className="node-text">UsersTable</text>
+                </g>
+                <g id="node-ProductsTable" className="svg-anim">
+                  <rect x="260" y="780" width="120" height="50" rx="5" className="node-rect"/>
+                  <text x="320" y="805" className="node-text">ProductsTable</text>
+                </g>
+                <g id="node-OrdersTable" className="svg-anim">
+                  <rect x="420" y="780" width="120" height="50" rx="5" className="node-rect"/>
+                  <text x="480" y="805" className="node-text">OrdersTable</text>
+                </g>
+
+                {/* Connections */}
+                <path id="line-App-ProductGrid" className="line-connector svg-line" d="M 370 90 L 370 120 L 110 120 L 110 170"/>
+                <path id="line-App-ShoppingCart" className="line-connector svg-line" d="M 390 90 L 390 120 L 280 120 L 280 170"/>
+                <path id="line-App-CheckoutForm" className="line-connector svg-line" d="M 410 90 L 410 120 L 520 120 L 520 170"/>
+                <path id="line-App-AIChatWidget" className="line-connector svg-line" d="M 430 90 L 430 120 L 690 120 L 690 170"/>
+                <path id="line-CheckoutForm-StripeService" className="line-connector svg-line" d="M 520 230 L 520 310 L 280 310 L 280 370"/>
+                <path id="line-AIChatWidget-GeminiService" className="line-connector svg-line" d="M 690 230 L 690 310 L 520 310 L 520 370"/>
+                <path id="line-StripeService-OrdersAPI" className="line-connector svg-line" d="M 280 430 L 280 490 L 480 490 L 480 550"/>
+                <path id="line-GeminiService-ChatAPI" className="line-connector svg-line" d="M 520 430 L 520 490 L 690 490 L 690 550"/>
+                <path id="line-AuthAPI-UsersTable" className="line-connector svg-line" d="M 110 610 L 110 770"/>
+                <path id="line-ProductsAPI-ProductsTable" className="line-connector svg-line" d="M 320 610 L 320 770"/>
+                <path id="line-OrdersAPI-OrdersTable" className="line-connector svg-line" d="M 480 610 L 480 770"/>
+              </svg>
             </div>
-            
-            {/* Chat input */}
-            <div className="border-t border-gray-100 p-4">
-              <div className="flex items-center space-x-3">
-                <input 
-                  type="text" 
-                  placeholder="Try: 'Add a pricing section to my landing page'" 
-                  className="flex-1 border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blueprint-500 focus:border-transparent"
-                  disabled
-                />
-                <button className="bg-blueprint-500 hover:bg-blueprint-600 text-white p-2 rounded-lg transition-colors">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </motion.div>
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .chat-bubble {
+          padding: 10px 15px;
+          border-radius: 10px;
+          max-width: 85%;
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+          line-height: 1.4;
+        }
+
+        .chat-bubble.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .chat-bubble.user {
+          background-color: #007BFF;
+          color: white;
+          align-self: flex-end;
+        }
+
+        .chat-bubble.ai {
+          background-color: #D3D3D3;
+          color: #333333;
+          align-self: flex-start;
+        }
+
+        .chat-bubble .avatar {
+          font-size: 1.5rem;
+          line-height: 1;
+          padding-top: 2px;
+        }
+
+        .chat-bubble .text-content {
+          min-height: 1.2em;
+        }
+
+        .typing-cursor {
+          display: inline-block;
+          width: 8px;
+          height: 1em;
+          background-color: currentColor;
+          animation: blink 1s step-end infinite;
+          vertical-align: bottom;
+        }
+
+        @keyframes blink {
+          from, to { background-color: transparent }
+          50% { background-color: currentColor; }
+        }
+
+        .svg-anim {
+          opacity: 0;
+          transition: opacity 0.7s ease-in-out;
+        }
+
+        .svg-anim.visible {
+          opacity: 1;
+        }
+
+        .svg-line {
+          transition: stroke-dashoffset 1.5s ease-in-out;
+        }
+
+        .svg-line.drawn {
+          stroke-dashoffset: 0 !important;
+        }
+
+        .subgraph-rect {
+          stroke: #000000;
+          stroke-width: 1;
+          fill: rgba(0, 0, 0, 0.05);
+        }
+
+        .node-rect {
+          fill: #FFFFFF;
+          stroke: #000000;
+          stroke-width: 1.5;
+        }
+
+        .node-text {
+          fill: #000000;
+          font-family: 'Helvetica', 'Arial', sans-serif;
+          font-size: 12px;
+          text-anchor: middle;
+          dominant-baseline: middle;
+        }
+
+        .subgraph-text {
+          fill: #333333;
+          font-family: 'Helvetica', 'Arial', sans-serif;
+          font-size: 14px;
+          font-weight: bold;
+          text-anchor: middle;
+        }
+
+        .line-connector {
+          stroke: #000000;
+          stroke-width: 1.5;
+          fill: none;
+          marker-end: url(#arrowhead);
+        }
+      `}</style>
     </section>
   );
 }
