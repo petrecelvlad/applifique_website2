@@ -1,7 +1,10 @@
 # Ignore everything
 *
 
-# But don't ignore the client/src folder
+# Un-ignore the parent directory 'client' so Git can see inside it
+!/client/
+
+# Un-ignore the 'src' folder within 'client'
 !/client/src/
 
 # Also, don't ignore this .gitignore file itself
