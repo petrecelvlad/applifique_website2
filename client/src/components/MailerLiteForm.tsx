@@ -1,58 +1,35 @@
-import { useEffect, useRef } from "react";
+// src/components/MailerLiteForm.tsx
+import { useEffect } from "react";
+import { useMailerLiteScript } from "../hooks/useMailerLiteScript";
 
-interface MailerLiteFormProps {
-  formId: string;
-  className?: string;
-}
-
-// Declare global MailerLite function
 declare global {
   interface Window {
     ml: (action: string, ...args: any[]) => void;
   }
 }
 
-export default function MailerLiteForm({ formId, className = "" }: MailerLiteFormProps) {
-  const formRef = useRef<HTMLDivElement>(null);
+interface MailerLiteFormProps {
+  formId: string;
+  className?: string;
+}
+
+export default function MailerLiteForm({
+  formId,
+  className = "",
+}: MailerLiteFormProps) {
+  const isScriptReady = useMailerLiteScript();
 
   useEffect(() => {
-    // Wait for MailerLite script to load and scan for embedded forms
-    const initializeForm = () => {
-      if (typeof window.ml !== 'undefined' && formRef.current) {
-        try {
-          // MailerLite automatically scans for embedded forms, we just need to trigger a rescan
-          window.ml('account', '1711800');
-        } catch (error) {
-          console.log('MailerLite form initialization:', error);
-        }
-      }
-    };
+    // Only proceed if the main script is fully loaded and ready.
+    if (isScriptReady && typeof window.ml !== "undefined") {
+      // THE FIX: This is the most reliable way to tell the *existing*
+      // MailerLite script to find and render a form that was just added to the page.
+      // We are directly telling it to render a form with our specific ID.
+      window.ml("forms.render", {
+        formId: formId,
+      });
+    }
+  }, [isScriptReady, formId]); // This runs whenever the component mounts OR the script becomes ready.
 
-    // Delay initialization to ensure DOM is ready
-    const timer = setTimeout(() => {
-      if (typeof window.ml !== 'undefined') {
-        initializeForm();
-      } else {
-        // Wait for MailerLite script to load
-        const checkForML = setInterval(() => {
-          if (typeof window.ml !== 'undefined') {
-            clearInterval(checkForML);
-            initializeForm();
-          }
-        }, 100);
-        
-        setTimeout(() => clearInterval(checkForML), 10000);
-      }
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, [formId]);
-
-  return (
-    <div 
-      ref={formRef}
-      className={`ml-embedded ${className}`} 
-      data-form={formId}
-    />
-  );
+  return <div className={`ml-embedded ${className}`} data-form={formId} />;
 }
