@@ -1,8 +1,8 @@
 # Ignore everything
 *
 
-# But don't ignore the src folder
-!/src/
+# But don't ignore the client/src folder
+!/client/src/
 
 # Also, don't ignore this .gitignore file itself
 !/.gitignore
