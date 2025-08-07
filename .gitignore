@@ -1,11 +1,8 @@
-# Ignore everything
+# 1. Ignore everything by default
 *
 
-# Un-ignore the parent directory 'client' so Git can see inside it
-!/client/
+# 2. DO NOT ignore the "client" folder and everything inside it
+!/client/**
 
-# Un-ignore the 'src' folder within 'client'
-!/client/src/
-
-# Also, don't ignore this .gitignore file itself
+# 3. DO NOT ignore this .gitignore file itself
 !/.gitignore
