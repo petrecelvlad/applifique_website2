@@ -1,8 +1,9 @@
-# 1. Ignore everything by default
-*
+# 1. Ignore everything in the project's root directory.
+/*
 
-# 2. DO NOT ignore the "client" folder and everything inside it
-!/client/**
-
-# 3. DO NOT ignore this .gitignore file itself
+# 2. BUT, make an exception for the .gitignore file itself.
 !/.gitignore
+
+# 3. AND, make an exception for the 'client' directory.
+# This allows Git to see the folder and everything inside it.
+!/client
